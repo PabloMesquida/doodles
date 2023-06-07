@@ -13,9 +13,6 @@ interface AddEditNoteDialogProps {
   onNoteSaved: (note: Note) => void;
 }
 
-let x = 50;
-const y = 50;
-
 const AddEditNoteDialog = ({
   noteToEdit,
   onDismiss,
