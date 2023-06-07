@@ -4,12 +4,17 @@ import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
+import Sketch from "react-p5";
+import p5Types from "p5";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
   onDismiss: () => void;
   onNoteSaved: (note: Note) => void;
 }
+
+let x = 50;
+const y = 50;
 
 const AddEditNoteDialog = ({
   noteToEdit,
@@ -26,6 +31,16 @@ const AddEditNoteDialog = ({
       text: noteToEdit?.text || "",
     },
   });
+
+  const setup = (p5: p5Types, canvasParentRef: Element) => {
+    p5.createCanvas(500, 500).parent(canvasParentRef);
+  };
+
+  const draw = (p5: p5Types) => {
+    p5.background(0);
+    p5.ellipse(x, y, 70, 70);
+    x++;
+  };
 
   async function onSubmit(input: NoteInput) {
     try {
@@ -68,6 +83,7 @@ const AddEditNoteDialog = ({
             register={register}
           />
         </Form>
+        <Sketch setup={setup} draw={draw} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
