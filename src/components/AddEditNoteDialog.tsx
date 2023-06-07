@@ -37,7 +37,9 @@ const AddEditNoteDialog = ({
   const draw = (p5: p5Types) => {
     p5.fill(0);
     p5.stroke(0);
-    if (p5.mouseIsPressed === true) p5.circle(p5.mouseX, p5.mouseY, 5);
+    p5.strokeWeight(4);
+    if (p5.mouseIsPressed === true)
+      p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
   };
 
   async function onSubmit(input: NoteInput) {
