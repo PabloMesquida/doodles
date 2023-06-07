@@ -5,6 +5,9 @@ import { Note as NoteModel } from "../models/note";
 import { formDate } from "../utils/formatDate";
 import { MdDelete } from "react-icons/md";
 
+import Sketch from "react-p5";
+import p5Types from "p5";
+
 interface NoteProps {
   note: NoteModel;
   onNoteClicked: (note: NoteModel) => void;
