@@ -33,13 +33,14 @@ const AddEditNoteDialog = ({
   });
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
-    p5.createCanvas(500, 500).parent(canvasParentRef);
+    p5.createCanvas(400, 400).parent(canvasParentRef);
+    p5.background(255);
   };
 
   const draw = (p5: p5Types) => {
-    p5.background(0);
-    p5.ellipse(x, y, 70, 70);
-    x++;
+    p5.fill(0);
+    p5.stroke(0);
+    if (p5.mouseIsPressed === true) p5.circle(p5.mouseX, p5.mouseY, 5);
   };
 
   async function onSubmit(input: NoteInput) {
