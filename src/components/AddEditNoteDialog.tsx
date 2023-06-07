@@ -25,7 +25,6 @@ const AddEditNoteDialog = ({
   } = useForm<NoteInput>({
     defaultValues: {
       title: noteToEdit?.title || "",
-      text: noteToEdit?.text || "",
     },
   });
 
@@ -73,14 +72,6 @@ const AddEditNoteDialog = ({
             register={register}
             registerOptions={{ required: "Required" }}
             error={errors.title}
-          />
-          <TextInputField
-            name="text"
-            label="Text"
-            as="textarea"
-            rows={5}
-            placeholder="Text"
-            register={register}
           />
         </Form>
         <Sketch setup={setup} draw={draw} />

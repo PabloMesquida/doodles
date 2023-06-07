@@ -1,4 +1,4 @@
-import { ConflictError, UnauthorizedError } from "../errors/http_erros";
+import { ConflictError, UnauthorizedError } from "../errors/http_errors";
 import { Note } from "../models/note";
 import { User } from "../models/user";
 
@@ -86,7 +86,6 @@ export async function fetchNotes(): Promise<Note[]> {
 
 export interface NoteInput {
   title: string;
-  text?: string;
 }
 
 export async function createNote(note: NoteInput): Promise<Note> {

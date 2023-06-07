@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { User } from "../models/user";
 import { LoginCredentials } from "../network/notes_api";
-import { UnauthorizedError } from "../errors/http_erros";
+import { UnauthorizedError } from "../errors/http_errors";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import TextInputField from "./forms/TextInputField";
 import stylesUtils from "../styles/utils.module.css";

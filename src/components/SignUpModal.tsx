@@ -6,7 +6,7 @@ import { SignUpCredentials } from "../network/notes_api";
 import { Alert, Button, Form, Modal } from "react-bootstrap";
 import TextInputField from "./forms/TextInputField";
 import stylesUtils from "../styles/utils.module.css";
-import { ConflictError } from "../errors/http_erros";
+import { ConflictError } from "../errors/http_errors";
 
 interface SignUpModalProps {
   onDismiss: () => void;
