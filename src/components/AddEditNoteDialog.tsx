@@ -1,11 +1,11 @@
 import * as NoteApi from "../network/notes_api";
+import * as React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import { ReactP5Wrapper, Sketch } from "react-p5-wrapper";
-import React from "react";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -29,20 +29,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   //const canvasRef = React.useRef<typeof ReactP5Wrapper | null>(null);
 
-  const handleCanvasMount = (
-    instance: typeof ReactP5Wrapper | React.MutableRefObject<typeof ReactP5Wrapper | null>
-  ) => {
-    if (instance && "current" in instance) {
-      const canvasElement = instance.current;
-      // Aquí tienes la referencia al elemento canvas
-      console.log("Canvas REF:", canvasElement);
-    } else {
-      const canvasElement = instance;
-      // Aquí tienes la referencia al elemento canvas
-      console.log("Canvas REF:", canvasElement);
-    }
-    console.log("OK");
-  };
+  const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
@@ -61,9 +48,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
-    // const canvas = canvasRef.current;
-    // console.log("Canvas REF: ", canvas);
-
+    console.log("Canvas REF: ", canvasRef.current);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
@@ -96,7 +81,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch} instance={handleCanvasMount} />
+        <ReactP5Wrapper sketch={sketch} ref={canvasRef} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
