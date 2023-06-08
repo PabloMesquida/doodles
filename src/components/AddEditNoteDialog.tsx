@@ -40,21 +40,20 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
+    if (canvasRef.current) {
+      console.log("Canvas REF: ", canvasRef.current);
+      // const canvas = canvasRef.current.canvas as HTMLCanvasElement;
+      //const imageURL = canvas.toDataURL("image/png");
+
+      // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
+      // console.log("Imagen guardada:", imageURL);
+    }
     try {
       let noteResponse: Note;
       if (noteToEdit) {
         noteResponse = await NoteApi.updateNote(noteToEdit._id, input);
       } else {
         noteResponse = await NoteApi.createNote(input);
-      }
-
-      if (canvasRef.current) {
-        console.log("Canvas REF: ", canvasRef.current);
-        // const canvas = canvasRef.current.canvas as HTMLCanvasElement;
-        //const imageURL = canvas.toDataURL("image/png");
-
-        // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
-        // console.log("Imagen guardada:", imageURL);
       }
 
       onNoteSaved(noteResponse);
