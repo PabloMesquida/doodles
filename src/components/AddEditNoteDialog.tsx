@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import Sketch from "react-p5";
+import p5Types from "p5";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -41,8 +42,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   async function onSubmit(input: NoteInput) {
     if (canvasRef.current) {
       console.log("Canvas REF: ", canvasRef.current);
-      // const sketch = canvasRef.current.sketch as p5Types;
-      // const canvas = sketch.canvas as HTMLCanvasElement;
+      // const sketch = canvasRef.current as p5Types;
+      const canvas = canvasRef.current.canvasParentRef as HTMLCanvasElement;
       //const imageURL = canvas.toDataURL("image/png");
 
       // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
