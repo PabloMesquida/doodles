@@ -27,8 +27,12 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   //const canvasRef = React.createRef<p5Types>();
 
   const sketch: Sketch = (p5) => {
+    let canvas: p5Types.Element;
+
+    canvas;
+
     p5.setup = () => {
-      p5.createCanvas(400, 400);
+      canvas = p5.createCanvas(400, 400);
       p5.background(255);
     };
 
@@ -37,23 +41,10 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       p5.stroke(0);
       p5.strokeWeight(4);
       if (p5.mouseIsPressed === true) {
-        console.log(p5.mouseX, p5.mouseY);
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
       }
     };
   };
-
-  // const setup = (p5: p5Types, canvasParentRef: Element) => {
-  //   p5.createCanvas(400, 400).parent(canvasParentRef);
-  //   p5.background(255);
-  // };
-
-  // const draw = (p5: p5Types) => {
-  //   p5.fill(0);
-  //   p5.stroke(0);
-  //   p5.strokeWeight(4);
-  //   if (p5.mouseIsPressed === true) p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-  // };
 
   async function onSubmit(input: NoteInput) {
     // if (canvasRef.current) {
@@ -98,8 +89,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        {/* <Sketch setup={setup} /> */}
-        {/* <Sketch setup={setup} draw={draw} ref={canvasRef} /> */}
         <ReactP5Wrapper sketch={sketch} />
       </Modal.Body>
       <Modal.Footer>
