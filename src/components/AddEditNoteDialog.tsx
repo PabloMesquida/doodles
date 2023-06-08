@@ -5,7 +5,7 @@ import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import { ReactP5Wrapper, Sketch } from "react-p5-wrapper";
-import { useRef } from "react";
+import React from "react";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
