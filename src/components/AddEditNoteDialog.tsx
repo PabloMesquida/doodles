@@ -6,7 +6,6 @@ import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import Sketch from "react-p5";
-import p5Types from "p5";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -25,7 +24,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<p5Types | null>(null);
 
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(400, 400).parent(canvasParentRef);
@@ -42,7 +41,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   async function onSubmit(input: NoteInput) {
     if (canvasRef.current) {
       console.log("Canvas REF: ", canvasRef.current);
-      // const canvas = canvasRef.current.canvas as HTMLCanvasElement;
+      // const sketch = canvasRef.current.sketch as p5Types;
+      // const canvas = sketch.canvas as HTMLCanvasElement;
       //const imageURL = canvas.toDataURL("image/png");
 
       // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
@@ -80,6 +80,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
+        {/* <Sketch setup={setup} /> */}
         <Sketch setup={setup} draw={draw} ref={canvasRef} />
       </Modal.Body>
       <Modal.Footer>
