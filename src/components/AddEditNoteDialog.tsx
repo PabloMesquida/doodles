@@ -1,12 +1,10 @@
 import * as NoteApi from "../network/notes_api";
-import { useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
-import Sketch from "react-p5";
-import p5Types from "p5";
+import { ReactP5Wrapper, Sketch } from "react-p5-wrapper";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -25,30 +23,46 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  const canvasRef = useRef<p5Types | null>(null);
+  //const canvasRef = useRef<p5Types | null>(null);
+  //const canvasRef = React.createRef<p5Types>();
 
-  const setup = (p5: p5Types, canvasParentRef: Element) => {
-    p5.createCanvas(400, 400).parent(canvasParentRef);
-    p5.background(255);
+  const sketch: Sketch = (p5) => {
+    p5.setup = () => {
+      p5.createCanvas(400, 400, p5.WEBGL);
+      p5.background(255);
+    };
+
+    p5.draw = () => {
+      p5.fill(0);
+      p5.stroke(0);
+      p5.strokeWeight(4);
+      if (p5.mouseIsPressed === true) p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+    };
   };
 
-  const draw = (p5: p5Types) => {
-    p5.fill(0);
-    p5.stroke(0);
-    p5.strokeWeight(4);
-    if (p5.mouseIsPressed === true) p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-  };
+  // const setup = (p5: p5Types, canvasParentRef: Element) => {
+  //   p5.createCanvas(400, 400).parent(canvasParentRef);
+  //   p5.background(255);
+  // };
+
+  // const draw = (p5: p5Types) => {
+  //   p5.fill(0);
+  //   p5.stroke(0);
+  //   p5.strokeWeight(4);
+  //   if (p5.mouseIsPressed === true) p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+  // };
 
   async function onSubmit(input: NoteInput) {
-    if (canvasRef.current) {
-      console.log("Canvas REF: ", canvasRef.current);
-      // const sketch = canvasRef.current as p5Types;
-      const canvas = canvasRef.current.canvasParentRef as HTMLCanvasElement;
-      //const imageURL = canvas.toDataURL("image/png");
+    // if (canvasRef.current) {
+    //   console.log("Canvas REF: ", canvasRef.current.sketch);
+    //   // const sketch = canvasRef.current as p5Types;
+    //   const canvas = canvasRef.current.canvasParentRef.current as HTMLCanvasElement;
+    //   console.log("canvas", canvas);
+    //   //const imageURL = canvas.toDataURL("image/png");
 
-      // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
-      // console.log("Imagen guardada:", imageURL);
-    }
+    //   // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
+    //   // console.log("Imagen guardada:", imageURL);
+    // }
     try {
       let noteResponse: Note;
       if (noteToEdit) {
@@ -82,7 +96,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
           />
         </Form>
         {/* <Sketch setup={setup} /> */}
-        <Sketch setup={setup} draw={draw} ref={canvasRef} />
+        {/* <Sketch setup={setup} draw={draw} ref={canvasRef} /> */}
+        <ReactP5Wrapper sketch={sketch} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
