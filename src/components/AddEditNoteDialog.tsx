@@ -1,4 +1,5 @@
 import * as NoteApi from "../network/notes_api";
+import { useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -13,11 +14,7 @@ interface AddEditNoteDialogProps {
   onNoteSaved: (note: Note) => void;
 }
 
-const AddEditNoteDialog = ({
-  noteToEdit,
-  onDismiss,
-  onNoteSaved,
-}: AddEditNoteDialogProps) => {
+const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
   const {
     register,
     handleSubmit,
@@ -28,6 +25,8 @@ const AddEditNoteDialog = ({
     },
   });
 
+  const canvasRef = useRef(null);
+
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(400, 400).parent(canvasParentRef);
     p5.background(255);
@@ -37,8 +36,7 @@ const AddEditNoteDialog = ({
     p5.fill(0);
     p5.stroke(0);
     p5.strokeWeight(4);
-    if (p5.mouseIsPressed === true)
-      p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+    if (p5.mouseIsPressed === true) p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
   };
 
   async function onSubmit(input: NoteInput) {
@@ -48,6 +46,15 @@ const AddEditNoteDialog = ({
         noteResponse = await NoteApi.updateNote(noteToEdit._id, input);
       } else {
         noteResponse = await NoteApi.createNote(input);
+      }
+
+      if (canvasRef.current) {
+        console.log("Canvas REF: ", canvasRef.current);
+        // const canvas = canvasRef.current.canvas as HTMLCanvasElement;
+        //const imageURL = canvas.toDataURL("image/png");
+
+        // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
+        // console.log("Imagen guardada:", imageURL);
       }
 
       onNoteSaved(noteResponse);
@@ -74,7 +81,7 @@ const AddEditNoteDialog = ({
             error={errors.title}
           />
         </Form>
-        <Sketch setup={setup} draw={draw} />
+        <Sketch setup={setup} draw={draw} ref={canvasRef} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
