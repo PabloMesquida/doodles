@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import { ReactP5Wrapper, Sketch } from "react-p5-wrapper";
+import { useRef } from "react";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -25,14 +26,11 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   //const canvasRef = useRef<p5Types | null>(null);
   //const canvasRef = React.createRef<p5Types>();
+  const canvasRef = useRef(null);
 
   const sketch: Sketch = (p5) => {
-    let canvas: p5Types.Element;
-
-    canvas;
-
     p5.setup = () => {
-      canvas = p5.createCanvas(400, 400);
+      p5.createCanvas(400, 400);
       p5.background(255);
     };
 
@@ -47,16 +45,9 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
-    // if (canvasRef.current) {
-    //   console.log("Canvas REF: ", canvasRef.current.sketch);
-    //   // const sketch = canvasRef.current as p5Types;
-    //   const canvas = canvasRef.current.canvasParentRef.current as HTMLCanvasElement;
-    //   console.log("canvas", canvas);
-    //   //const imageURL = canvas.toDataURL("image/png");
-
-    //   // Aquí puedes utilizar una función para guardar la imagen, por ejemplo, enviarla al servidor o guardarla en el almacenamiento local.
-    //   // console.log("Imagen guardada:", imageURL);
-    // }
+    if (canvasRef.current) {
+      console.log("Canvas REF: ", canvasRef.current);
+    }
     try {
       let noteResponse: Note;
       if (noteToEdit) {
@@ -89,7 +80,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch} />
+        <ReactP5Wrapper sketch={sketch} ref={canvasRef} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
