@@ -27,7 +27,22 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   //const canvasRef = useRef<p5Types | null>(null);
   //const canvasRef = React.createRef<p5Types>();
 
-  const canvasRef = React.useRef<typeof ReactP5Wrapper | null>(null);
+  //const canvasRef = React.useRef<typeof ReactP5Wrapper | null>(null);
+
+  const handleCanvasMount = (
+    instance: typeof ReactP5Wrapper | React.MutableRefObject<typeof ReactP5Wrapper | null>
+  ) => {
+    if (instance && "current" in instance) {
+      const canvasElement = instance.current;
+      // Aquí tienes la referencia al elemento canvas
+      console.log("Canvas REF:", canvasElement);
+    } else {
+      const canvasElement = instance;
+      // Aquí tienes la referencia al elemento canvas
+      console.log("Canvas REF:", canvasElement);
+    }
+    console.log("OK");
+  };
 
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
@@ -46,8 +61,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
-    const canvas = canvasRef.current;
-    console.log("Canvas REF: ", canvas);
+    // const canvas = canvasRef.current;
+    // console.log("Canvas REF: ", canvas);
 
     try {
       let noteResponse: Note;
@@ -81,7 +96,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch} ref={canvasRef} />
+        <ReactP5Wrapper sketch={sketch} instance={handleCanvasMount} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
