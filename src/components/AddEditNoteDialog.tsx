@@ -45,7 +45,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
-    const canvas = canvasRef.current?.getElement();
+    const canvas = canvasRef.current;
     console.log("Canvas REF: ", canvas);
 
     try {
