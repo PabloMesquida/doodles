@@ -25,6 +25,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   });
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  console.log("Canvas REF: ", canvasRef);
 
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
@@ -43,8 +44,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
-    const canvas = canvasRef;
-    console.log("Canvas REF: ", canvas);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
