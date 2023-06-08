@@ -1,5 +1,5 @@
 import * as NoteApi from "../network/notes_api";
-import * as React from "react";
+import { useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -24,12 +24,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  //const canvasRef = useRef<p5Types | null>(null);
-  //const canvasRef = React.createRef<p5Types>();
-
-  //const canvasRef = React.useRef<typeof ReactP5Wrapper | null>(null);
-
-  const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
@@ -48,7 +43,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
-    console.log("Canvas REF: ", sketch);
+    const canvas = canvasRef;
+    console.log("Canvas REF: ", canvas);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
@@ -81,7 +77,9 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch} ref={canvasRef} />
+        <ReactP5Wrapper sketch={sketch}>
+          <canvas ref={canvasRef} style={{ display: "none" }} />
+        </ReactP5Wrapper>
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
