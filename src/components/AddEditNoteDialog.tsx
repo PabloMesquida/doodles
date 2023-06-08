@@ -26,7 +26,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   //const canvasRef = useRef<p5Types | null>(null);
   //const canvasRef = React.createRef<p5Types>();
-  const canvasRef = useRef(null);
+  const canvasRef = useRef<React.MutableRefObject<typeof ReactP5Wrapper | null>>(null);
 
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
@@ -45,7 +45,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   };
 
   async function onSubmit(input: NoteInput) {
-    console.log("Canvas REF: ", canvasRef);
+    const canvas = canvasRef.current?.getElement();
+    console.log("Canvas REF: ", canvas);
 
     try {
       let noteResponse: Note;
