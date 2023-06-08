@@ -26,7 +26,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   //const canvasRef = useRef<p5Types | null>(null);
   //const canvasRef = React.createRef<p5Types>();
-  const canvasRef = useRef<React.MutableRefObject<typeof ReactP5Wrapper | null>>(null);
+
+  const canvasRef = React.useRef<typeof ReactP5Wrapper | null>(null);
 
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
