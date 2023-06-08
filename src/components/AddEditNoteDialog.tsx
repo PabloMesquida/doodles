@@ -28,7 +28,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
-      p5.createCanvas(400, 400, p5.WEBGL);
+      p5.createCanvas(400, 400);
       p5.background(255);
     };
 
