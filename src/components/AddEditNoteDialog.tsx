@@ -36,7 +36,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       p5.fill(0);
       p5.stroke(0);
       p5.strokeWeight(4);
-      if (p5.mouseIsPressed === true) p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+      if (p5.mouseIsPressed === true)
+        p5.line(p5.mouseX / 2, p5.mouseY / 2, p5.pmouseX / 2, p5.pmouseY / 2);
     };
   };
 
