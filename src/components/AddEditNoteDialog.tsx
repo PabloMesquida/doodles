@@ -1,5 +1,5 @@
 import * as NoteApi from "../network/notes_api";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -25,6 +25,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
+  const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   console.log("Canvas REF: ", canvasRef);
 
@@ -45,18 +46,24 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     };
   };
 
-  async function onSubmit(input: NoteInput) {
+  const saveCanvasAsImage = () => {
     const canvas = canvasRef.current;
-    console.log(canvas);
     if (canvas) {
       const dataURL = canvas.toDataURL();
-      const blob = await (await fetch(dataURL)).blob();
+      setCanvasDataURL(dataURL);
+      console.log(dataURL);
+    }
+  };
+
+  async function onSubmit(input: NoteInput) {
+    if (canvasDataURL) {
+      const blob = await (await fetch(canvasDataURL)).blob();
       const file = new File([blob], "filename.png", { type: "image/png" });
       const fileRandomName = generateRandomName();
       uploadImage({ file, fileName: fileRandomName });
       console.log(file);
     }
-    console.log("Canvas", canvas);
+    console.log("Canvas", canvasDataURL);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
@@ -126,7 +133,12 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
         <canvas ref={canvasRef} style={{ display: "none" }} />
       </Modal.Body>
       <Modal.Footer>
-        <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
+        <Button
+          type="submit"
+          form="addEditNoteForm"
+          disabled={isSubmitting}
+          onClick={saveCanvasAsImage}
+        >
           Save
         </Button>
       </Modal.Footer>
