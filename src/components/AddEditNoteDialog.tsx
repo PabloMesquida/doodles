@@ -50,19 +50,17 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     const canvas = canvasRef.current;
     console.log("CANVAS", canvas);
 
-    if (canvas) {
-      const context = canvas.getContext("2d");
-      const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
-      const blob = new Blob([imageData as unknown as BlobPart], { type: "image/png" });
-      const imageUrl = URL.createObjectURL(blob);
-
-      console.log("IMAGE URL:", imageUrl);
-
-      const blob2 = await (await fetch(imageUrl)).blob();
-      const file = new File([blob2], "filename.png", { type: "image/png" });
-      const fileRandomName = generateRandomName();
-      uploadImage({ file, fileName: fileRandomName });
-      console.log("FILE", file);
+    try {
+      if (canvas) {
+        const context = canvas.getContext("2d");
+        const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
+        const blob = new Blob([imageData as unknown as BlobPart], { type: "image/png" });
+        const file = new File([blob], "filename.png", { type: "image/png" });
+        const fileRandomName = generateRandomName();
+        uploadImage({ file, fileName: fileRandomName });
+      }
+    } catch (error) {
+      console.error("Error al generar o cargar la imagen:", error);
     }
 
     try {
