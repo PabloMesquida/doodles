@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import { ReactP5Wrapper, Sketch } from "react-p5-wrapper";
+import { generateRandomName } from "../utils/generateRandomName";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -49,8 +50,11 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
     if (canvas) {
       const dataURL = canvas.toDataURL();
-
-      console.log(dataURL);
+      const blob = await (await fetch(dataURL)).blob();
+      const file = new File([blob], "filename.png", { type: "image/png" });
+      const fileRandomName = generateRandomName();
+      uploadImage({ file, fileName: fileRandomName });
+      console.log(file);
     }
     console.log("Canvas", canvas);
     try {
@@ -65,6 +69,39 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     } catch (error) {
       console.error(error);
       alert(error);
+    }
+  }
+
+  interface UploadImageParams {
+    file: File;
+    fileName: string;
+  }
+
+  async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
+    const cloudName = "dq2hljnad";
+    const uploadPreset = "doodles-upload";
+
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    const formData: FormData = new FormData();
+
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("public_id", `${fileName}.png`);
+
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
+
+      if (response.ok) {
+        console.log("Archivo subido con éxito");
+        // Hacer algo con la respuesta de Cloudinary
+      } else {
+        console.error("Error al subir archivo:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
     }
   }
 
