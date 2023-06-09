@@ -142,7 +142,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch} />
+        <ReactP5Wrapper sketch={sketch} canvasRef={canvasRef} />
         {/* <canvas ref={canvasRef} style={{ display: "none" }} /> */}
       </Modal.Body>
       <Modal.Footer>
