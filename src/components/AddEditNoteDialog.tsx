@@ -52,16 +52,27 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
     try {
       if (canvas) {
-        const context = canvas.getContext("2d");
-        console.log("CONTEXT: ", context);
-        const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
-        console.log("IMAGEDATE: ", imageData);
-        const blob = new Blob([imageData as unknown as BlobPart], { type: "image/png" });
-        console.log("BLOB", blob);
-        const file = new File([blob], "filename.png", { type: "image/png" });
-        console.log("FILE", file);
-        const fileRandomName = generateRandomName();
-        uploadImage({ file, fileName: fileRandomName });
+        const blob = await new Promise<Blob | null>((resolve) => {
+          canvas.toBlob((value) => resolve(value), "image/png");
+        });
+        if (blob) {
+          const file = new File([blob], "filename.png", { type: "image/png" });
+          const fileRandomName = generateRandomName();
+          uploadImage({ file, fileName: fileRandomName });
+        } else {
+          console.error("Error al generar el Blob");
+        }
+
+        // const context = canvas.getContext("2d");
+        // console.log("CONTEXT: ", context);
+        // const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
+        // console.log("IMAGEDATE: ", imageData);
+        // const blob = new Blob([imageData as unknown as BlobPart], { type: "image/png" });
+        // console.log("BLOB", blob);
+        // const file = new File([blob], "filename.png", { type: "image/png" });
+        // console.log("FILE", file);
+        // const fileRandomName = generateRandomName();
+        // uploadImage({ file, fileName: fileRandomName });
       }
     } catch (error) {
       console.error("Error al generar o cargar la imagen:", error);
