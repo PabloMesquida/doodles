@@ -47,7 +47,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   async function onSubmit(input: NoteInput) {
     const canvas = canvasRef.current;
-
+    console.log(canvas);
     if (canvas) {
       const dataURL = canvas.toDataURL();
       const blob = await (await fetch(dataURL)).blob();
@@ -86,7 +86,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
     formData.append("file", file);
     formData.append("upload_preset", uploadPreset);
-    formData.append("public_id", `${fileName}.png`);
+    formData.append("public_id", fileName);
 
     try {
       const response = await fetch(url, {
