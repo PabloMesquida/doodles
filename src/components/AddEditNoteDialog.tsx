@@ -86,7 +86,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   }
 
   async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
-    console.log("UPLOAD IMAGE");
+    console.log("UPLOAD IMAGE", file, fileName);
     const cloudName = "dq2hljnad";
     const uploadPreset = "doodles-upload";
 
