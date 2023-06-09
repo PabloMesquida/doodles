@@ -5,7 +5,7 @@ import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
-import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
+import { ReactP5Wrapper, P5CanvasInstance, SketchProps } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
 
 interface AddEditNoteDialogProps {
@@ -27,11 +27,17 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   //const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+
   console.log("Canvas REF: ", canvasRef);
 
-  function sketch(p5: P5CanvasInstance) {
+  interface MySketchProps extends SketchProps {
+    canvasRef: React.RefObject<HTMLCanvasElement>;
+  }
+
+  function sketch(p5: P5CanvasInstance<MySketchProps>) {
     p5.setup = () => {
-      p5.createCanvas(400, 400);
+      //const canvasRef = p5.createCanvas(400, 400);
+      p5.createCanvas(400, 400).canvas.parentElement = canvasRef.current;
 
       p5.background(255);
     };
@@ -39,7 +45,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     p5.draw = () => {
       p5.fill(0);
       p5.stroke(0);
-      p5.strokeWeight(10);
+      p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
       }
