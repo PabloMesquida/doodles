@@ -5,7 +5,7 @@ import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
-import { ReactP5Wrapper, Sketch } from "react-p5-wrapper";
+import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
 
 interface AddEditNoteDialogProps {
@@ -29,7 +29,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   const canvasRef = useRef<HTMLCanvasElement>(null);
   console.log("Canvas REF: ", canvasRef);
 
-  const sketch: Sketch = (p5) => {
+  function sketch(p5: P5CanvasInstance) {
     p5.setup = () => {
       p5.createCanvas(400, 400);
 
@@ -44,15 +44,16 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
       }
     };
-  };
+  }
 
   const saveCanvasAsImage = () => {
-    const canvas = canvasRef.current;
-    if (canvas) {
-      const dataURL = canvas.toDataURL();
-      setCanvasDataURL(dataURL);
-      console.log("dataURL:", dataURL);
-    }
+    const canvas = sketch;
+    console.log("SKETCH", canvas);
+    // if (canvas) {
+    //   const dataURL = canvas.toDataURL();
+    //   setCanvasDataURL(dataURL);
+    //   console.log("dataURL:", dataURL);
+    // }
   };
 
   async function onSubmit(input: NoteInput) {
