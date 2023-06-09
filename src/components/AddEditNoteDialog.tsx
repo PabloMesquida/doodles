@@ -49,20 +49,20 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   async function onSubmit(input: NoteInput) {
     const canvas = sketch;
     console.log("SKETCH", canvas);
-    // if (canvas) {
-    //   const dataURL = canvas.toDataURL();
-    //   setCanvasDataURL(dataURL);
-    //   console.log("dataURL:", dataURL);
-    // }
+    if (canvas) {
+      const dataURL = canvas; // canvas.toDataURL();
+      setCanvasDataURL(dataURL);
+      console.log("dataURL:", dataURL);
+    }
 
-    // if (canvasDataURL) {
-    //   const blob = await (await fetch(canvasDataURL)).blob();
-    //   const file = new File([blob], "filename.png", { type: "image/png" });
-    //   const fileRandomName = generateRandomName();
-    //   uploadImage({ file, fileName: fileRandomName });
-    //   console.log("FILE", file);
-    // }
-    // console.log("Canvas", canvasDataURL);
+    if (canvasDataURL) {
+      const blob = await (await fetch(canvasDataURL)).blob();
+      const file = new File([blob], "filename.png", { type: "image/png" });
+      const fileRandomName = generateRandomName();
+      uploadImage({ file, fileName: fileRandomName });
+      console.log("FILE", file);
+    }
+    console.log("Canvas", canvasDataURL);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
