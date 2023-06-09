@@ -143,7 +143,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
           />
         </Form>
         <ReactP5Wrapper sketch={sketch} />
-        <canvas ref={canvasRef} style={{ display: "none" }} />
+        {/* <canvas ref={canvasRef} style={{ display: "none" }} /> */}
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
