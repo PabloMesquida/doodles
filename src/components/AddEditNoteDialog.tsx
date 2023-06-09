@@ -42,21 +42,17 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
       }
     };
-
-    p5.saveCanvas = () => {
-      // Guardar el lienzo como imagen en el servidor
-
-      const canvas = canvasRef.current;
-
-      if (canvas) {
-        const dataURL = canvas.toDataURL();
-
-        console.log(dataURL);
-      }
-    };
   };
 
   async function onSubmit(input: NoteInput) {
+    const canvas = canvasRef.current;
+
+    if (canvas) {
+      const dataURL = canvas.toDataURL();
+
+      console.log(dataURL);
+    }
+    console.log("Canvas", canvas);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
