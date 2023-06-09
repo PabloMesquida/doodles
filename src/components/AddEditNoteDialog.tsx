@@ -39,7 +39,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     p5.draw = () => {
       p5.fill(0);
       p5.stroke(0);
-      p5.strokeWeight(4);
+      p5.strokeWeight(10);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
       }
@@ -49,6 +49,15 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   async function onSubmit(input: NoteInput) {
     const canvas = canvasRef.current;
     console.log("CANVAS", canvas);
+
+    if (canvasRef.current) {
+      const canvas = canvasRef.current;
+      const context = canvas.getContext("2d");
+      console.log(
+        "Contenido del canvas:",
+        context?.getImageData(0, 0, canvas.width, canvas.height)
+      );
+    }
 
     try {
       if (canvas) {
@@ -62,17 +71,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
         } else {
           console.error("Error al generar el Blob");
         }
-
-        // const context = canvas.getContext("2d");
-        // console.log("CONTEXT: ", context);
-        // const imageData = context?.getImageData(0, 0, canvas.width, canvas.height);
-        // console.log("IMAGEDATE: ", imageData);
-        // const blob = new Blob([imageData as unknown as BlobPart], { type: "image/png" });
-        // console.log("BLOB", blob);
-        // const file = new File([blob], "filename.png", { type: "image/png" });
-        // console.log("FILE", file);
-        // const fileRandomName = generateRandomName();
-        // uploadImage({ file, fileName: fileRandomName });
       }
     } catch (error) {
       console.error("Error al generar o cargar la imagen:", error);
