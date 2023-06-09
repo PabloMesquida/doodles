@@ -30,6 +30,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   const sketch: Sketch = (p5) => {
     p5.setup = () => {
       p5.createCanvas(400, 400);
+
       p5.background(255);
     };
 
@@ -39,6 +40,18 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       p5.strokeWeight(4);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+      }
+    };
+
+    p5.saveCanvas = () => {
+      // Guardar el lienzo como imagen en el servidor
+
+      const canvas = canvasRef.current;
+
+      if (canvas) {
+        const dataURL = canvas.toDataURL();
+
+        console.log(dataURL);
       }
     };
   };
@@ -76,9 +89,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch}>
-          <canvas ref={canvasRef} style={{ display: "none" }} />
-        </ReactP5Wrapper>
+        <ReactP5Wrapper sketch={sketch} />
+        <canvas ref={canvasRef} style={{ display: "none" }} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
