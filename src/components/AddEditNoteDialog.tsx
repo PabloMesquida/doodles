@@ -1,12 +1,12 @@
 import * as NoteApi from "../network/notes_api";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
-import { generateRandomName } from "../utils/generateRandomName";
+//import { generateRandomName } from "../utils/generateRandomName";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -25,7 +25,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
+  //const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   console.log("Canvas REF: ", canvasRef);
 
@@ -55,14 +55,14 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       console.log("dataURL:", dataURL);
     }
 
-    if (canvasDataURL) {
-      const blob = await (await fetch(canvasDataURL)).blob();
-      const file = new File([blob], "filename.png", { type: "image/png" });
-      const fileRandomName = generateRandomName();
-      uploadImage({ file, fileName: fileRandomName });
-      console.log("FILE", file);
-    }
-    console.log("Canvas", canvasDataURL);
+    // if (canvasDataURL) {
+    //   const blob = await (await fetch(canvasDataURL)).blob();
+    //   const file = new File([blob], "filename.png", { type: "image/png" });
+    //   const fileRandomName = generateRandomName();
+    //   uploadImage({ file, fileName: fileRandomName });
+    //   console.log("FILE", file);
+    // }
+    // console.log("Canvas", canvasDataURL);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
@@ -78,38 +78,38 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     }
   }
 
-  interface UploadImageParams {
-    file: File;
-    fileName: string;
-  }
+  // interface UploadImageParams {
+  //   file: File;
+  //   fileName: string;
+  // }
 
-  async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
-    const cloudName = "dq2hljnad";
-    const uploadPreset = "doodles-upload";
+  // async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
+  //   const cloudName = "dq2hljnad";
+  //   const uploadPreset = "doodles-upload";
 
-    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-    const formData: FormData = new FormData();
+  //   const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+  //   const formData: FormData = new FormData();
 
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
-    formData.append("public_id", fileName);
+  //   formData.append("file", file);
+  //   formData.append("upload_preset", uploadPreset);
+  //   formData.append("public_id", fileName);
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData,
-      });
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       body: formData,
+  //     });
 
-      if (response.ok) {
-        console.log("Archivo subido con éxito");
-        // Hacer algo con la respuesta de Cloudinary
-      } else {
-        console.error("Error al subir archivo:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error de red:", error);
-    }
-  }
+  //     if (response.ok) {
+  //       console.log("Archivo subido con éxito");
+  //       // Hacer algo con la respuesta de Cloudinary
+  //     } else {
+  //       console.error("Error al subir archivo:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error de red:", error);
+  //   }
+  // }
 
   return (
     <Modal show onHide={onDismiss}>
