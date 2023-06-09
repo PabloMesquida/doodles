@@ -34,7 +34,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       //const canvasRef = p5.createCanvas(400, 400);
       const canvas = p5.createCanvas(400, 400).canvas;
       canvasRef.current?.appendChild(canvas);
-
+      console.log("SKETC: ", canvasRef);
       p5.background(255);
     };
 
@@ -144,7 +144,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch} />
+        <ReactP5Wrapper sketch={sketch} ref={canvasRef} />
         {/* <canvas ref={canvasRef} style={{ display: "none" }} /> */}
       </Modal.Body>
       <Modal.Footer>
