@@ -51,7 +51,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     if (canvas) {
       const dataURL = canvas.toDataURL();
       setCanvasDataURL(dataURL);
-      console.log(dataURL);
+      console.log("dataURL:", dataURL);
     }
   };
 
@@ -61,7 +61,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       const file = new File([blob], "filename.png", { type: "image/png" });
       const fileRandomName = generateRandomName();
       uploadImage({ file, fileName: fileRandomName });
-      console.log(file);
+      console.log("FILE", file);
     }
     console.log("Canvas", canvasDataURL);
     try {
