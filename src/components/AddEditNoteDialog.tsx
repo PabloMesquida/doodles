@@ -1,5 +1,5 @@
 import * as NoteApi from "../network/notes_api";
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -25,7 +25,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
+  //const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   console.log("Canvas REF: ", canvasRef);
 
@@ -56,18 +56,15 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       const blob = new Blob([imageData as unknown as BlobPart], { type: "image/png" });
       const imageUrl = URL.createObjectURL(blob);
 
-      setCanvasDataURL(imageUrl);
       console.log("IMAGE URL:", imageUrl);
-    }
-    if (canvasDataURL) {
-      const blob = await (await fetch(canvasDataURL)).blob();
-      const file = new File([blob], "filename.png", { type: "image/png" });
+
+      const blob2 = await (await fetch(imageUrl)).blob();
+      const file = new File([blob2], "filename.png", { type: "image/png" });
       const fileRandomName = generateRandomName();
       uploadImage({ file, fileName: fileRandomName });
       console.log("FILE", file);
     }
 
-    console.log("Canvas Data URL", canvasDataURL);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
