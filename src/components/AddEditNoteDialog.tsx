@@ -50,8 +50,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     const canvas = sketch;
     console.log("SKETCH", canvas);
     if (canvas) {
-      const dataURL = canvas; // canvas.toDataURL();
-      setCanvasDataURL(dataURL);
+      const dataURL = canvas.name; // canvas.toDataURL();
+      //  setCanvasDataURL(dataURL);
       console.log("dataURL:", dataURL);
     }
 
