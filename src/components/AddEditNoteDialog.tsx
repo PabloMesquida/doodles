@@ -5,7 +5,7 @@ import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
-import { ReactP5Wrapper, P5CanvasInstance, SketchProps } from "react-p5-wrapper";
+import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
 
 interface AddEditNoteDialogProps {
@@ -25,16 +25,11 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  //const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   console.log("Canvas REF: ", canvasRef);
 
-  interface MySketchProps extends SketchProps {
-    canvasRef: React.RefObject<HTMLCanvasElement>;
-  }
-
-  function sketch(p5: P5CanvasInstance<MySketchProps>) {
+  function sketch(p5: P5CanvasInstance) {
     p5.setup = () => {
       //const canvasRef = p5.createCanvas(400, 400);
       const canvas = p5.createCanvas(400, 400).canvas;
@@ -149,7 +144,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <ReactP5Wrapper sketch={sketch} canvasRef={canvasRef} />
+        <ReactP5Wrapper sketch={sketch} />
         {/* <canvas ref={canvasRef} style={{ display: "none" }} /> */}
       </Modal.Body>
       <Modal.Footer>
