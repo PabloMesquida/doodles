@@ -46,7 +46,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     };
   }
 
-  const saveCanvasAsImage = () => {
+  async function onSubmit(input: NoteInput) {
     const canvas = sketch;
     console.log("SKETCH", canvas);
     // if (canvas) {
@@ -54,17 +54,15 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     //   setCanvasDataURL(dataURL);
     //   console.log("dataURL:", dataURL);
     // }
-  };
 
-  async function onSubmit(input: NoteInput) {
-    if (canvasDataURL) {
-      const blob = await (await fetch(canvasDataURL)).blob();
-      const file = new File([blob], "filename.png", { type: "image/png" });
-      const fileRandomName = generateRandomName();
-      uploadImage({ file, fileName: fileRandomName });
-      console.log("FILE", file);
-    }
-    console.log("Canvas", canvasDataURL);
+    // if (canvasDataURL) {
+    //   const blob = await (await fetch(canvasDataURL)).blob();
+    //   const file = new File([blob], "filename.png", { type: "image/png" });
+    //   const fileRandomName = generateRandomName();
+    //   uploadImage({ file, fileName: fileRandomName });
+    //   console.log("FILE", file);
+    // }
+    // console.log("Canvas", canvasDataURL);
     try {
       let noteResponse: Note;
       if (noteToEdit) {
@@ -134,12 +132,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
         <canvas ref={canvasRef} style={{ display: "none" }} />
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          type="submit"
-          form="addEditNoteForm"
-          disabled={isSubmitting}
-          onClick={saveCanvasAsImage}
-        >
+        <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
           Save
         </Button>
       </Modal.Footer>
