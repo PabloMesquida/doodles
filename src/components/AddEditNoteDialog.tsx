@@ -37,12 +37,12 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   function sketch(p5: P5CanvasInstance) {
     p5.setup = () => {
       //const canvasRef = p5.createCanvas(400, 400);
-      // const canvas = p5.createCanvas(400, 400).canvas;
-      // canvasRef.current?.appendChild(canvas);
+      const canvas = p5.createCanvas(400, 400);
+      canvasRef.current?.appendChild(canvas);
+      console.log("-- CANVAS ---", canvas);
+      console.log("--- CANVAS REF ---", canvasRef.current);
+      //  canvasRef.current.canvas;
 
-      // p5.background(255);
-
-      p5.createCanvas(400, 400).canvas;
       p5.background(255);
     };
 
@@ -153,7 +153,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
           />
         </Form>
         <ReactP5Wrapper sketch={sketch} />
-        <canvas ref={canvasRef} />
+        <canvas ref={canvasRef} style={{ display: "none" }} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
