@@ -1,37 +1,11 @@
 import * as NoteApi from "../network/notes_api";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
-
-interface DoodleProps {
-  cRef: React.RefObject<HTMLDivElement>;
-}
-
-const Doodle = ({ cRef }: DoodleProps) => {
-  const sketch = (p5: P5CanvasInstance) => {
-    p5.setup = () => {
-      p5.createCanvas(400, 400).parent(cRef.current ? cRef.current : undefined);
-      console.log("--- CANVAS REF ---", cRef.current);
-
-      p5.background(255);
-    };
-
-    p5.draw = () => {
-      p5.fill(0);
-      p5.stroke(0);
-      p5.strokeWeight(25);
-      if (p5.mouseIsPressed === true) {
-        p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-      }
-    };
-  };
-
-  return <ReactP5Wrapper sketch={sketch} />;
-};
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -40,6 +14,7 @@ interface AddEditNoteDialogProps {
 }
 
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
+  const [canvas, setCanvas] = useState<P5CanvasInstance | null>(null);
   const {
     register,
     handleSubmit,
@@ -52,9 +27,36 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   const canvasRef = useRef<HTMLDivElement>(null);
 
+  interface DoodleProps {
+    cRef: React.RefObject<HTMLDivElement>;
+  }
+
+  const Doodle = ({ cRef }: DoodleProps) => {
+    const sketch = (p5: P5CanvasInstance) => {
+      setCanvas(p5);
+      p5.setup = () => {
+        p5.createCanvas(400, 400).parent(cRef.current ? cRef.current : undefined);
+        console.log("--- CANVAS REF ---", cRef.current);
+
+        p5.background(255);
+      };
+
+      p5.draw = () => {
+        p5.fill(0);
+        p5.stroke(0);
+        p5.strokeWeight(25);
+        if (p5.mouseIsPressed === true) {
+          p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+        }
+      };
+    };
+
+    return <ReactP5Wrapper sketch={sketch} />;
+  };
+
   async function onSubmit(input: NoteInput) {
-    const canvas = canvasRef.current;
-    console.log("CANVAS", canvas);
+    //canvas const canvas = canvasRef.current;
+    console.log("STATE-CANVAS", canvas);
 
     try {
       let noteResponse: Note;
