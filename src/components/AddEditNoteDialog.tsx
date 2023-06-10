@@ -7,12 +7,12 @@ import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 // import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 //import { generateRandomName } from "../utils/generateRandomName";
-//import { useCanvasContext } from "../context/CanvasContext";
+import { useCanvasContext } from "../context/CanvasContext";
 
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 
 export const Doodle = () => {
-  // const { setCanvas } = useCanvasContext();
+  const { setCanvas } = useCanvasContext();
   // console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
@@ -26,9 +26,9 @@ export const Doodle = () => {
       p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-        // if (setCanvas) {
-        //   setCanvas(p5);
-        // }
+        if (setCanvas) {
+          setCanvas(p5);
+        }
       }
     };
   };
