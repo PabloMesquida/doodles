@@ -142,7 +142,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        {/* <Doodle /> */}
+        <Doodle />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
