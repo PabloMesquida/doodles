@@ -1,5 +1,5 @@
 import * as NoteApi from "../network/notes_api";
-import React, { useState } from "react";
+// import { useContext } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -7,6 +7,7 @@ import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
+import { useCanvasContext } from "../context/CanvasContext";
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
@@ -15,7 +16,8 @@ interface AddEditNoteDialogProps {
 }
 
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
-  const [canvas, setCanvas] = useState<P5CanvasInstance | null>(null);
+  //const [canvas, setCanvas] = useState<P5CanvasInstance | null>(null);
+  const { canvas, setCanvas } = useCanvasContext();
   const {
     register,
     handleSubmit,
@@ -26,7 +28,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  const Doodle = React.memo(() => {
+  const Doodle = () => {
     const sketch = (p5: P5CanvasInstance) => {
       p5.setup = () => {
         p5.createCanvas(400, 400);
@@ -39,13 +41,15 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
         p5.strokeWeight(25);
         if (p5.mouseIsPressed === true) {
           p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-          setCanvas(p5);
+          if (setCanvas) {
+            setCanvas(p5);
+          }
         }
       };
     };
 
     return <ReactP5Wrapper sketch={sketch} />;
-  });
+  };
 
   async function onSubmit(input: NoteInput) {
     const newCanvas = canvas.canvas;

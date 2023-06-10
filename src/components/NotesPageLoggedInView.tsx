@@ -7,6 +7,7 @@ import styles from "../styles/NotesPage.module.css";
 import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "./AddEditNoteDialog";
 import Note from "./Note";
+// import CanvasContextProvider from "../context/CanvasContext";
 
 const NotesPageLoggedInView = () => {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -68,13 +69,9 @@ const NotesPageLoggedInView = () => {
       </Button>
 
       {notesLoading && <Spinner animation="border" variant="primary" />}
-      {showNotesLoadingError && (
-        <p>Something went wrong. Please refresh the page.</p>
-      )}
+      {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
       {!notesLoading && !showNotesLoadingError && (
-        <>
-          {notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}
-        </>
+        <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
       )}
       {showNoteDialog && (
         <AddEditNoteDialog
@@ -92,9 +89,7 @@ const NotesPageLoggedInView = () => {
           onNoteSaved={(updatedNote) => {
             setNotes(
               notes.map((existingNote) =>
-                existingNote._id === updatedNote._id
-                  ? updatedNote
-                  : existingNote
+                existingNote._id === updatedNote._id ? updatedNote : existingNote
               )
             );
             setNoteToEdit(null);
