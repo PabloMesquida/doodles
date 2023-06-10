@@ -1,3 +1,4 @@
+import * as React from "react";
 import * as NoteApi from "../network/notes_api";
 import { useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
@@ -5,7 +6,7 @@ import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
-import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
+import { ReactP5Wrapper, P5CanvasInstance, SketchProps } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
 
 interface AddEditNoteDialogProps {
@@ -29,12 +30,20 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   console.log("Canvas REF: ", canvasRef);
 
-  function sketch(p5: P5CanvasInstance) {
-    p5.setup = () => {
-      //const canvasRef = p5.createCanvas(400, 400);
-      const canvas = p5.createCanvas(400, 400).canvas;
-      canvasRef.current?.appendChild(canvas);
-      console.log("SKETC: ", canvasRef);
+  interface MySketchProps extends SketchProps {
+    canvasRef: React.RefObject<HTMLDivElement>;
+  }
+
+  function sketch(p5: P5CanvasInstance<MySketchProps>) {
+    let canvas = p5.createCanvas(400, 400);
+
+    p5.setup = (props: MySketchProps) => {
+      const canvasElement = p5.createCanvas(400, 400);
+      if (props.canvasRef.current) {
+        console.log("SETUP:", props.canvasRef.current);
+        canvasElement.parent(props.canvasRef.current);
+        canvas = canvasElement;
+      }
       p5.background(255);
     };
 
@@ -44,6 +53,10 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+        if (canvas && canvasRef.current) {
+          canvasRef.current.appendChild(canvas.elt);
+          console.log("SKETCH: ", canvasRef);
+        }
       }
     };
   }
@@ -145,7 +158,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
           />
         </Form>
         <ReactP5Wrapper sketch={sketch} />
-        <canvas ref={canvasRef} style={{ display: "none" }} />
+        <canvas ref={canvasRef} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
