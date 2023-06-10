@@ -9,6 +9,30 @@ import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
 import { useCanvasContext } from "../context/CanvasContext";
 
+const Doodle = () => {
+  const { setCanvas } = useCanvasContext();
+  const sketch = (p5: P5CanvasInstance) => {
+    p5.setup = () => {
+      p5.createCanvas(400, 400);
+      p5.background(255);
+    };
+
+    p5.draw = () => {
+      p5.fill(0);
+      p5.stroke(0);
+      p5.strokeWeight(25);
+      if (p5.mouseIsPressed === true) {
+        p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+        if (setCanvas) {
+          setCanvas(p5);
+        }
+      }
+    };
+  };
+
+  return <ReactP5Wrapper sketch={sketch} />;
+};
+
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
   onDismiss: () => void;
@@ -17,7 +41,7 @@ interface AddEditNoteDialogProps {
 
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
   //const [canvas, setCanvas] = useState<P5CanvasInstance | null>(null);
-  const { canvas, setCanvas } = useCanvasContext();
+  const { canvas } = useCanvasContext();
   const {
     register,
     handleSubmit,
@@ -27,29 +51,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       title: noteToEdit?.title || "",
     },
   });
-
-  const Doodle = () => {
-    const sketch = (p5: P5CanvasInstance) => {
-      p5.setup = () => {
-        p5.createCanvas(400, 400);
-        p5.background(255);
-      };
-
-      p5.draw = () => {
-        p5.fill(0);
-        p5.stroke(0);
-        p5.strokeWeight(25);
-        if (p5.mouseIsPressed === true) {
-          p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-          if (setCanvas) {
-            setCanvas(p5);
-          }
-        }
-      };
-    };
-
-    return <ReactP5Wrapper sketch={sketch} />;
-  };
 
   async function onSubmit(input: NoteInput) {
     const newCanvas = canvas.canvas;
