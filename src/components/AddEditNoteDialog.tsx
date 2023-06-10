@@ -1,4 +1,3 @@
-import * as React from "react";
 import * as NoteApi from "../network/notes_api";
 import { useRef } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
@@ -15,10 +14,6 @@ interface AddEditNoteDialogProps {
   onNoteSaved: (note: Note) => void;
 }
 
-interface MySketchProps extends SketchProps {
-  canvasRef: React.RefObject<HTMLDivElement>;
-}
-
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
   const {
     register,
@@ -30,23 +25,29 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
+  //const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   console.log("Canvas REF: ", canvasRef);
 
-  function sketch(p5: P5CanvasInstance<MySketchProps>) {
+  // interface MySketchProps extends SketchProps {
+  //   canvasRef: React.RefObject<HTMLCanvasElement>;
+  // }
+
+  function sketch(p5: P5CanvasInstance) {
     p5.setup = () => {
-      if (canvasRef.current) {
-        p5.createCanvas(400, 400).parent(canvasRef.current);
-        p5.background(255);
-      }
+      //const canvasRef = p5.createCanvas(400, 400);
+      const canvas = p5.createCanvas(400, 400).canvas;
+      canvasRef.current?.appendChild(canvas);
+
+      p5.background(255);
     };
 
     p5.draw = () => {
       p5.fill(0);
       p5.stroke(0);
       p5.strokeWeight(25);
-      if (p5.mouseIsPressed === true && canvasRef.current) {
+      if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
       }
     };
@@ -149,7 +150,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
           />
         </Form>
         <ReactP5Wrapper sketch={sketch} canvasRef={canvasRef} />
-        {/* <canvas ref={canvasRef} /> */}
+        <canvas ref={canvasRef} style={{ display: "none" }} />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
