@@ -36,12 +36,10 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   function sketch(p5: P5CanvasInstance) {
     p5.setup = () => {
-      //const canvasRef = p5.createCanvas(400, 400);
       const canvas = p5.createCanvas(400, 400);
       canvasRef.current?.appendChild(canvas);
       console.log("-- CANVAS ---", canvas);
       console.log("--- CANVAS REF ---", canvasRef.current);
-      //  canvasRef.current.canvas;
 
       p5.background(255);
     };
