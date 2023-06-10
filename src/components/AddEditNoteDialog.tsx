@@ -26,12 +26,12 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   });
 
   //const [canvasDataURL, setCanvasDataURL] = useState<string | null>(null);
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+  let canvasRef = useRef<HTMLCanvasElement>(null);
 
   function sketch(p5: P5CanvasInstance) {
     p5.setup = () => {
       const canvas = p5.createCanvas(400, 400);
-      canvasRef.current?.appendChild(canvas.canvas);
+      canvasRef = canvas.canvas;
       console.log("-- CANVAS ---", canvas);
       console.log("--- CANVAS REF ---", canvasRef.current);
 
