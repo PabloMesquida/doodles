@@ -57,7 +57,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   async function onSubmit(input: NoteInput) {
     //canvas const canvas = canvasRef.current;
-    console.log("STATE-CANVAS", canvas.canvas);
+    console.log("STATE-CANVAS", canvas.canvas.getContext("2d"));
 
     try {
       let noteResponse: Note;
