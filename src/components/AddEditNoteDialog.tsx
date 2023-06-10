@@ -5,7 +5,7 @@ import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
-import { ReactP5Wrapper, P5CanvasInstance, SketchProps } from "react-p5-wrapper";
+import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
 
 interface AddEditNoteDialogProps {
