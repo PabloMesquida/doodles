@@ -11,6 +11,7 @@ import { useCanvasContext } from "../context/CanvasContext";
 
 const Doodle = () => {
   const { setCanvas } = useCanvasContext();
+  console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(400, 400);
@@ -51,7 +52,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       title: noteToEdit?.title || "",
     },
   });
-
+  console.log("NOTE");
   async function onSubmit(input: NoteInput) {
     const newCanvas = canvas.canvas;
     const context = newCanvas.getContext("2d");
