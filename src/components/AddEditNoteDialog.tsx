@@ -1,5 +1,5 @@
 import * as NoteApi from "../network/notes_api";
-import { useState } from "react";
+import React, { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -26,19 +26,10 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  //const canvasRef = useRef<HTMLDivElement>(null);
-
-  // interface DoodleProps {
-  //   cRef: React.RefObject<HTMLDivElement>;
-  // }
-  console.log("AddEditNoteDialog");
-  const Doodle = () => {
+  const Doodle = React.memo(() => {
     const sketch = (p5: P5CanvasInstance) => {
       p5.setup = () => {
         p5.createCanvas(400, 400);
-        //p5.createCanvas(400, 400).parent(cRef.current ? cRef.current : undefined);
-        //   console.log("--- CANVAS REF ---", cRef.current);
-
         p5.background(255);
       };
 
@@ -54,10 +45,9 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     };
 
     return <ReactP5Wrapper sketch={sketch} />;
-  };
+  });
 
   async function onSubmit(input: NoteInput) {
-    //canvas const canvas = canvasRef.current;
     const newCanvas = canvas.canvas;
     const context = newCanvas.getContext("2d");
 
@@ -119,7 +109,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
       if (response.ok) {
         console.log("Archivo subido con éxito");
-        // Hacer algo con la respuesta de Cloudinary
       } else {
         console.error("Error al subir archivo:", response.statusText);
       }
