@@ -9,16 +9,14 @@ import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 // import { generateRandomName } from "../utils/generateRandomName";
 
 interface DoodleProps {
-  canvasRef: React.RefObject<HTMLDivElement>;
+  cRef: React.RefObject<HTMLDivElement>;
 }
 
-const Doodle = ({ canvasRef }: DoodleProps) => {
+const Doodle = ({ cRef }: DoodleProps) => {
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      p5.createCanvas(400, 400).parent(canvasRef.current);
-      // canvasRef.current?.appendChild(canvas.canvas);
-      //  console.log("-- CANVAS ---", canvas);
-      console.log("--- CANVAS REF ---", canvasRef.current);
+      p5.createCanvas(400, 400).parent(cRef.current);
+      console.log("--- CANVAS REF ---", cRef.current);
 
       p5.background(255);
     };
@@ -32,6 +30,7 @@ const Doodle = ({ canvasRef }: DoodleProps) => {
       }
     };
   };
+
   return <ReactP5Wrapper sketch={sketch} />;
 };
 
@@ -58,14 +57,14 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     const canvas = canvasRef.current;
     console.log("CANVAS", canvas);
 
-    if (canvasRef.current) {
-      //   const canvas = canvasRef.current;
-      // const context = canvas.getContext("2d");
-      console.log(
-        "Contenido del canvas:"
-        //  context?.getImageData(0, 0, canvas.width, canvas.height)
-      );
-    }
+    // if (canvasRef.current) {
+    //   //   const canvas = canvasRef.current;
+    //   // const context = canvas.getContext("2d");
+    //   console.log(
+    //     "Contenido del canvas:"
+    //     //  context?.getImageData(0, 0, canvas.width, canvas.height)
+    //   );
+    // }
 
     try {
       if (canvas) {
@@ -150,7 +149,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <Doodle canvasRef={canvasRef} />
+        <Doodle cRef={canvasRef} />
         {/* <ReactP5Wrapper sketch={sketch} />
         <div ref={canvasRef} style={{ display: "none" }} /> */}
       </Modal.Body>
