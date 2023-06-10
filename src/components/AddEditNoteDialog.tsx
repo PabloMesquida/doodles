@@ -15,6 +15,10 @@ interface AddEditNoteDialogProps {
   onNoteSaved: (note: Note) => void;
 }
 
+interface MySketchProps extends SketchProps {
+  canvasRef: React.RefObject<HTMLDivElement>;
+}
+
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
   const {
     register,
@@ -30,33 +34,20 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   console.log("Canvas REF: ", canvasRef);
 
-  interface MySketchProps extends SketchProps {
-    canvasRef: React.RefObject<HTMLDivElement>;
-  }
-
   function sketch(p5: P5CanvasInstance<MySketchProps>) {
-    let canvas = p5.createCanvas(400, 400);
-
-    p5.setup = (props: MySketchProps) => {
-      const canvasElement = p5.createCanvas(400, 400);
-      if (props.canvasRef.current) {
-        console.log("SETUP:", props.canvasRef.current);
-        canvasElement.parent(props.canvasRef.current);
-        canvas = canvasElement;
+    p5.setup = () => {
+      if (canvasRef.current) {
+        p5.createCanvas(400, 400).parent(canvasRef.current);
+        p5.background(255);
       }
-      p5.background(255);
     };
 
     p5.draw = () => {
       p5.fill(0);
       p5.stroke(0);
       p5.strokeWeight(25);
-      if (p5.mouseIsPressed === true) {
+      if (p5.mouseIsPressed === true && canvasRef.current) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-        if (canvas && canvasRef.current) {
-          canvasRef.current.appendChild(canvas.elt);
-          console.log("SKETCH: ", canvasRef);
-        }
       }
     };
   }
