@@ -3,7 +3,7 @@ import { useCanvasContext } from "../context/CanvasContext";
 
 export const Doodle = () => {
   const { setCanvas } = useCanvasContext();
-  console.log("DOOLE");
+  console.log("DOOLE- PERON");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(400, 400);

@@ -8,7 +8,7 @@ import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "./AddEditNoteDialog";
 import Note from "./Note";
 import { CanvasContextProvider } from "../context/CanvasContext";
-import { Doodle } from "./Doodle";
+//import { Doodle } from "./Doodle";
 // import CanvasContextProvider from "../context/CanvasContext";
 
 const NotesPageLoggedInView = () => {
@@ -85,7 +85,7 @@ const NotesPageLoggedInView = () => {
                 setShowNoteDialog(false);
               }}
             />
-            <Doodle />
+            {/* <Doodle /> */}
           </>
         )}
         {noteToEdit && (
