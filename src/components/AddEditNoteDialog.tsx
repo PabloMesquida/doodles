@@ -1,5 +1,5 @@
 import * as NoteApi from "../network/notes_api";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -25,18 +25,19 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     },
   });
 
-  const canvasRef = useRef<HTMLDivElement>(null);
+  //const canvasRef = useRef<HTMLDivElement>(null);
 
-  interface DoodleProps {
-    cRef: React.RefObject<HTMLDivElement>;
-  }
+  // interface DoodleProps {
+  //   cRef: React.RefObject<HTMLDivElement>;
+  // }
 
-  const Doodle = ({ cRef }: DoodleProps) => {
+  const Doodle = () => {
     const sketch = (p5: P5CanvasInstance) => {
       setCanvas(p5);
       p5.setup = () => {
-        p5.createCanvas(400, 400).parent(cRef.current ? cRef.current : undefined);
-        console.log("--- CANVAS REF ---", cRef.current);
+        p5.createCanvas(400, 400);
+        //p5.createCanvas(400, 400).parent(cRef.current ? cRef.current : undefined);
+        //   console.log("--- CANVAS REF ---", cRef.current);
 
         p5.background(255);
       };
@@ -90,7 +91,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <Doodle cRef={canvasRef} />
+        <Doodle />
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
