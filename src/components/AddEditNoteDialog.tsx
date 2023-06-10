@@ -30,10 +30,9 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   // interface DoodleProps {
   //   cRef: React.RefObject<HTMLDivElement>;
   // }
-
+  console.log("AddEditNoteDialog");
   const Doodle = () => {
     const sketch = (p5: P5CanvasInstance) => {
-      setCanvas(p5);
       p5.setup = () => {
         p5.createCanvas(400, 400);
         //p5.createCanvas(400, 400).parent(cRef.current ? cRef.current : undefined);
@@ -48,6 +47,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
         p5.strokeWeight(25);
         if (p5.mouseIsPressed === true) {
           p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+          setCanvas(p5);
         }
       };
     };
