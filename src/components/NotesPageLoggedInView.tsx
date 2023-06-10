@@ -8,6 +8,7 @@ import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "./AddEditNoteDialog";
 import Note from "./Note";
 import { CanvasContextProvider } from "../context/CanvasContext";
+import { Doodle } from "./Doodle";
 // import CanvasContextProvider from "../context/CanvasContext";
 
 const NotesPageLoggedInView = () => {
@@ -76,13 +77,16 @@ const NotesPageLoggedInView = () => {
           <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
         )}
         {showNoteDialog && (
-          <AddEditNoteDialog
-            onDismiss={() => setShowNoteDialog(false)}
-            onNoteSaved={(newNote) => {
-              setNotes([...notes, newNote]);
-              setShowNoteDialog(false);
-            }}
-          />
+          <>
+            <AddEditNoteDialog
+              onDismiss={() => setShowNoteDialog(false)}
+              onNoteSaved={(newNote) => {
+                setNotes([...notes, newNote]);
+                setShowNoteDialog(false);
+              }}
+            />
+            <Doodle />
+          </>
         )}
         {noteToEdit && (
           <AddEditNoteDialog
