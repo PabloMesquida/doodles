@@ -58,10 +58,13 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   // console.log("NOTE");
 
   const handleCanvasReady = (p5: P5CanvasInstance) => {
-    setP5Instance(p5); // Almacenar la instancia p5 en el estado
+    // Aquí puedes hacer lo que necesites con la referencia a p5
+    setP5Instance(p5);
+    console.log("p5 instance:", p5);
   };
 
   async function onSubmit(input: NoteInput) {
+    console.log("PS Submitn", p5Instance);
     // const newCanvas = canvas.canvas;
     // const context = newCanvas.getContext("2d");
 
@@ -82,11 +85,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     // } catch (error) {
     //   console.error("Error al generar o cargar la imagen:", error);
     // }
-
-    if (p5Instance) {
-      console.log("p5 instance:", p5Instance);
-      // Resto del código del submit...
-    }
 
     try {
       let noteResponse: Note;
