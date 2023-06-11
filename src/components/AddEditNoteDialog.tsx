@@ -27,8 +27,8 @@ const Doodle = () => {
       p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-
-        p5.select("mycanvas").id("mycanvas");
+        console.log("p5canvas", p5.canvas);
+        //  p5.select("mycanvas").id("mycanvas");
         // onCanvasReady(p5);
       }
     };
