@@ -8,6 +8,7 @@ import TextInputField from "./forms/TextInputField";
 // import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 //import { generateRandomName } from "../utils/generateRandomName";
 // import { useCanvasContext } from "../context/CanvasContext";
+import { useState } from "react";
 
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 // const { setCanvas } = useCanvasContext();
@@ -42,6 +43,9 @@ interface AddEditNoteDialogProps {
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
   //const [canvas, setCanvas] = useState<P5CanvasInstance | null>(null);
   // const { canvas } = useCanvasContext();
+
+  const [p5Instance, setP5Instance] = useState<P5CanvasInstance | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -54,8 +58,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   // console.log("NOTE");
 
   const handleCanvasReady = (p5: P5CanvasInstance) => {
-    // Aquí puedes hacer lo que necesites con la referencia a p5
-    console.log("p5 instance:", p5);
+    setP5Instance(p5); // Almacenar la instancia p5 en el estado
   };
 
   async function onSubmit(input: NoteInput) {
@@ -79,6 +82,11 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     // } catch (error) {
     //   console.error("Error al generar o cargar la imagen:", error);
     // }
+
+    if (p5Instance) {
+      console.log("p5 instance:", p5Instance);
+      // Resto del código del submit...
+    }
 
     try {
       let noteResponse: Note;
