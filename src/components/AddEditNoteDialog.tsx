@@ -32,7 +32,6 @@ const Doodle = () => {
         // onCanvasReady(p5);
       }
     };
-    p5.canvas.id("mycanvas");
   };
 
   return <ReactP5Wrapper sketch={sketch} />;
