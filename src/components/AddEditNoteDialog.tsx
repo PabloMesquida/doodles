@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
 import TextInputField from "./forms/TextInputField";
 // import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
-//import { generateRandomName } from "../utils/generateRandomName";
+import { generateRandomName } from "../utils/generateRandomName";
 // import { useCanvasContext } from "../context/CanvasContext";
 //import { useState } from "react";
 
@@ -72,21 +72,21 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
     // console.log("STATE-CANVAS", context?.getImageData(0, 0, canvas.width, canvas.height));
 
-    // try {
-    //   const blob = await new Promise<Blob | null>((resolve) => {
-    //     newCanvas.toBlob((value: Blob | null) => resolve(value), "image/png");
-    //   });
-    //   console.log("BLOB", blob);
-    //   if (blob) {
-    //     const file = new File([blob], "filename.png", { type: "image/png" });
-    //     const fileRandomName = generateRandomName();
-    //     uploadImage({ file, fileName: fileRandomName });
-    //   } else {
-    //     console.error("Error al generar el Blob");
-    //   }
-    // } catch (error) {
-    //   console.error("Error al generar o cargar la imagen:", error);
-    // }
+    try {
+      const blob = await new Promise<Blob | null>((resolve) => {
+        canvasElement.toBlob((value: Blob | null) => resolve(value), "image/png");
+      });
+      console.log("BLOB", blob);
+      if (blob) {
+        const file = new File([blob], "filename.png", { type: "image/png" });
+        const fileRandomName = generateRandomName();
+        uploadImage({ file, fileName: fileRandomName });
+      } else {
+        console.error("Error al generar el Blob");
+      }
+    } catch (error) {
+      console.error("Error al generar o cargar la imagen:", error);
+    }
 
     try {
       let noteResponse: Note;
@@ -103,38 +103,38 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     }
   }
 
-  // interface UploadImageParams {
-  //   file: File;
-  //   fileName: string;
-  // }
+  interface UploadImageParams {
+    file: File;
+    fileName: string;
+  }
 
-  // async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
-  //   console.log("UPLOAD IMAGE", file, fileName);
-  //   const cloudName = "dq2hljnad";
-  //   const uploadPreset = "doodles-upload";
+  async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
+    console.log("UPLOAD IMAGE", file, fileName);
+    const cloudName = "dq2hljnad";
+    const uploadPreset = "doodles-upload";
 
-  //   const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-  //   const formData: FormData = new FormData();
+    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+    const formData: FormData = new FormData();
 
-  //   formData.append("file", file);
-  //   formData.append("upload_preset", uploadPreset);
-  //   formData.append("public_id", fileName);
+    formData.append("file", file);
+    formData.append("upload_preset", uploadPreset);
+    formData.append("public_id", fileName);
 
-  //   try {
-  //     const response = await fetch(url, {
-  //       method: "POST",
-  //       body: formData,
-  //     });
+    try {
+      const response = await fetch(url, {
+        method: "POST",
+        body: formData,
+      });
 
-  //     if (response.ok) {
-  //       console.log("Archivo subido con éxito");
-  //     } else {
-  //       console.error("Error al subir archivo:", response.statusText);
-  //     }
-  //   } catch (error) {
-  //     console.error("Error de red:", error);
-  //   }
-  // }
+      if (response.ok) {
+        console.log("Archivo subido con éxito");
+      } else {
+        console.error("Error al subir archivo:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error de red:", error);
+    }
+  }
 
   return (
     <Modal show onHide={onDismiss}>
