@@ -20,7 +20,7 @@ const Doodle = () => {
     p5.setup = () => {
       p5.createCanvas(400, 400);
       p5.background(255, 0, 0);
-      canvasElement = p5.select("canvas").elt as HTMLCanvasElement;
+      canvasElement = p5.canvas as HTMLCanvasElement;
     };
 
     p5.draw = () => {
