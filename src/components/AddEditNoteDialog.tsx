@@ -16,11 +16,9 @@ import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 const Doodle = () => {
   // console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
-    let canvasElement: HTMLCanvasElement;
     p5.setup = () => {
       p5.createCanvas(400, 400);
       p5.background(255, 0, 0);
-      canvasElement = p5.canvas as HTMLCanvasElement;
     };
 
     p5.draw = () => {
@@ -29,9 +27,7 @@ const Doodle = () => {
       p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-        if (!canvasElement.id) {
-          canvasElement.id = "mycanvas";
-        }
+        p5.canvas.id("mycanvas");
         //p5.select("canvas");
         // onCanvasReady(p5);
       }
