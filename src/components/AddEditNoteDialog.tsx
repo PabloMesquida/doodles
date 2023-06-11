@@ -18,7 +18,7 @@ const Doodle = () => {
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(400, 400).id("mycanvas");
-      p5.background(255);
+      p5.background(255, 0, 0);
     };
 
     p5.draw = () => {
