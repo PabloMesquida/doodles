@@ -17,7 +17,7 @@ const Doodle = () => {
   // console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      p5.createCanvas(400, 400).id("mycanvas");
+      p5.createCanvas(400, 400);
       p5.background(255);
     };
 
@@ -27,6 +27,7 @@ const Doodle = () => {
       p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+        p5.id("mycanvas");
         // onCanvasReady(p5);
       }
     };
@@ -68,9 +69,12 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
     console.log("canvaselemente:", canvasElement);
     // const newCanvas = canvas.canvas;
-    // const context = newCanvas.getContext("2d");
-
-    // console.log("STATE-CANVAS", context?.getImageData(0, 0, canvas.width, canvas.height));
+    const context = canvasElement.getContext("2d");
+    console.log("context", context);
+    console.log(
+      "STATE-CANVAS",
+      context?.getImageData(0, 0, canvasElement.width, canvasElement.height)
+    );
 
     try {
       const blob = await new Promise<Blob | null>((resolve) => {
