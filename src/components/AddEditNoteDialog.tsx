@@ -8,17 +8,17 @@ import TextInputField from "./forms/TextInputField";
 // import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 //import { generateRandomName } from "../utils/generateRandomName";
 // import { useCanvasContext } from "../context/CanvasContext";
-import { useState } from "react";
+//import { useState } from "react";
 
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 // const { setCanvas } = useCanvasContext();
-const Doodle = ({ onCanvasReady }: { onCanvasReady: (p5: P5CanvasInstance) => void }) => {
+// const Doodle = ({ onCanvasReady }: { onCanvasReady: (p5: P5CanvasInstance) => void }) => {
+const Doodle = () => {
   // console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      p5.createCanvas(400, 400);
+      p5.createCanvas(400, 400).id("mycanvas");
       p5.background(255);
-      onCanvasReady(p5);
     };
 
     p5.draw = () => {
@@ -27,6 +27,7 @@ const Doodle = ({ onCanvasReady }: { onCanvasReady: (p5: P5CanvasInstance) => vo
       p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+        // onCanvasReady(p5);
       }
     };
   };
@@ -44,7 +45,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   //const [canvas, setCanvas] = useState<P5CanvasInstance | null>(null);
   // const { canvas } = useCanvasContext();
 
-  const [p5Instance, setP5Instance] = useState<P5CanvasInstance | null>(null);
+  // const [p5Instance, setP5Instance] = useState<P5CanvasInstance | null>(null);
 
   const {
     register,
@@ -57,14 +58,15 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   });
   // console.log("NOTE");
 
-  const handleCanvasReady = (p5: P5CanvasInstance) => {
-    // Aquí puedes hacer lo que necesites con la referencia a p5
-    setP5Instance(p5);
-    console.log("p5 instance:", p5);
-  };
+  // const handleCanvasReady = (p5: P5CanvasInstance) => {
+  //   // Aquí puedes hacer lo que necesites con la referencia a p5
+  //   // setP5Instance(p5);
+  //   console.log("p5 instance:", p5);
+  // };
 
   async function onSubmit(input: NoteInput) {
-    console.log("PS Submitn", p5Instance);
+    const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
+    console.log("canvaselemente:", canvasElement);
     // const newCanvas = canvas.canvas;
     // const context = newCanvas.getContext("2d");
 
@@ -151,7 +153,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <Doodle onCanvasReady={handleCanvasReady} />
+        <Doodle />
+        {/* <Doodle onCanvasReady={handleCanvasReady} /> */}
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
