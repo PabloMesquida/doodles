@@ -15,10 +15,10 @@ import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 // const Doodle = ({ onCanvasReady }: { onCanvasReady: (p5: P5CanvasInstance) => void }) => {
 const Doodle = () => {
   // console.log("DOOLE");
-  const sketch = (p5: P5CanvasInstance, canvasParentRef: Element) => {
+  const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      // p5.createCanvas(400, 400).id("mycanvas");
-      p5.createCanvas(400, 400).parent(canvasParentRef).id("mycanvas");
+      p5.createCanvas(400, 400).id("mycanvas");
+
       p5.background(255, 0, 0);
       console.log("SETUP-p5canvas", p5.canvas);
       // p5.id("p5");
@@ -42,7 +42,7 @@ const Doodle = () => {
     };
   };
 
-  return <ReactP5Wrapper sketch={sketch} />;
+  return <ReactP5Wrapper sketch={sketch} id="testid" />;
 };
 
 interface AddEditNoteDialogProps {
@@ -76,6 +76,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   async function onSubmit(input: NoteInput) {
     // const p5Element = document.getElementById("p5") as P5CanvasInstance | null;
+    const wrapperElement = document.getElementById("testid");
+    console.log("wraper", wrapperElement);
     const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
     console.log("canvaselemente:", canvasElement);
     // const newCanvas = canvas.canvas;
