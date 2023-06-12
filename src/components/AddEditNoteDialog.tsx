@@ -4,12 +4,12 @@ import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
-import { generateRandomName } from "../utils/generateRandomName";
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
+import generateRandomName from "../utils/generateRandomName";
+import uploadImage from "../utils/uploadImage";
 import TextInputField from "./forms/TextInputField";
 
 const Doodle = memo(() => {
-  console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(400, 400).id("mycanvas");
@@ -49,7 +49,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   async function onSubmit(input: NoteInput) {
     const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
-    //const context = canvasElement.getContext("2d");
 
     try {
       const blob = await new Promise<Blob | null>((resolve) => {
@@ -81,38 +80,37 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     }
   }
 
-  interface UploadImageParams {
-    file: File;
-    fileName: string;
-  }
+  // interface UploadImageParams {
+  //   file: File;
+  //   fileName: string;
+  // }
 
-  async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
-    console.log("UPLOAD IMAGE", file, fileName);
-    const cloudName = "dq2hljnad";
-    const uploadPreset = "doodles-upload";
+  // async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
+  //   const cloudName = "dq2hljnad";
+  //   const uploadPreset = "doodles-upload";
 
-    const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
-    const formData: FormData = new FormData();
+  //   const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+  //   const formData: FormData = new FormData();
 
-    formData.append("file", file);
-    formData.append("upload_preset", uploadPreset);
-    formData.append("public_id", fileName);
+  //   formData.append("file", file);
+  //   formData.append("upload_preset", uploadPreset);
+  //   formData.append("public_id", fileName);
 
-    try {
-      const response = await fetch(url, {
-        method: "POST",
-        body: formData,
-      });
+  //   try {
+  //     const response = await fetch(url, {
+  //       method: "POST",
+  //       body: formData,
+  //     });
 
-      if (response.ok) {
-        console.log("Archivo subido con éxito");
-      } else {
-        console.error("Error al subir archivo:", response.statusText);
-      }
-    } catch (error) {
-      console.error("Error de red:", error);
-    }
-  }
+  //     if (response.ok) {
+  //       console.log("Archivo subido con éxito");
+  //     } else {
+  //       console.error("Error al subir archivo:", response.statusText);
+  //     }
+  //   } catch (error) {
+  //     console.error("Error de red:", error);
+  //   }
+  // }
 
   return (
     <Modal show onHide={onDismiss}>

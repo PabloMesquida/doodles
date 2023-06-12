@@ -1,4 +1,4 @@
-export function generateRandomName(): string {
+export default function generateRandomName(): string {
   const characters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
   const length = 20;
 
