@@ -14,7 +14,7 @@ import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 // const { setCanvas } = useCanvasContext();
 // const Doodle = ({ onCanvasReady }: { onCanvasReady: (p5: P5CanvasInstance) => void }) => {
 const Doodle = () => {
-  // console.log("DOOLE");
+  console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(400, 400).id("mycanvas");
@@ -28,10 +28,7 @@ const Doodle = () => {
       p5.fill(0);
       p5.stroke(0);
       p5.strokeWeight(25);
-      for (let i = 0; i < 10; i++) {
-        const f = p5.map(i, 0, 10 - 1, 1, 0.1);
-        p5.square(0, 0, f * 50);
-      }
+
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY).push();
 
@@ -82,7 +79,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     // const newCanvas = canvas.canvas;
     const context = canvasElement.getContext("2d");
     console.log("context", context);
-    context.drawIamge(canvasElement, 0, 0);
+    // context.drawIamge(canvasElement, 0, 0);
     console.log(
       "STATE-CANVAS",
       context?.getImageData(0, 0, canvasElement.width, canvasElement.height)
