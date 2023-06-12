@@ -4,14 +4,11 @@ interface UploadImageParams {
 }
 
 export default async function uploadImage({ file, fileName }: UploadImageParams): Promise<void> {
-  const cloudName = "dq2hljnad";
-  const uploadPreset = "doodles-upload";
-
-  const url = `https://api.cloudinary.com/v1_1/${cloudName}/upload`;
+  const url = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/upload`;
   const formData: FormData = new FormData();
 
   formData.append("file", file);
-  formData.append("upload_preset", uploadPreset);
+  formData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
   formData.append("public_id", fileName);
 
   try {
