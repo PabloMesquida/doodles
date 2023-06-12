@@ -7,9 +7,6 @@ import styles from "../styles/NotesPage.module.css";
 import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "./AddEditNoteDialog";
 import Note from "./Note";
-import { CanvasContextProvider } from "../context/CanvasContext";
-//import { Doodle } from "./Doodle";
-// import CanvasContextProvider from "../context/CanvasContext";
 
 const NotesPageLoggedInView = () => {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -62,47 +59,44 @@ const NotesPageLoggedInView = () => {
 
   return (
     <>
-      <CanvasContextProvider>
-        <Button
-          className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
-          onClick={() => setShowNoteDialog(true)}
-        >
-          <FaPlus />
-          Add new note
-        </Button>
+      <Button
+        className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
+        onClick={() => setShowNoteDialog(true)}
+      >
+        <FaPlus />
+        Add new note
+      </Button>
 
-        {notesLoading && <Spinner animation="border" variant="primary" />}
-        {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
-        {!notesLoading && !showNotesLoadingError && (
-          <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
-        )}
-        {showNoteDialog && (
-          <>
-            <AddEditNoteDialog
-              onDismiss={() => setShowNoteDialog(false)}
-              onNoteSaved={(newNote) => {
-                setNotes([...notes, newNote]);
-                setShowNoteDialog(false);
-              }}
-            />
-            {/* <Doodle /> */}
-          </>
-        )}
-        {noteToEdit && (
+      {notesLoading && <Spinner animation="border" variant="primary" />}
+      {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
+      {!notesLoading && !showNotesLoadingError && (
+        <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
+      )}
+      {showNoteDialog && (
+        <>
           <AddEditNoteDialog
-            noteToEdit={noteToEdit}
-            onDismiss={() => setNoteToEdit(null)}
-            onNoteSaved={(updatedNote) => {
-              setNotes(
-                notes.map((existingNote) =>
-                  existingNote._id === updatedNote._id ? updatedNote : existingNote
-                )
-              );
-              setNoteToEdit(null);
+            onDismiss={() => setShowNoteDialog(false)}
+            onNoteSaved={(newNote) => {
+              setNotes([...notes, newNote]);
+              setShowNoteDialog(false);
             }}
           />
-        )}
-      </CanvasContextProvider>
+        </>
+      )}
+      {noteToEdit && (
+        <AddEditNoteDialog
+          noteToEdit={noteToEdit}
+          onDismiss={() => setNoteToEdit(null)}
+          onNoteSaved={(updatedNote) => {
+            setNotes(
+              notes.map((existingNote) =>
+                existingNote._id === updatedNote._id ? updatedNote : existingNote
+              )
+            );
+            setNoteToEdit(null);
+          }}
+        />
+      )}
     </>
   );
 };

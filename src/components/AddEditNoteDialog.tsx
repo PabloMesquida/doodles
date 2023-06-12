@@ -1,27 +1,19 @@
 import * as NoteApi from "../network/notes_api";
-import React from "react";
+import { memo } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
 import { NoteInput } from "../network/notes_api";
-import TextInputField from "./forms/TextInputField";
-// import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 import { generateRandomName } from "../utils/generateRandomName";
-// import { useCanvasContext } from "../context/CanvasContext";
-//import { useState } from "react";
-
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
-// const { setCanvas } = useCanvasContext();
-// const Doodle = ({ onCanvasReady }: { onCanvasReady: (p5: P5CanvasInstance) => void }) => {
-const Doodle = React.memo(() => {
+import TextInputField from "./forms/TextInputField";
+
+const Doodle = memo(() => {
   console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(400, 400).id("mycanvas");
-
       p5.background(255, 0, 0);
-      console.log("SETUP-p5canvas", p5.canvas);
-      // p5.id("p5");
     };
 
     p5.draw = () => {
@@ -30,11 +22,7 @@ const Doodle = React.memo(() => {
       p5.strokeWeight(25);
 
       if (p5.mouseIsPressed === true) {
-        p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY).push();
-
-        //  console.log("p5canvas", p5.canvas);
-        //  p5.select("mycanvas").id("mycanvas");
-        // onCanvasReady(p5);
+        p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
       }
     };
   };
@@ -49,11 +37,6 @@ interface AddEditNoteDialogProps {
 }
 
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
-  //const [canvas, setCanvas] = useState<P5CanvasInstance | null>(null);
-  // const { canvas } = useCanvasContext();
-
-  // const [p5Instance, setP5Instance] = useState<P5CanvasInstance | null>(null);
-
   const {
     register,
     handleSubmit,
@@ -63,33 +46,15 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       title: noteToEdit?.title || "",
     },
   });
-  // console.log("NOTE");
-
-  // const handleCanvasReady = (p5: P5CanvasInstance) => {
-  //   // Aquí puedes hacer lo que necesites con la referencia a p5
-  //   // setP5Instance(p5);
-  //   console.log("p5 instance:", p5);
-  // };
 
   async function onSubmit(input: NoteInput) {
-    // const p5Element = document.getElementById("p5") as P5CanvasInstance | null;
-
     const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
-    console.log("canvaselemente:", canvasElement);
-    // const newCanvas = canvas.canvas;
-    const context = canvasElement.getContext("2d");
-    console.log("context", context);
-    // context.drawIamge(canvasElement, 0, 0);
-    console.log(
-      "STATE-CANVAS",
-      context?.getImageData(0, 0, canvasElement.width, canvasElement.height)
-    );
+    //const context = canvasElement.getContext("2d");
 
     try {
       const blob = await new Promise<Blob | null>((resolve) => {
         canvasElement.toBlob((value: Blob | null) => resolve(value), "image/png");
       });
-      console.log("BLOB", blob);
       if (blob) {
         const file = new File([blob], "filename.png", { type: "image/png" });
         const fileRandomName = generateRandomName();
@@ -167,7 +132,6 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
           />
         </Form>
         <Doodle />
-        {/* <Doodle onCanvasReady={handleCanvasReady} /> */}
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
