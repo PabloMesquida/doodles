@@ -16,7 +16,7 @@ export const CanvasContextProvider = ({ children }: CanvasContextProviderProps) 
 
   const contextValue: CanvasContextType = {
     canvas,
-    setCanvas: setCanvas || null,
+    setCanvas: setCanvas,
   };
 
   return <CanvasContext.Provider value={contextValue}>{children}</CanvasContext.Provider>;
