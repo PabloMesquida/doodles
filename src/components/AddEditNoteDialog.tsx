@@ -32,8 +32,8 @@ const Doodle = () => {
       }
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-
-        console.log("p5canvas", p5.canvas);
+        p5.id("p5");
+        //  console.log("p5canvas", p5.canvas);
         //  p5.select("mycanvas").id("mycanvas");
         // onCanvasReady(p5);
       }
@@ -73,7 +73,8 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   // };
 
   async function onSubmit(input: NoteInput) {
-    const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
+    const p5Element = document.getElementById("p5") as P5CanvasInstance | null;
+    const canvasElement = p5Element.canvas;
     console.log("canvaselemente:", canvasElement);
     // const newCanvas = canvas.canvas;
     const context = canvasElement.getContext("2d");
