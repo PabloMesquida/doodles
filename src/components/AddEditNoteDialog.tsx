@@ -20,6 +20,7 @@ const Doodle = () => {
       p5.createCanvas(400, 400).id("mycanvas");
       p5.background(255, 0, 0);
       console.log("SETUP-p5canvas", p5.canvas);
+      p5.id("p5");
     };
 
     p5.draw = () => {
@@ -32,7 +33,7 @@ const Doodle = () => {
       }
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
-        p5.id("p5");
+
         //  console.log("p5canvas", p5.canvas);
         //  p5.select("mycanvas").id("mycanvas");
         // onCanvasReady(p5);
