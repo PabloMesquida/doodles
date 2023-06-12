@@ -19,6 +19,7 @@ const Doodle = () => {
     p5.setup = () => {
       p5.createCanvas(400, 400).id("mycanvas");
       p5.background(255, 0, 0);
+      console.log("SETUP-p5canvas", p5.canvas);
     };
 
     p5.draw = () => {
