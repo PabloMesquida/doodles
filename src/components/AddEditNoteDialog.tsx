@@ -1,5 +1,5 @@
 import * as NoteApi from "../network/notes_api";
-// import { useRef } from "react";
+import React from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { Note } from "../models/note";
 import { useForm } from "react-hook-form";
@@ -13,7 +13,7 @@ import { generateRandomName } from "../utils/generateRandomName";
 import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 // const { setCanvas } = useCanvasContext();
 // const Doodle = ({ onCanvasReady }: { onCanvasReady: (p5: P5CanvasInstance) => void }) => {
-const Doodle = () => {
+const Doodle = React.memo(() => {
   console.log("DOOLE");
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
@@ -40,7 +40,7 @@ const Doodle = () => {
   };
 
   return <ReactP5Wrapper sketch={sketch} />;
-};
+});
 
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
