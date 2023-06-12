@@ -27,7 +27,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   });
 
   async function onSubmit(input: NoteInput) {
-    const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
+    const canvasElement = document.getElementById("p5canvas") as P5CanvasInstance | null;
 
     try {
       const blob = await new Promise<Blob | null>((resolve) => {

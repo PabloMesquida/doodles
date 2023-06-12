@@ -4,7 +4,7 @@ import { ReactP5Wrapper, P5CanvasInstance } from "react-p5-wrapper";
 const Doodle = memo(() => {
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
-      p5.createCanvas(400, 400).id("mycanvas");
+      p5.createCanvas(400, 400).id("p5canvas");
       p5.background(255, 0, 0);
     };
 
