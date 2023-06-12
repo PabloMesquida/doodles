@@ -9,8 +9,6 @@ import uploadImage from "../utils/uploadImage";
 import TextInputField from "./forms/TextInputField";
 import Doodle from "./Doodle";
 
-import { useState } from "react";
-
 interface AddEditNoteDialogProps {
   noteToEdit?: Note;
   onDismiss: () => void;
@@ -18,8 +16,6 @@ interface AddEditNoteDialogProps {
 }
 
 const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDialogProps) => {
-  const [fileRandomName, setFileRandomName] = useState("");
-
   const {
     register,
     handleSubmit,
@@ -27,7 +23,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   } = useForm<NoteInput>({
     defaultValues: {
       title: noteToEdit?.title || "",
-      img: noteToEdit?.img || fileRandomName,
+      img: noteToEdit?.img || "",
     },
   });
 
@@ -41,7 +37,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       if (blob) {
         const file = new File([blob], "filename.png", { type: "image/png" });
         const randomName = generateRandomName();
-        setFileRandomName(randomName);
+        input.img = randomName;
         uploadImage({ file, fileName: randomName });
       } else {
         console.error("Error al generar el Blob");
