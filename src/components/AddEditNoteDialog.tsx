@@ -82,6 +82,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
     // const newCanvas = canvas.canvas;
     const context = canvasElement.getContext("2d");
     console.log("context", context);
+    context.drawIamge(canvasElement, 0, 0);
     console.log(
       "STATE-CANVAS",
       context?.getImageData(0, 0, canvasElement.width, canvasElement.height)
