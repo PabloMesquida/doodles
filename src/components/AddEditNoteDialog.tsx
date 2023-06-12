@@ -33,7 +33,7 @@ const Doodle = () => {
         p5.square(0, 0, f * 50);
       }
       if (p5.mouseIsPressed === true) {
-        p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+        p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY).push();
 
         //  console.log("p5canvas", p5.canvas);
         //  p5.select("mycanvas").id("mycanvas");
@@ -42,7 +42,7 @@ const Doodle = () => {
     };
   };
 
-  return <ReactP5Wrapper sketch={sketch} id="testid" />;
+  return <ReactP5Wrapper sketch={sketch} />;
 };
 
 interface AddEditNoteDialogProps {
@@ -76,8 +76,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
 
   async function onSubmit(input: NoteInput) {
     // const p5Element = document.getElementById("p5") as P5CanvasInstance | null;
-    const wrapperElement = document.getElementById("testid");
-    console.log("wraper", wrapperElement);
+
     const canvasElement = document.getElementById("mycanvas") as P5CanvasInstance | null;
     console.log("canvaselemente:", canvasElement);
     // const newCanvas = canvas.canvas;
