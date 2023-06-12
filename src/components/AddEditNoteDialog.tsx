@@ -37,7 +37,9 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       if (blob) {
         const file = new File([blob], "filename.png", { type: "image/png" });
         const randomName = generateRandomName();
-        input.img = randomName;
+        input.img = `https://res.cloudinary.com/${
+          import.meta.env.VITE_CLOUD_NAME
+        }/image/upload/v1686591951/doodles/${randomName}.png`;
         uploadImage({ file, fileName: randomName });
       } else {
         console.error("Error al generar el Blob");
