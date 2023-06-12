@@ -7,6 +7,8 @@ export default async function uploadImage({ file, fileName }: UploadImageParams)
   const url = `https://api.cloudinary.com/v1_1/${import.meta.env.VITE_CLOUD_NAME}/upload`;
   const formData: FormData = new FormData();
 
+  console.log(import.meta.env.VITE_CLOUD_NAME, import.meta.env.VITE_UPLOAD_PRESET);
+
   formData.append("file", file);
   formData.append("upload_preset", import.meta.env.VITE_UPLOAD_PRESET);
   formData.append("public_id", fileName);
