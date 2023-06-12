@@ -27,6 +27,10 @@ const Doodle = () => {
       p5.strokeWeight(25);
       if (p5.mouseIsPressed === true) {
         p5.line(p5.mouseX, p5.mouseY, p5.pmouseX, p5.pmouseY);
+        for (let i = 0; i < 10; i++) {
+          const f = p5.map(i, 0, 10 - 1, 1, 0.1);
+          p5.square(0, 0, f * 50);
+        }
         console.log("p5canvas", p5.canvas);
         //  p5.select("mycanvas").id("mycanvas");
         // onCanvasReady(p5);
