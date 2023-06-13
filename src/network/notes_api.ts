@@ -81,10 +81,13 @@ export async function fetchNoteUser(userId: string): Promise<User> {
   return response.json();
 }
 
-export async function fetchUserNotes(userId: string): Promise<User> {
-  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/notes/user/${userId}`, {
-    method: "GET",
-  });
+export async function fetchUserNotes(userName: string): Promise<Note[]> {
+  const response = await fetchData(
+    `${import.meta.env.VITE_SERVER_URL}/api/notes/user/${userName}`,
+    {
+      method: "GET",
+    }
+  );
   return response.json();
 }
 

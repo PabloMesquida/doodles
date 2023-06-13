@@ -27,7 +27,13 @@ const NotesPageLoggedInView = () => {
       try {
         setShowNotesLoadingError(false);
         setNotesLoading(true);
-        const notes = await NotesApi.fetchNotes();
+        let notes: NoteModel[];
+        if (userName) {
+          notes = await NotesApi.fetchUserNotes(userName);
+        } else {
+          notes = await NotesApi.fetchNotes();
+        }
+
         setNotes(notes);
       } catch (error) {
         console.error(error);
