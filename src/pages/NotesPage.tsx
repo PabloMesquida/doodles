@@ -11,9 +11,7 @@ import NotesPageLoggedInView from "../components/NotesPageLoggedInView";
 const NotesPage = () => {
   return (
     <Container className={styles.notesPage}>
-      <>
-        <NotesPageLoggedInView />
-      </>
+      <NotesPageLoggedInView />
     </Container>
   );
 };
