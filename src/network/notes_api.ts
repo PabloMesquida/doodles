@@ -74,8 +74,15 @@ export async function fetchNotes(): Promise<Note[]> {
   return response.json();
 }
 
-export async function fetchUserNote(userId: string): Promise<User> {
+export async function fetchNoteUser(userId: string): Promise<User> {
   const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/users/${userId}`, {
+    method: "GET",
+  });
+  return response.json();
+}
+
+export async function fetchUserNotes(userId: string): Promise<User> {
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/notes/user/${userId}`, {
     method: "GET",
   });
   return response.json();

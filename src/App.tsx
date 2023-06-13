@@ -40,6 +40,7 @@ function App() {
           <Routes>
             <Route path="/" element={<NotesPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/:userName" element={<NotesPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Container>

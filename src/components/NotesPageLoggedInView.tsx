@@ -7,6 +7,7 @@ import styles from "../styles/NotesPage.module.css";
 import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "./AddEditNoteDialog";
 import Note from "./Note";
+import { useParams } from "react-router-dom";
 
 const NotesPageLoggedInView = () => {
   const [notes, setNotes] = useState<NoteModel[]>([]);
@@ -14,6 +15,12 @@ const NotesPageLoggedInView = () => {
   const [showNotesLoadingError, setShowNotesLoadingError] = useState(false);
   const [showNoteDialog, setShowNoteDialog] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState<NoteModel | null>(null);
+
+  type RouteParams = {
+    userName: string;
+  };
+
+  const { userName } = useParams<RouteParams>();
 
   useEffect(() => {
     async function loadNotes() {
@@ -30,7 +37,7 @@ const NotesPageLoggedInView = () => {
       }
     }
     loadNotes();
-  }, []);
+  }, [userName]);
 
   async function deleteNote(note: NoteModel) {
     try {

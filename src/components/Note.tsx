@@ -30,7 +30,7 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
   useEffect(() => {
     async function loadUserNote() {
       try {
-        const user = await NotesApi.fetchUserNote(userId);
+        const user = await NotesApi.fetchNoteUser(userId);
         setUserNote(user);
       } catch (error) {
         console.error(error);
