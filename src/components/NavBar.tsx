@@ -3,6 +3,7 @@ import { User } from "../models/user";
 import { Link } from "react-router-dom";
 import NavBarLoggedInView from "./NavBarLoggedInView";
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
+import styles from "../styles/Nav.module.css";
 
 interface NavBarProps {
   loggedInUser: User | null;
@@ -18,7 +19,7 @@ const NavBar = ({
   onLogoutSuccessful,
 }: NavBarProps) => {
   return (
-    <Navbar bg="primary" variant="dark" expand="sm" sticky="top">
+    <Navbar className={styles.navContainer} variant="dark" expand="sm" sticky="top">
       <Container>
         <Navbar.Brand as={Link} to="/">
           doodles
@@ -32,10 +33,7 @@ const NavBar = ({
           </Nav>
           <Nav className="ms-auto">
             {loggedInUser ? (
-              <NavBarLoggedInView
-                user={loggedInUser}
-                onLogoutSuccessful={onLogoutSuccessful}
-              />
+              <NavBarLoggedInView user={loggedInUser} onLogoutSuccessful={onLogoutSuccessful} />
             ) : (
               <NavBarLoggedOutView
                 onLoginClicked={onLoginClicked}
