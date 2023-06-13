@@ -38,10 +38,7 @@ function App() {
         />
         <Container className={styles.pageContainer}>
           <Routes>
-            <Route
-              path="/"
-              element={<NotesPage loggedInUser={loggedInUser} />}
-            />
+            <Route path="/" element={<NotesPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
