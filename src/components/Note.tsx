@@ -1,9 +1,12 @@
+import * as NotesApi from "../network/notes_api";
 import styles from "../styles/Note.module.css";
 import styleUtils from "../styles/utils.module.css";
 import { Card } from "react-bootstrap";
 import { Note as NoteModel } from "../models/note";
 import { formDate } from "../utils/formatDate";
 import { MdDelete } from "react-icons/md";
+import { useEffect, useState } from "react";
+import { User } from "../models/user";
 
 interface NoteProps {
   note: NoteModel;
@@ -13,7 +16,8 @@ interface NoteProps {
 }
 
 const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps) => {
-  const { title, img, createdAt, updatedAt } = note;
+  const [userNote, setUserNote] = useState<User>();
+  const { userId, title, img, createdAt, updatedAt } = note;
 
   let createdUpdatedText: string;
 
@@ -22,9 +26,25 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
   } else {
     createdUpdatedText = "Created: " + formDate(createdAt);
   }
+
+  useEffect(() => {
+    async function loadUserNote() {
+      try {
+        const user = await NotesApi.fetchUserNote(userId);
+        setUserNote(user);
+      } catch (error) {
+        console.error(error);
+      }
+    }
+    loadUserNote();
+  }, [userId]);
+
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Body className={styles.cardBody}>
+        <p className="card-text">
+          <small className="text-muted">{userNote?.username}</small>
+        </p>
         <Card.Title className={styleUtils.flexCenter}>
           {title}
           <MdDelete

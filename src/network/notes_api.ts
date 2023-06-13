@@ -19,18 +19,15 @@ async function fetchData(input: RequestInfo, init?: RequestInit) {
     } else if (response.status === 409) {
       throw new ConflictError(errorMessage);
     } else {
-      throw Error(
-        `Request failed with status: ${response.status} message: ${errorMessage}`
-      );
+      throw Error(`Request failed with status: ${response.status} message: ${errorMessage}`);
     }
   }
 }
 
 export async function getLoggedInUser(): Promise<User> {
-  const response = await fetchData(
-    `${import.meta.env.VITE_SERVER_URL}/api/users`,
-    { method: "GET" }
-  );
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/users`, {
+    method: "GET",
+  });
 
   return response.json();
 }
@@ -42,14 +39,11 @@ export interface SignUpCredentials {
 }
 
 export async function signUp(credentials: SignUpCredentials): Promise<User> {
-  const response = await fetchData(
-    `${import.meta.env.VITE_SERVER_URL}/api/users/signup`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    }
-  );
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/users/signup`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(credentials),
+  });
   return response.json();
 }
 
@@ -59,14 +53,11 @@ export interface LoginCredentials {
 }
 
 export async function login(credentials: LoginCredentials): Promise<User> {
-  const response = await fetchData(
-    `${import.meta.env.VITE_SERVER_URL}/api/users/login`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(credentials),
-    }
-  );
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/users/login`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(credentials),
+  });
   return response.json();
 }
 
@@ -77,10 +68,16 @@ export async function logout() {
 }
 
 export async function fetchNotes(): Promise<Note[]> {
-  const response = await fetchData(
-    `${import.meta.env.VITE_SERVER_URL}/api/notes`,
-    { method: "GET" }
-  );
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/notes`, {
+    method: "GET",
+  });
+  return response.json();
+}
+
+export async function fetchUserNote(userId: string): Promise<User> {
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/user/${userId}`, {
+    method: "GET",
+  });
   return response.json();
 }
 
@@ -90,29 +87,20 @@ export interface NoteInput {
 }
 
 export async function createNote(note: NoteInput): Promise<Note> {
-  const response = await fetchData(
-    `${import.meta.env.VITE_SERVER_URL}/api/notes`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(note),
-    }
-  );
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/notes`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(note),
+  });
   return response.json();
 }
 
-export async function updateNote(
-  noteId: string,
-  note: NoteInput
-): Promise<Note> {
-  const response = await fetchData(
-    `${import.meta.env.VITE_SERVER_URL}/api/notes/${noteId}`,
-    {
-      method: "PATCH",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(note),
-    }
-  );
+export async function updateNote(noteId: string, note: NoteInput): Promise<Note> {
+  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/notes/${noteId}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(note),
+  });
   return response.json();
 }
 
