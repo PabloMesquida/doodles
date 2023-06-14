@@ -46,7 +46,10 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
       <Card.Body className={styles.cardBody}>
         <div className="flex">
           <RiUserSmileLine className="me-6" />
-          <Link to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}>
+          <Link
+            to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
+            style={{ textDecoration: "none" }}
+          >
             <small className={styles.userText}>{userNote?.username}</small>
           </Link>
         </div>
