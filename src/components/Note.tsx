@@ -48,7 +48,7 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
           <RiUserSmileLine className="me-6" />
           <Link
             to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
-            style={{ textDecoration: "none" }}
+            style={{ textDecoration: "none", marginLeft: "2rem" }}
           >
             <small className={styles.userText}>{userNote?.username}</small>
           </Link>
