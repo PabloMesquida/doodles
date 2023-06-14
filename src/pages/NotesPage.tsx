@@ -43,7 +43,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
           notes = await NotesApi.fetchNotes({ page, limit });
         }
 
-        setNotes(notes);
+        setNotes((prevNotes) => [...prevNotes, ...notes]);
 
         if (notes.length < limit) {
           setHasMore(false);
