@@ -12,12 +12,13 @@ import { Link } from "react-router-dom";
 
 interface NoteProps {
   note: NoteModel;
+  user: User | null;
   onNoteClicked: (note: NoteModel) => void;
   onDeleteNoteClicked: (note: NoteModel) => void;
   className?: string;
 }
 
-const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps) => {
+const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: NoteProps) => {
   const [userNote, setUserNote] = useState<User>();
   const { userId, title, img, createdAt, updatedAt } = note;
 
@@ -61,13 +62,15 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
           style={{ marginTop: "0.5rem", marginBottom: "1rem" }}
         >
           {title}
-          <MdDelete
-            className="text-muted ms-auto"
-            onClick={(e: { stopPropagation: () => void }) => {
-              onDeleteNoteClicked(note);
-              e.stopPropagation();
-            }}
-          />
+          {user?.username === userNote?.username && (
+            <MdDelete
+              className="text-muted ms-auto"
+              onClick={(e: { stopPropagation: () => void }) => {
+                onDeleteNoteClicked(note);
+                e.stopPropagation();
+              }}
+            />
+          )}
         </Card.Title>
         <img src={img} className="img-fluid" />
       </Card.Body>

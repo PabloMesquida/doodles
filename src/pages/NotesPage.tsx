@@ -66,6 +66,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
         <div key={note._id}>
           <Note
             note={note}
+            user={loggedInUser}
             className={styles.note}
             onNoteClicked={setNoteToEdit}
             onDeleteNoteClicked={deleteNote}
