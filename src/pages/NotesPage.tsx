@@ -1,6 +1,6 @@
 import * as NotesApi from "../network/notes_api";
 import { useState, useEffect } from "react";
-import { Button, Spinner } from "react-bootstrap";
+import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
 import { Note as NoteModel } from "../models/note";
 import styles from "../styles/NotesPage.module.css";
@@ -71,46 +71,48 @@ const NotesPage = () => {
   );
 
   return (
-    <>
-      <Button
-        className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
-        onClick={() => setShowNoteDialog(true)}
-      >
-        <FaPlus />
-        Add new note
-      </Button>
+    <Row>
+      <Col>
+        <Button
+          className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
+          onClick={() => setShowNoteDialog(true)}
+        >
+          <FaPlus />
+          Add new note
+        </Button>
 
-      {notesLoading && <Spinner animation="border" variant="primary" />}
-      {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
-      {!notesLoading && !showNotesLoadingError && (
-        <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
-      )}
-      {showNoteDialog && (
-        <>
+        {notesLoading && <Spinner animation="border" variant="primary" />}
+        {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
+        {!notesLoading && !showNotesLoadingError && (
+          <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
+        )}
+        {showNoteDialog && (
+          <>
+            <AddEditNoteDialog
+              onDismiss={() => setShowNoteDialog(false)}
+              onNoteSaved={(newNote) => {
+                setNotes([...notes, newNote]);
+                setShowNoteDialog(false);
+              }}
+            />
+          </>
+        )}
+        {noteToEdit && (
           <AddEditNoteDialog
-            onDismiss={() => setShowNoteDialog(false)}
-            onNoteSaved={(newNote) => {
-              setNotes([...notes, newNote]);
-              setShowNoteDialog(false);
+            noteToEdit={noteToEdit}
+            onDismiss={() => setNoteToEdit(null)}
+            onNoteSaved={(updatedNote) => {
+              setNotes(
+                notes.map((existingNote) =>
+                  existingNote._id === updatedNote._id ? updatedNote : existingNote
+                )
+              );
+              setNoteToEdit(null);
             }}
           />
-        </>
-      )}
-      {noteToEdit && (
-        <AddEditNoteDialog
-          noteToEdit={noteToEdit}
-          onDismiss={() => setNoteToEdit(null)}
-          onNoteSaved={(updatedNote) => {
-            setNotes(
-              notes.map((existingNote) =>
-                existingNote._id === updatedNote._id ? updatedNote : existingNote
-              )
-            );
-            setNoteToEdit(null);
-          }}
-        />
-      )}
-    </>
+        )}
+      </Col>
+    </Row>
   );
 };
 
