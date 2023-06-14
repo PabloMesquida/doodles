@@ -66,7 +66,7 @@ const LoginModal = ({ onDismiss, OnLoginSuccessful }: LoginModalProps) => {
             Log In
           </Button>
           <Modal.Body>Or Sign Up:</Modal.Body>
-          <Button type="submit" disabled={onDismiss} className={stylesUtils.width100}>
+          <Button type="submit" onClick={onDismiss} className={stylesUtils.width100}>
             Sing Up
           </Button>
         </Form>
