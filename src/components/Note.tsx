@@ -45,9 +45,7 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
       <Card.Body className={styles.cardBody}>
         <div className="flex">
           <RiUserSmileLine className="mr-2" />
-          <p className="card-text">
-            <small className="text-muted">{userNote?.username}</small>
-          </p>
+          <small className="text-muted">{userNote?.username}</small>
         </div>
         <Card.Title className={styleUtils.flexCenter}>
           {title}
