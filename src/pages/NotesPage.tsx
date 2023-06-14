@@ -72,7 +72,7 @@ const NotesPage = () => {
 
   return (
     <Row className="justify-content-center">
-      <Col xs md="6" className="justify-content-center bg-warning">
+      <Col xs md="6" className="justify-content-center">
         <Button
           className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
           onClick={() => setShowNoteDialog(true)}
