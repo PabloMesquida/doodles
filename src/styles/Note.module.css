@@ -14,7 +14,10 @@
   color: darkslategrey;
   text-decoration: none;
 }
-.userText:link {
+
+.userText:link,
+.userText:visited,
+.userText:active {
   color: darkslategrey;
   text-decoration: none;
 }
