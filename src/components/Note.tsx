@@ -68,11 +68,10 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
             <small className={styles.userText}>{userNote?.username}</small>
           </Link>
         </Card.Text>
+        <Card.Text>
+          <small>{createdUpdatedText}</small>
+        </Card.Text>
       </Card.Body>
-
-      <Card.Footer className="text-muted">
-        <small>{createdUpdatedText}</small>
-      </Card.Footer>
     </Card>
   );
 };
