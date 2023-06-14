@@ -32,7 +32,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 
   useEffect(() => {
     async function loadNotes() {
-      const limit = 5;
+      const limit = 3;
       try {
         setShowNotesLoadingError(false);
         setNotesLoading(true);
