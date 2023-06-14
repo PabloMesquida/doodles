@@ -5,6 +5,7 @@ import { Card } from "react-bootstrap";
 import { Note as NoteModel } from "../models/note";
 import { formDate } from "../utils/formatDate";
 import { MdDelete } from "react-icons/md";
+import { RiUserSmileLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { User } from "../models/user";
 
@@ -42,9 +43,12 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Body className={styles.cardBody}>
-        <p className="card-text">
-          <small className="text-muted">{userNote?.username}</small>
-        </p>
+        <div>
+          <RiUserSmileLine />
+          <p className="card-text">
+            <small className="text-muted">{userNote?.username}</small>
+          </p>
+        </div>
         <Card.Title className={styleUtils.flexCenter}>
           {title}
           <MdDelete
