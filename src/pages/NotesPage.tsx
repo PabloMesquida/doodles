@@ -1,6 +1,6 @@
 import * as NotesApi from "../network/notes_api";
 import { useState, useEffect } from "react";
-import { Button, Col, Row, Spinner } from "react-bootstrap";
+import { Button, Spinner } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
 import { Note as NoteModel } from "../models/note";
 import { useParams } from "react-router-dom";
@@ -69,14 +69,14 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   }
 
   const notesGrid = (
-    <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-      <InfiniteScroll
-        dataLength={notes.length}
-        next={() => setPage(page + 1)}
-        hasMore={hasMore}
-        loader={<Spinner animation="border" variant="primary" />}
-        endMessage={<p>You have reached the end of the notes.</p>}
-      >
+    <InfiniteScroll
+      dataLength={notes.length}
+      next={() => setPage(page + 1)}
+      hasMore={hasMore}
+      loader={<Spinner animation="border" variant="primary" />}
+      endMessage={<p>You have reached the end of the notes.</p>}
+    >
+      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
         {notes.map((note) => (
           <div key={note._id}>
             <Note
@@ -88,59 +88,55 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
             />
           </div>
         ))}
-      </InfiniteScroll>
-    </div>
+      </div>
+    </InfiniteScroll>
   );
 
   return (
-    <Row className="justify-content-center">
-      <Col xs md="6" className="justify-content-center">
-        <div className={`${styles.notesGrid}`}>
-          {loggedInUser ? (
-            <Button
-              className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
-              onClick={() => setShowNoteDialog(true)}
-            >
-              <FaPlus />
-              Add new note
-            </Button>
-          ) : (
-            "Log in "
-          )}
+    <div className={`${styles.notesGrid}`}>
+      {loggedInUser ? (
+        <Button
+          className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
+          onClick={() => setShowNoteDialog(true)}
+        >
+          <FaPlus />
+          Add new note
+        </Button>
+      ) : (
+        "Log in "
+      )}
 
-          {notesLoading && <Spinner animation="border" variant="primary" />}
-          {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
-          {!notesLoading && !showNotesLoadingError && (
-            <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
-          )}
-          {showNoteDialog && (
-            <>
-              <AddEditNoteDialog
-                onDismiss={() => setShowNoteDialog(false)}
-                onNoteSaved={(newNote) => {
-                  setNotes([...notes, newNote]);
-                  setShowNoteDialog(false);
-                }}
-              />
-            </>
-          )}
-          {noteToEdit && (
-            <AddEditNoteDialog
-              noteToEdit={noteToEdit}
-              onDismiss={() => setNoteToEdit(null)}
-              onNoteSaved={(updatedNote) => {
-                setNotes(
-                  notes.map((existingNote) =>
-                    existingNote._id === updatedNote._id ? updatedNote : existingNote
-                  )
-                );
-                setNoteToEdit(null);
-              }}
-            />
-          )}
-        </div>
-      </Col>
-    </Row>
+      {notesLoading && <Spinner animation="border" variant="primary" />}
+      {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
+      {!notesLoading && !showNotesLoadingError && (
+        <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
+      )}
+      {showNoteDialog && (
+        <>
+          <AddEditNoteDialog
+            onDismiss={() => setShowNoteDialog(false)}
+            onNoteSaved={(newNote) => {
+              setNotes([...notes, newNote]);
+              setShowNoteDialog(false);
+            }}
+          />
+        </>
+      )}
+      {noteToEdit && (
+        <AddEditNoteDialog
+          noteToEdit={noteToEdit}
+          onDismiss={() => setNoteToEdit(null)}
+          onNoteSaved={(updatedNote) => {
+            setNotes(
+              notes.map((existingNote) =>
+                existingNote._id === updatedNote._id ? updatedNote : existingNote
+              )
+            );
+            setNoteToEdit(null);
+          }}
+        />
+      )}
+    </div>
   );
 };
 
