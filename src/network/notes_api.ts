@@ -73,6 +73,7 @@ interface FetchNotesProps {
 }
 
 export async function fetchNotes({ page, limit }: FetchNotesProps): Promise<Note[]> {
+  console.log("page:", page, " - limit:", limit);
   const response = await fetchData(
     `${import.meta.env.VITE_SERVER_URL}/api/notes?page=${page}&limit=${limit}`,
     {

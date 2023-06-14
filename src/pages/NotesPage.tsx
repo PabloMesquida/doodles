@@ -21,7 +21,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   const [showNotesLoadingError, setShowNotesLoadingError] = useState(false);
   const [showNoteDialog, setShowNoteDialog] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState<NoteModel | null>(null);
-  const [hasMore, setHasMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
   type RouteParams = {
