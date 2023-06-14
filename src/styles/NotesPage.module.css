@@ -10,8 +10,7 @@
 }
 
 .note {
-  max-width: 600px;
-  min-width: 500px;
+  max-width: 400px;
   transition: box-shadow 0.2s ease-in-out;
   cursor: pointer;
 }
