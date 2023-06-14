@@ -71,7 +71,9 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
         </Card.Title>
         <img src={img} className="img-fluid" />
       </Card.Body>
-      <Card.Footer className="text-muted">{createdUpdatedText}</Card.Footer>
+      <Card.Footer className="text-muted">
+        <small>{createdUpdatedText}</small>
+      </Card.Footer>
     </Card>
   );
 };
