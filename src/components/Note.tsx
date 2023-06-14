@@ -45,18 +45,6 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Body className={styles.cardBody}>
-        <div
-          className="flex"
-          style={{ borderBottom: "1px solid #4a5759", paddingBottom: "0.5rem" }}
-        >
-          <BiFace />
-          <Link
-            to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
-            style={{ textDecoration: "none", marginLeft: "0.5rem" }}
-          >
-            <small className={styles.userText}>{userNote?.username}</small>
-          </Link>
-        </div>
         <Card.Title
           className={styleUtils.flexCenter}
           style={{ marginTop: "0.5rem", marginBottom: "1rem" }}
@@ -75,7 +63,17 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
           )}
         </Card.Title>
         <img src={img} className="img-fluid" />
+        <div className="flex">
+          <BiFace />
+          <Link
+            to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
+            style={{ textDecoration: "none", marginLeft: "0.5rem" }}
+          >
+            <small className={styles.userText}>{userNote?.username}</small>
+          </Link>
+        </div>
       </Card.Body>
+
       <Card.Footer className="text-muted">
         <small>{createdUpdatedText}</small>
       </Card.Footer>
