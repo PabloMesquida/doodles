@@ -53,7 +53,10 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
             <small className={styles.userText}>{userNote?.username}</small>
           </Link>
         </div>
-        <Card.Title className={`${styleUtils.flexCenter} margin-top:1rem margin-bottom:1rem`}>
+        <Card.Title
+          className={styleUtils.flexCenter}
+          style={{ marginTop: "1rem", marginBottom: "1rem" }}
+        >
           {title}
           <MdDelete
             className="text-muted ms-auto"
