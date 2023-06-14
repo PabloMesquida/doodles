@@ -71,7 +71,7 @@ const NotesPage = () => {
   );
 
   return (
-    <Row>
+    <Row className="justify-content-md-center">
       <Col>
         <Button
           className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
