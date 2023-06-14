@@ -44,24 +44,24 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
 
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
-      <Card.Title
-        className={styleUtils.flexCenter}
-        style={{ marginTop: "0.5rem", marginBottom: "1rem" }}
-      >
-        <div style={{ flex: "1" }}>{title}</div>
-        {user?.username === userNote?.username && (
-          <div>
-            <MdDelete
-              className="text-muted ms-auto"
-              onClick={(e: { stopPropagation: () => void }) => {
-                onDeleteNoteClicked(note);
-                e.stopPropagation();
-              }}
-            />
-          </div>
-        )}
-      </Card.Title>
       <Card.Body className={styles.cardBody}>
+        <Card.Title
+          className={styleUtils.flexCenter}
+          style={{ marginTop: "0.5rem", marginBottom: "1rem" }}
+        >
+          <div style={{ flex: "1" }}>{title}</div>
+          {user?.username === userNote?.username && (
+            <div>
+              <MdDelete
+                className="text-muted ms-auto"
+                onClick={(e: { stopPropagation: () => void }) => {
+                  onDeleteNoteClicked(note);
+                  e.stopPropagation();
+                }}
+              />
+            </div>
+          )}
+        </Card.Title>
         <img src={img} className="img-fluid" />
         <div className="flex">
           <BiFace />
