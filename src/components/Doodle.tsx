@@ -5,12 +5,11 @@ const Doodle = memo(() => {
   const sketch = (p5: P5CanvasInstance) => {
     p5.setup = () => {
       p5.createCanvas(600, 600).id("p5canvas");
-      p5.background(252, 250, 250);
+      p5.background(235, 235, 218);
     };
 
     p5.draw = () => {
-      p5.fill(0);
-      p5.stroke(0);
+      p5.stroke(10, 10, 10);
       p5.strokeWeight(25);
 
       if (p5.mouseIsPressed === true) {
