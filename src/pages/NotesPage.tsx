@@ -61,7 +61,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   }
 
   const notesGrid = (
-    <div className={`${styles.notesGrid}`}>
+    <>
       {notes.map((note) => (
         <div key={note._id}>
           <Note
@@ -72,54 +72,56 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
           />
         </div>
       ))}
-    </div>
+    </>
   );
 
   return (
     <Row className="justify-content-center">
       <Col xs md="6" className="justify-content-center">
-        {loggedInUser ? (
-          <Button
-            className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
-            onClick={() => setShowNoteDialog(true)}
-          >
-            <FaPlus />
-            Add new note
-          </Button>
-        ) : (
-          "Log in "
-        )}
+        <div className={`${styles.notesGrid}`}>
+          {loggedInUser ? (
+            <Button
+              className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
+              onClick={() => setShowNoteDialog(true)}
+            >
+              <FaPlus />
+              Add new note
+            </Button>
+          ) : (
+            "Log in "
+          )}
 
-        {notesLoading && <Spinner animation="border" variant="primary" />}
-        {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
-        {!notesLoading && !showNotesLoadingError && (
-          <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
-        )}
-        {showNoteDialog && (
-          <>
+          {notesLoading && <Spinner animation="border" variant="primary" />}
+          {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
+          {!notesLoading && !showNotesLoadingError && (
+            <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
+          )}
+          {showNoteDialog && (
+            <>
+              <AddEditNoteDialog
+                onDismiss={() => setShowNoteDialog(false)}
+                onNoteSaved={(newNote) => {
+                  setNotes([...notes, newNote]);
+                  setShowNoteDialog(false);
+                }}
+              />
+            </>
+          )}
+          {noteToEdit && (
             <AddEditNoteDialog
-              onDismiss={() => setShowNoteDialog(false)}
-              onNoteSaved={(newNote) => {
-                setNotes([...notes, newNote]);
-                setShowNoteDialog(false);
+              noteToEdit={noteToEdit}
+              onDismiss={() => setNoteToEdit(null)}
+              onNoteSaved={(updatedNote) => {
+                setNotes(
+                  notes.map((existingNote) =>
+                    existingNote._id === updatedNote._id ? updatedNote : existingNote
+                  )
+                );
+                setNoteToEdit(null);
               }}
             />
-          </>
-        )}
-        {noteToEdit && (
-          <AddEditNoteDialog
-            noteToEdit={noteToEdit}
-            onDismiss={() => setNoteToEdit(null)}
-            onNoteSaved={(updatedNote) => {
-              setNotes(
-                notes.map((existingNote) =>
-                  existingNote._id === updatedNote._id ? updatedNote : existingNote
-                )
-              );
-              setNoteToEdit(null);
-            }}
-          />
-        )}
+          )}
+        </div>
       </Col>
     </Row>
   );
