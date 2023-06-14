@@ -45,7 +45,7 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Body className={styles.cardBody}>
         <div className="flex">
-          <RiUserSmileLine className="me-6" />
+          <RiUserSmileLine />
           <Link
             to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
             style={{ textDecoration: "none", marginLeft: "0.5rem" }}
@@ -53,7 +53,7 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
             <small className={styles.userText}>{userNote?.username}</small>
           </Link>
         </div>
-        <Card.Title className={styleUtils.flexCenter}>
+        <Card.Title className={`${styleUtils.flexCenter} margin-top:1rem margin-bottom:1rem`}>
           {title}
           <MdDelete
             className="text-muted ms-auto"
