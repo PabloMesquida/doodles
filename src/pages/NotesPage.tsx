@@ -63,7 +63,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   const notesGrid = (
     <>
       {notes.map((note) => (
-        <div key={note._id} style={{ gap: "1em" }}>
+        <div key={note._id} style={{ display: "flex", flexDirection: "column", gap: "1em" }}>
           <Note
             note={note}
             user={loggedInUser}
