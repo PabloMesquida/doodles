@@ -69,14 +69,14 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   }
 
   const notesGrid = (
-    <InfiniteScroll
-      dataLength={notes.length}
-      next={() => setPage(page + 1)}
-      hasMore={hasMore}
-      loader={<Spinner animation="border" variant="primary" />}
-      endMessage={<p>You have reached the end of the notes.</p>}
-    >
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+    <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <InfiniteScroll
+        dataLength={notes.length}
+        next={() => setPage(page + 1)}
+        hasMore={hasMore}
+        loader={<Spinner animation="border" variant="primary" />}
+        endMessage={<p>You have reached the end of the notes.</p>}
+      >
         {notes.map((note) => (
           <div key={note._id}>
             <Note
@@ -88,8 +88,8 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
             />
           </div>
         ))}
-      </div>
-    </InfiniteScroll>
+      </InfiniteScroll>
+    </div>
   );
 
   return (
