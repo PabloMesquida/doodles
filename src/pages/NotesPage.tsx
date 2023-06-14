@@ -72,7 +72,7 @@ const NotesPage = () => {
 
   return (
     <Row className="justify-content-md-center">
-      <Col>
+      <Col xs lg="2">
         <Button
           className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
           onClick={() => setShowNoteDialog(true)}
@@ -82,10 +82,13 @@ const NotesPage = () => {
         </Button>
 
         {notesLoading && <Spinner animation="border" variant="primary" />}
+
         {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
+
         {!notesLoading && !showNotesLoadingError && (
           <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
         )}
+
         {showNoteDialog && (
           <>
             <AddEditNoteDialog
