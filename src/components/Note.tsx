@@ -5,7 +5,7 @@ import { Card } from "react-bootstrap";
 import { Note as NoteModel } from "../models/note";
 import { formDate } from "../utils/formatDate";
 import { MdDelete } from "react-icons/md";
-import { RiUserSmileLine } from "react-icons/ri";
+import { BiFace } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { User } from "../models/user";
 import { Link } from "react-router-dom";
@@ -44,8 +44,8 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Body className={styles.cardBody}>
-        <div className="flex">
-          <RiUserSmileLine />
+        <div className="flex" style={{ borderBottom: "1px solid #4a5759" }}>
+          <BiFace />
           <Link
             to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
             style={{ textDecoration: "none", marginLeft: "0.5rem" }}
