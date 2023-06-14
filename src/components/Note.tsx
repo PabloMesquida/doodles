@@ -8,6 +8,7 @@ import { MdDelete } from "react-icons/md";
 import { RiUserSmileLine } from "react-icons/ri";
 import { useEffect, useState } from "react";
 import { User } from "../models/user";
+import { Link } from "react-router-dom";
 
 interface NoteProps {
   note: NoteModel;
@@ -44,8 +45,10 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Body className={styles.cardBody}>
         <div className="flex">
-          <RiUserSmileLine className="mr-2" />
-          <small className="text-muted">{userNote?.username}</small>
+          <RiUserSmileLine className="me-6" />
+          <Link to={`./u/${userNote?.username}`}>
+            <small className="text-muted">{userNote?.username}</small>
+          </Link>
         </div>
         <Card.Title className={styleUtils.flexCenter}>
           {title}
