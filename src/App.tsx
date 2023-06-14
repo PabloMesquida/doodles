@@ -2,7 +2,7 @@ import * as NotesApi from "./network/notes_api";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { User } from "./models/user";
-import { Container, Row, Col } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import SignUpModal from "./components/SignUpModal";
 import LoginModal from "./components/LoginModal";
 import NavBar from "./components/NavBar";
@@ -37,19 +37,12 @@ function App() {
           onLogoutSuccessful={() => setLoggedInUser(null)}
         />
         <Container>
-          <Row>
-            <Col xs={2} lg={4}>
-              uno
-            </Col>
-            <Col>
-              <Routes>
-                <Route path="/" element={<NotesPage />} />
-                <Route path="/privacy" element={<PrivacyPage />} />
-                <Route path="/u/:userName" element={<NotesPage />} />
-                <Route path="*" element={<NotFoundPage />} />
-              </Routes>
-            </Col>
-          </Row>
+          <Routes>
+            <Route path="/" element={<NotesPage />} />
+            <Route path="/privacy" element={<PrivacyPage />} />
+            <Route path="/u/:userName" element={<NotesPage />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Routes>
         </Container>
         {showSignUpModal && (
           <SignUpModal
