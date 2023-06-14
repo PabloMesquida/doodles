@@ -36,7 +36,7 @@ function App() {
           onSignUpClicked={() => setShowSignUpModal(true)}
           onLogoutSuccessful={() => setLoggedInUser(null)}
         />
-        <Container>
+        <Container className={styles.notesPage}>
           <Routes>
             <Route path="/" element={<NotesPage />} />
             <Route path="/privacy" element={<PrivacyPage />} />

@@ -56,7 +56,7 @@ const NotesPageLoggedInView = () => {
   }
 
   const notesGrid = (
-    <div className={`${styles.notesGrid} g-4`}>
+    <div className={`${styles.notesGrid}`}>
       {notes.map((note) => (
         <div key={note._id}>
           <Note
