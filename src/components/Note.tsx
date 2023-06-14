@@ -43,8 +43,8 @@ const Note = ({ note, onNoteClicked, onDeleteNoteClicked, className }: NoteProps
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Body className={styles.cardBody}>
-        <div>
-          <RiUserSmileLine />
+        <div className="flex">
+          <RiUserSmileLine className="mr-2" />
           <p className="card-text">
             <small className="text-muted">{userNote?.username}</small>
           </p>
