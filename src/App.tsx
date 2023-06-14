@@ -2,7 +2,7 @@ import * as NotesApi from "./network/notes_api";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { User } from "./models/user";
-import { Container } from "react-bootstrap";
+// import { Container } from "react-bootstrap";
 import SignUpModal from "./components/SignUpModal";
 import LoginModal from "./components/LoginModal";
 import NavBar from "./components/NavBar";
@@ -36,14 +36,14 @@ function App() {
           onSignUpClicked={() => setShowSignUpModal(true)}
           onLogoutSuccessful={() => setLoggedInUser(null)}
         />
-        <Container className={styles.notesPage} fluid="md">
+        <div className={styles.notesPage}>
           <Routes>
             <Route path="/" element={<NotesPage loggedInUser={loggedInUser} />} />
             <Route path="/privacy" element={<PrivacyPage />} />
             <Route path="/u/:userName" element={<NotesPage loggedInUser={loggedInUser} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        </Container>
+        </div>
         {showSignUpModal && (
           <SignUpModal
             onDismiss={() => setShowSignUpModal(false)}
