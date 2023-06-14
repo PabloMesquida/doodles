@@ -1,6 +1,5 @@
 import * as NotesApi from "../network/notes_api";
 import styles from "../styles/Note.module.css";
-import styleUtils from "../styles/utils.module.css";
 import { Card } from "react-bootstrap";
 import { Note as NoteModel } from "../models/note";
 import { formDate } from "../utils/formatDate";
@@ -45,11 +44,8 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
   return (
     <Card className={`${styles.noteCard} ${className}`} onClick={() => onNoteClicked(note)}>
       <Card.Img variant="top" src={img} />
-      <Card.Body className={styles.cardBody}>
-        <Card.Title
-          className={styleUtils.flexCenter}
-          style={{ marginTop: "0.5rem", marginBottom: "1rem" }}
-        >
+      <Card.Body>
+        <Card.Title>
           <div style={{ flex: "1" }}>{title}</div>
           {user?.username === userNote?.username && (
             <div>
