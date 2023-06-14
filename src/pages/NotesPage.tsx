@@ -3,13 +3,18 @@ import { useState, useEffect } from "react";
 import { Button, Col, Row, Spinner } from "react-bootstrap";
 import { FaPlus } from "react-icons/fa";
 import { Note as NoteModel } from "../models/note";
+import { useParams } from "react-router-dom";
+import { User } from "../models/user";
 import styles from "../styles/NotesPage.module.css";
 import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "../components/AddEditNoteDialog";
 import Note from "../components/Note";
-import { useParams } from "react-router-dom";
 
-const NotesPage = () => {
+interface NotesPageProps {
+  loggedInUser: User | null;
+}
+
+const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   const [notes, setNotes] = useState<NoteModel[]>([]);
   const [notesLoading, setNotesLoading] = useState(true);
   const [showNotesLoadingError, setShowNotesLoadingError] = useState(false);
@@ -73,22 +78,23 @@ const NotesPage = () => {
   return (
     <Row className="justify-content-center">
       <Col xs md="6" className="justify-content-center">
-        <Button
-          className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
-          onClick={() => setShowNoteDialog(true)}
-        >
-          <FaPlus />
-          Add new note
-        </Button>
+        {loggedInUser ? (
+          <Button
+            className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
+            onClick={() => setShowNoteDialog(true)}
+          >
+            <FaPlus />
+            Add new note
+          </Button>
+        ) : (
+          "Log in "
+        )}
 
         {notesLoading && <Spinner animation="border" variant="primary" />}
-
         {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
-
         {!notesLoading && !showNotesLoadingError && (
           <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
         )}
-
         {showNoteDialog && (
           <>
             <AddEditNoteDialog

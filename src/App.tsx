@@ -38,9 +38,9 @@ function App() {
         />
         <Container className={styles.notesPage} fluid="md">
           <Routes>
-            <Route path="/" element={<NotesPage />} />
+            <Route path="/" element={<NotesPage loggedInUser={loggedInUser} />} />
             <Route path="/privacy" element={<PrivacyPage />} />
-            <Route path="/u/:userName" element={<NotesPage />} />
+            <Route path="/u/:userName" element={<NotesPage loggedInUser={loggedInUser} />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </Container>
