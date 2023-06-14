@@ -61,15 +61,17 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
           className={styleUtils.flexCenter}
           style={{ marginTop: "0.5rem", marginBottom: "1rem" }}
         >
-          {title}
+          <div style={{ flex: "1" }}>{title}</div>
           {user?.username === userNote?.username && (
-            <MdDelete
-              className="text-muted ms-auto"
-              onClick={(e: { stopPropagation: () => void }) => {
-                onDeleteNoteClicked(note);
-                e.stopPropagation();
-              }}
-            />
+            <div>
+              <MdDelete
+                className="text-muted ms-auto"
+                onClick={(e: { stopPropagation: () => void }) => {
+                  onDeleteNoteClicked(note);
+                  e.stopPropagation();
+                }}
+              />
+            </div>
           )}
         </Card.Title>
         <img src={img} className="img-fluid" />
