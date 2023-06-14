@@ -62,12 +62,12 @@ const LoginModal = ({ onDismiss, OnLoginSuccessful }: LoginModalProps) => {
             registerOptions={{ required: "Required" }}
             error={errors.password}
           />
-          <Button
-            type="submit"
-            disabled={isSubmitting}
-            className={stylesUtils.width100}
-          >
+          <Button type="submit" disabled={isSubmitting} className={stylesUtils.width100}>
             Log In
+          </Button>
+          No tienes cuenta
+          <Button type="submit" disabled={isSubmitting} className={stylesUtils.width100}>
+            Sing Up
           </Button>
         </Form>
       </Modal.Body>
