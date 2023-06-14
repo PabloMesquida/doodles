@@ -67,10 +67,18 @@ export async function logout() {
   });
 }
 
-export async function fetchNotes(): Promise<Note[]> {
-  const response = await fetchData(`${import.meta.env.VITE_SERVER_URL}/api/notes`, {
-    method: "GET",
-  });
+interface FetchNotesProps {
+  page: number;
+  limit: number;
+}
+
+export async function fetchNotes({ page, limit }: FetchNotesProps): Promise<Note[]> {
+  const response = await fetchData(
+    `${import.meta.env.VITE_SERVER_URL}/api/notes?page=${page}&limit=${limit}`,
+    {
+      method: "GET",
+    }
+  );
   return response.json();
 }
 

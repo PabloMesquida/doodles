@@ -9,6 +9,7 @@ import styles from "../styles/NotesPage.module.css";
 import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "../components/AddEditNoteDialog";
 import Note from "../components/Note";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 interface NotesPageProps {
   loggedInUser: User | null;
@@ -20,6 +21,8 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   const [showNotesLoadingError, setShowNotesLoadingError] = useState(false);
   const [showNoteDialog, setShowNoteDialog] = useState(false);
   const [noteToEdit, setNoteToEdit] = useState<NoteModel | null>(null);
+  const [hasMore, setHasMore] = useState(false);
+  const [page, setPage] = useState(1);
 
   type RouteParams = {
     userName: string;
@@ -29,6 +32,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 
   useEffect(() => {
     async function loadNotes() {
+      const limit = 5;
       try {
         setShowNotesLoadingError(false);
         setNotesLoading(true);
@@ -36,10 +40,14 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
         if (userName) {
           notes = await NotesApi.fetchUserNotes(userName);
         } else {
-          notes = await NotesApi.fetchNotes();
+          notes = await NotesApi.fetchNotes({ page, limit });
         }
 
         setNotes(notes);
+
+        if (notes.length < limit) {
+          setHasMore(false);
+        }
       } catch (error) {
         console.error(error);
         setShowNotesLoadingError(true);
@@ -48,7 +56,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
       }
     }
     loadNotes();
-  }, [userName]);
+  }, [page, userName]);
 
   async function deleteNote(note: NoteModel) {
     try {
@@ -61,19 +69,27 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   }
 
   const notesGrid = (
-    <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
-      {notes.map((note) => (
-        <div key={note._id}>
-          <Note
-            note={note}
-            user={loggedInUser}
-            className={styles.note}
-            onNoteClicked={setNoteToEdit}
-            onDeleteNoteClicked={deleteNote}
-          />
-        </div>
-      ))}
-    </div>
+    <InfiniteScroll
+      dataLength={notes.length}
+      next={() => setPage(page + 1)}
+      hasMore={hasMore}
+      loader={<Spinner animation="border" variant="primary" />}
+      endMessage={<p>You have reached the end of the notes.</p>}
+    >
+      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+        {notes.map((note) => (
+          <div key={note._id}>
+            <Note
+              note={note}
+              user={loggedInUser}
+              className={styles.note}
+              onNoteClicked={setNoteToEdit}
+              onDeleteNoteClicked={deleteNote}
+            />
+          </div>
+        ))}
+      </div>
+    </InfiniteScroll>
   );
 
   return (
