@@ -8,6 +8,7 @@
 .notesGrid {
   width: 100%;
   align-items: center;
+  background-color: #dedbd2;
 }
 
 .note {
