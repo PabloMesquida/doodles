@@ -65,8 +65,8 @@ const LoginModal = ({ onDismiss, OnLoginSuccessful }: LoginModalProps) => {
           <Button type="submit" disabled={isSubmitting} className={stylesUtils.width100}>
             Log In
           </Button>
-          No tienes cuenta
-          <Button type="submit" disabled={isSubmitting} className={stylesUtils.width100}>
+          <Modal.Body>Or Sign Up:</Modal.Body>
+          <Button type="submit" disabled={onDismiss} className={stylesUtils.width100}>
             Sing Up
           </Button>
         </Form>
