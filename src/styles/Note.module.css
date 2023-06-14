@@ -9,3 +9,8 @@
 .cardText {
   white-space: pre-line;
 }
+
+.userText {
+  color: darkslategrey;
+  text-decoration: none;
+}
