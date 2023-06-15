@@ -117,7 +117,9 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
       {notesLoading && <Spinner animation="border" variant="primary" />}
       {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
       {!notesLoading && !showNotesLoadingError && (
-        <>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</>
+        <div style={{ minWidth: "100%" }}>
+          {notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}
+        </div>
       )}
       {showNoteDialog && (
         <>
