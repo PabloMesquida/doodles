@@ -83,6 +83,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
           gap: "2rem",
           width: "100%",
           backgroundColor: "#FF0000",
+          overflow: "hidden",
         }}
       >
         {notes.map((note) => (
