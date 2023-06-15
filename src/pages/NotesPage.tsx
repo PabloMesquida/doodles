@@ -69,13 +69,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   }
 
   const notesGrid = (
-    <InfiniteScroll
-      dataLength={notes.length}
-      next={() => setPage(page + 1)}
-      hasMore={hasMore}
-      loader={<Spinner animation="border" variant="primary" />}
-      endMessage={<p>You have reached the end of the notes.</p>}
-    >
       <div
         style={{
           display: "flex",
@@ -83,7 +76,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
           gap: "2rem",
           width: "100%",
           backgroundColor: "#FF0000",
-          overflow: "hidden",
+ 
         }}
       >
         {notes.map((note) => (
@@ -97,11 +90,10 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
           />
         ))}
       </div>
-    </InfiniteScroll>
   );
 
   return (
-    <div className={`${styles.notesGrid}`}>
+    <div >
       {loggedInUser ? (
         <Button
           className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
@@ -124,7 +116,13 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 
       {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
       {!showNotesLoadingError && (
-        <div>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</div>
+        <InfiniteScroll
+        dataLength={notes.length}
+        next={() => setPage(page + 1)}
+        hasMore={hasMore}
+        loader={<Spinner animation="border" variant="primary" />}
+        endMessage={<p>You have reached the end of the notes.</p>}
+      >{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>} </InfiniteScroll>
       )}
       {showNoteDialog && (
         <>
