@@ -87,15 +87,14 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
         }}
       >
         {notes.map((note) => (
-          <div key={note._id}>
-            <Note
-              note={note}
-              user={loggedInUser}
-              className={styles.note}
-              onNoteClicked={setNoteToEdit}
-              onDeleteNoteClicked={deleteNote}
-            />
-          </div>
+          <Note
+            key={note._id}
+            note={note}
+            user={loggedInUser}
+            className={styles.note}
+            onNoteClicked={setNoteToEdit}
+            onDeleteNoteClicked={deleteNote}
+          />
         ))}
       </div>
     </InfiniteScroll>
@@ -125,9 +124,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 
       {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
       {!showNotesLoadingError && (
-        <div style={{ minWidth: "100%", textAlign: "center" }}>
-          {notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}
-        </div>
+        <div>{notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}</div>
       )}
       {showNoteDialog && (
         <>
