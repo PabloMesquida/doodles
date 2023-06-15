@@ -76,7 +76,15 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
       loader={<Spinner animation="border" variant="primary" />}
       endMessage={<p>You have reached the end of the notes.</p>}
     >
-      <div style={{ display: "flex", flexDirection: "column", gap: "2rem" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "2rem",
+          width: "100%",
+          backgroundColor: "#FF0000",
+        }}
+      >
         {notes.map((note) => (
           <div key={note._id}>
             <Note
