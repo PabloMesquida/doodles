@@ -74,10 +74,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 				display: "flex",
 				flexDirection: "column",
 				justifyContent: "center",
-
-				width: "100%",
-				height: "100%",
-				overflow: "auto",
 			}}
 		>
 			<InfiniteScroll
@@ -91,6 +87,10 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					flexDirection: "column",
 					justifyContent: "center",
 					gap: "2rem",
+					width: "100%",
+					height: "100%",
+					overflow: "auto",
+					backgroundColor: "red",
 				}}
 			>
 				{notes.map((note) => (
