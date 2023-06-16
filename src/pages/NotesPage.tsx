@@ -108,7 +108,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					Add new note
 				</Button>
 			) : (
-				<div>"Log in "</div>
+				<div className={styles.logMessage}>Log in</div>
 			)}
 
 			{showNotesLoadingError && (

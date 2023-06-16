@@ -18,3 +18,9 @@
 	max-width: 400px;
 	cursor: pointer;
 }
+
+.logMessage {
+	background-color: #4e598c;
+	max-width: 400px;
+	padding: 2rem;
+}
