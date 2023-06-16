@@ -76,8 +76,6 @@ const Note = ({
 					>
 						<small className={styles.userText}>{userNote?.username}</small>
 					</Link>
-				</Card.Text>
-				<Card.Text>
 					<BiCalendar style={{ color: "darkslategrey" }} />
 					<span className={styles.dateText}>{createdUpdatedText}</span>
 				</Card.Text>
