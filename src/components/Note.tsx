@@ -72,7 +72,8 @@ const Note = ({
 					style={{
 						display: "flex",
 						flexDirection: "column",
-						alignItems: "center",
+						alignItems: "start",
+						justifyContent: "center",
 					}}
 				>
 					<div>
