@@ -1,12 +1,12 @@
 .noteCard {
-  background-color: cornsilk;
+	background-color: #f2eecb;
 }
 
 .cardText {
-  white-space: pre-line;
+	white-space: pre-line;
 }
 
 .userText {
-  color: darkslategrey;
-  font-weight: bold;
+	color: darkslategrey;
+	font-weight: bold;
 }
