@@ -24,7 +24,7 @@ const NavBarLoggedInView = ({
 	}
 
 	return (
-		<>
+		<div style={{ display: "flex" }}>
 			<Navbar.Text
 				style={{
 					marginRight: "2rem",
@@ -40,7 +40,7 @@ const NavBarLoggedInView = ({
 			<Button className={styles.navBtn} onClick={logout}>
 				Log out
 			</Button>
-		</>
+		</div>
 	);
 };
 
