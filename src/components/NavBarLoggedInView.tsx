@@ -34,7 +34,7 @@ const NavBarLoggedInView = ({
 					alignItems: "center",
 				}}
 			>
-				<BiFace style={{ color: "#4e598c", marginRight: "0.5rem" }} />
+				<BiFace style={{ color: "#4e598c", marginRight: "0.25rem" }} />
 				{user.username}
 			</Navbar.Text>
 			<Button className={styles.navBtn} onClick={logout}>
