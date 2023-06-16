@@ -74,6 +74,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 				display: "flex",
 				flexDirection: "column",
 				justifyContent: "center",
+				alignContent: "center",
 			}}
 		>
 			<InfiniteScroll
@@ -109,17 +110,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	);
 
 	return (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				gap: "2rem",
-				width: "100%",
-				height: "100%",
-				overflow: "auto",
-			}}
-		>
+		<div>
 			{loggedInUser ? (
 				<Button
 					className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
