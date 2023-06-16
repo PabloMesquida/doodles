@@ -2,7 +2,6 @@ import * as NotesApi from "./network/notes_api";
 import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { User } from "./models/user";
-// import { Container } from "react-bootstrap";
 import SignUpModal from "./components/SignUpModal";
 import LoginModal from "./components/LoginModal";
 import NavBar from "./components/NavBar";

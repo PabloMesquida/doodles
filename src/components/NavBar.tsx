@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import NavBarLoggedInView from "./NavBarLoggedInView";
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
 import styles from "../styles/Nav.module.css";
+import { hasPathAfterDomain } from "../utils/hasPathAfterDomain";
 
 interface NavBarProps {
 	loggedInUser: User | null;
@@ -18,12 +19,20 @@ const NavBar = ({
 	onLoginClicked,
 	onLogoutSuccessful,
 }: NavBarProps) => {
+	const currentUrl: string = window.location.href;
 	return (
 		<Navbar className={styles.navContainer} expand="sm" sticky="top">
 			<Container>
 				<Navbar.Brand as={Link} to="/" style={{ color: "#4e598c" }}>
 					doodles
 				</Navbar.Brand>
+				{hasPathAfterDomain(currentUrl) && (
+					<Nav className="ms-auto">
+						<Nav.Link as={Link} to="/">
+							Feed
+						</Nav.Link>
+					</Nav>
+				)}
 				<Nav className="ms-auto">
 					{loggedInUser ? (
 						<NavBarLoggedInView

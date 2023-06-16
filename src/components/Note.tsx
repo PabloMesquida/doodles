@@ -54,7 +54,7 @@ const Note = ({
 		>
 			<Card.Img variant="top" src={img} />
 			<Card.Body>
-				<Card.Title style={{ display: "flex" }}>
+				<Card.Title style={{ display: "flex", alignItems: "center" }}>
 					<div style={{ flex: "1" }}>{title}</div>
 					{user?.username === userNote?.username && (
 						<div>
