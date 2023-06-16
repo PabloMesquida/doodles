@@ -1,3 +1,4 @@
 .navContainer {
 	border-bottom: 1px solid #4e598c;
+	filter: blur(4px);
 }
