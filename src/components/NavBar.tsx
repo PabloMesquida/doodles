@@ -21,7 +21,7 @@ const NavBar = ({
 	return (
 		<Navbar className={styles.navContainer} expand="sm" sticky="top">
 			<Container>
-				<Navbar.Brand as={Link} to="/">
+				<Navbar.Brand as={Link} to="/" style={{ color: "#4e598c" }}>
 					doodles
 				</Navbar.Brand>
 				<Navbar.Toggle aria-controls="main-navbar" />
