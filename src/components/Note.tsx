@@ -78,10 +78,8 @@ const Note = ({
 					</Link>
 				</Card.Text>
 				<Card.Text>
-					<BiCalendar
-						style={{ color: "darkslategrey", marginLeft: "0.5rem" }}
-					/>
-					{createdUpdatedText}
+					<BiCalendar style={{ color: "darkslategrey" }} />
+					<span className={styles.dateText}>{createdUpdatedText}</span>
 				</Card.Text>
 			</Card.Body>
 		</Card>
