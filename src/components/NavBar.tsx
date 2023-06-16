@@ -27,7 +27,7 @@ const NavBar = ({
 					doodles
 				</Navbar.Brand>
 				{hasPathAfterDomain(currentUrl) && (
-					<Nav className="ms-auto">
+					<Nav>
 						<Nav.Link as={Link} to="/">
 							Feed
 						</Nav.Link>
