@@ -38,19 +38,10 @@ const LoginModal = ({ onDismiss, OnLoginSuccessful }: LoginModalProps) => {
 
 	return (
 		<Modal show onHide={onDismiss}>
-			<Modal.Header
-				closeButton
-				style={{
-					backgroundColor: "#f2eecb",
-				}}
-			>
+			<Modal.Header closeButton>
 				<Modal.Title>Log In</Modal.Title>
 			</Modal.Header>
-			<Modal.Body
-				style={{
-					backgroundColor: "#f2eecb",
-				}}
-			>
+			<Modal.Body>
 				{errorText && <Alert variant="danger">{errorText}</Alert>}
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					<TextInputField
