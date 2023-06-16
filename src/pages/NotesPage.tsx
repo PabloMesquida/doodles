@@ -17,7 +17,6 @@ interface NotesPageProps {
 
 const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	const [notes, setNotes] = useState<NoteModel[]>([]);
-	//const [notesLoading, setNotesLoading] = useState(true);
 	const [showNotesLoadingError, setShowNotesLoadingError] = useState(false);
 	const [showNoteDialog, setShowNoteDialog] = useState(false);
 	const [noteToEdit, setNoteToEdit] = useState<NoteModel | null>(null);
@@ -35,7 +34,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 			const limit = 3;
 			try {
 				setShowNotesLoadingError(false);
-				// setNotesLoading(true);
 				let notes: NoteModel[];
 				if (userName) {
 					notes = await NotesApi.fetchUserNotes(userName);
@@ -51,8 +49,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 			} catch (error) {
 				console.error(error);
 				setShowNotesLoadingError(true);
-			} finally {
-				//  setNotesLoading(false);
 			}
 		}
 		loadNotes();
@@ -84,8 +80,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					gap: "2rem",
 					width: "100%",
 					height: "100%",
-					overflow: "auto",
-					backgroundColor: "red",
+					overflow: "visible",
 				}}
 			>
 				{notes.map((note) => (
@@ -115,14 +110,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 			) : (
 				"Log in "
 			)}
-
-			{/* {notesLoading && <Spinner animation="border" variant="primary" />}
-      {showNotesLoadingError && <p>Something went wrong. Please refresh the page.</p>}
-      {!notesLoading && !showNotesLoadingError && (
-        <div style={{ minWidth: "100%", textAlign: "center" }}>
-          {notes.length > 0 ? notesGrid : <p>You don't have any notes yet.</p>}
-        </div>
-      )} */}
 
 			{showNotesLoadingError && (
 				<p>Something went wrong. Please refresh the page.</p>
