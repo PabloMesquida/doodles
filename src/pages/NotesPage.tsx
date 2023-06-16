@@ -110,13 +110,15 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 				flexDirection: "column",
 			}}
 		>
-			{loggedInUser ? (
+			{userName ? (
+				`${userName} doodles`
+			) : loggedInUser ? (
 				<Button
 					className={styles.logMessage}
 					onClick={() => setShowNoteDialog(true)}
 				>
 					<FaPlus />
-					Add new note
+					Add new doodle!
 				</Button>
 			) : (
 				<LogMessage />
