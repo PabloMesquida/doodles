@@ -69,14 +69,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	}
 
 	const notesGrid = (
-		<div
-			style={{
-				display: "flex",
-				flexDirection: "column",
-				justifyContent: "center",
-				alignContent: "center",
-			}}
-		>
+		<div>
 			<InfiniteScroll
 				dataLength={notes.length}
 				next={() => setPage(page + 1)}
@@ -95,16 +88,25 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					backgroundColor: "red",
 				}}
 			>
-				{notes.map((note) => (
-					<Note
-						key={note._id}
-						note={note}
-						user={loggedInUser}
-						className={styles.note}
-						onNoteClicked={setNoteToEdit}
-						onDeleteNoteClicked={deleteNote}
-					/>
-				))}
+				<div
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+						width: "100%",
+					}}
+				>
+					{notes.map((note) => (
+						<Note
+							key={note._id}
+							note={note}
+							user={loggedInUser}
+							className={styles.note}
+							onNoteClicked={setNoteToEdit}
+							onDeleteNoteClicked={deleteNote}
+						/>
+					))}
+				</div>
 			</InfiniteScroll>
 		</div>
 	);
