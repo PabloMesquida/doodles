@@ -34,3 +34,11 @@
 	-webkit-border-radius: 5px 5px 5px 5px;
 	-moz-border-radius: 5px 5px 5px 5px;
 }
+
+.footer {
+	background-color: #f7f5e1;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 2rem;
+}
