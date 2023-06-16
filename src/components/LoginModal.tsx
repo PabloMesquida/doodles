@@ -46,7 +46,11 @@ const LoginModal = ({ onDismiss, OnLoginSuccessful }: LoginModalProps) => {
 			>
 				<Modal.Title>Log In</Modal.Title>
 			</Modal.Header>
-			<Modal.Body>
+			<Modal.Body
+				style={{
+					backgroundColor: "#f2eecb",
+				}}
+			>
 				{errorText && <Alert variant="danger">{errorText}</Alert>}
 				<Form onSubmit={handleSubmit(onSubmit)}>
 					<TextInputField
