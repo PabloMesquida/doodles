@@ -1,7 +1,7 @@
 import { BiFace } from "react-icons/bi";
 import styles from "../styles/NotesPage.module.css";
 
-export const UserBanner = (userName: string) => {
+export const UserBanner = ({ userName }: { userName: string }) => {
 	return (
 		<div className={styles.logMessage}>
 			<BiFace size={64} />
