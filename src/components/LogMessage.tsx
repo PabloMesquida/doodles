@@ -20,8 +20,8 @@ export const LogMessage = () => {
 
 	return (
 		<div className={styles.logMessage}>
-			<MdDraw size={36} />
-			<p>{randomPhrase}</p>
+			<MdDraw size={42} />
+			<span>{randomPhrase}</span>
 		</div>
 	);
 };
