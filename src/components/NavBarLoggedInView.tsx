@@ -3,30 +3,32 @@ import { User } from "../models/user";
 import { Button, Navbar } from "react-bootstrap";
 
 interface NavBarLoggedInViewProps {
-  user: User;
-  onLogoutSuccessful: () => void;
+	user: User;
+	onLogoutSuccessful: () => void;
 }
 
 const NavBarLoggedInView = ({
-  user,
-  onLogoutSuccessful,
+	user,
+	onLogoutSuccessful,
 }: NavBarLoggedInViewProps) => {
-  async function logout() {
-    try {
-      await NotesApi.logout();
-      onLogoutSuccessful();
-    } catch (error) {
-      alert(error);
-      console.error(error);
-    }
-  }
+	async function logout() {
+		try {
+			await NotesApi.logout();
+			onLogoutSuccessful();
+		} catch (error) {
+			alert(error);
+			console.error(error);
+		}
+	}
 
-  return (
-    <>
-      <Navbar.Text className="me-2">Signed in as: {user.username}</Navbar.Text>
-      <Button onClick={logout}>Log out</Button>
-    </>
-  );
+	return (
+		<>
+			<Navbar.Text className="m-2">{user.username}</Navbar.Text>
+			<Button onClick={logout} style={{ backgroundColor: "#4e598c" }}>
+				Log out
+			</Button>
+		</>
+	);
 };
 
 export default NavBarLoggedInView;

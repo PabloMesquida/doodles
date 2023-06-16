@@ -1,6 +1,6 @@
 .navContainer {
 	border-bottom: 1px solid #4e598c;
 	color: #4e598c;
-	backdrop-filter: blur(6px);
+	backdrop-filter: blur(8px);
 	background-color: #fcfbf190;
 }
