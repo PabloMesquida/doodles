@@ -20,10 +20,14 @@
 }
 
 .logMessage {
+	color: #fff;
 	background-color: #4e598c;
 	max-width: 400px;
 	width: 400px;
 	padding: 1.5rem;
 	margin-top: 0.5rem;
 	margin-bottom: 0.5rem;
+	border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
 }
