@@ -6,7 +6,6 @@ import { Note as NoteModel } from "../models/note";
 import { useParams } from "react-router-dom";
 import { User } from "../models/user";
 import styles from "../styles/NotesPage.module.css";
-// import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "../components/AddEditNoteDialog";
 import Note from "../components/Note";
 import InfiniteScroll from "react-infinite-scroll-component";
