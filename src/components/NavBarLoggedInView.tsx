@@ -1,6 +1,7 @@
 import * as NotesApi from "../network/notes_api";
 import { User } from "../models/user";
 import { Button, Navbar } from "react-bootstrap";
+import { BiFace } from "react-icons/bi";
 
 interface NavBarLoggedInViewProps {
 	user: User;
@@ -24,9 +25,14 @@ const NavBarLoggedInView = ({
 	return (
 		<>
 			<Navbar.Text
-				style={{ marginRight: "2rem", color: "#4e598c", fontSize: "large" }}
+				style={{
+					marginRight: "2rem",
+					marginLeft: "0.5rem",
+					color: "#4e598c",
+					fontSize: "large",
+				}}
 			>
-				{user.username}
+				<BiFace style={{ color: "#4e598c" }} /> {user.username}
 			</Navbar.Text>
 			<Button
 				onClick={logout}
