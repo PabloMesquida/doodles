@@ -9,3 +9,8 @@
 .userText {
 	color: darkslategrey;
 }
+
+.dateText {
+	font-size: smaller;
+	color: darkslategrey;
+}
