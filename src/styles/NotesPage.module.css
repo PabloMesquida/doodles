@@ -21,6 +21,7 @@
 
 .logMessage {
 	display: flex;
+	align-items: center;
 	gap: 1rem;
 	color: #fff;
 	background-color: #4e598c;
