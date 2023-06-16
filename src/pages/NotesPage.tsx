@@ -98,7 +98,14 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	);
 
 	return (
-		<div style={{ alignItems: "center" }}>
+		<div
+			style={{
+				alignItems: "center",
+				width: "100%",
+				display: "flex",
+				flexDirection: "column",
+			}}
+		>
 			{loggedInUser ? (
 				<Button
 					className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
