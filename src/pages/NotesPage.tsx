@@ -37,7 +37,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 				setShowNotesLoadingError(false);
 				let notes: NoteModel[];
 				if (userName) {
-					notes = await NotesApi.fetchUserNotes(userName);
+					notes = await NotesApi.fetchUserNotes({ userName, page, limit });
 				} else {
 					notes = await NotesApi.fetchNotes({ page, limit });
 				}
