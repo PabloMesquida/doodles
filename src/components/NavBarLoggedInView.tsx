@@ -2,7 +2,7 @@ import * as NotesApi from "../network/notes_api";
 import { User } from "../models/user";
 import { Button, Navbar } from "react-bootstrap";
 import { BiFace } from "react-icons/bi";
-import styles from "../styles/NotesPage.module.css";
+import styles from "../styles/Nav.module.css";
 
 interface NavBarLoggedInViewProps {
 	user: User;
@@ -38,7 +38,7 @@ const NavBarLoggedInView = ({
 				{user.username}
 			</Navbar.Text>
 			<Button
-				className={styles.logMessage}
+				className={styles.navBtn}
 				onClick={logout}
 				// style={{ backgroundColor: "#4e598c", borderColor: "#4e598c" }}
 			>
