@@ -22,5 +22,8 @@
 .logMessage {
 	background-color: #4e598c;
 	max-width: 400px;
-	padding: 2rem;
+	width: 400px;
+	padding: 1.5rem;
+	margin-top: 0.5rem;
+	margin-bottom: 0.5rem;
 }
