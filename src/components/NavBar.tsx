@@ -24,22 +24,19 @@ const NavBar = ({
 				<Navbar.Brand as={Link} to="/" style={{ color: "#4e598c" }}>
 					doodles
 				</Navbar.Brand>
-				<Navbar.Toggle aria-controls="main-navbar" />
-				<Navbar.Collapse id="main-navbar">
-					<Nav className="ms-auto">
-						{loggedInUser ? (
-							<NavBarLoggedInView
-								user={loggedInUser}
-								onLogoutSuccessful={onLogoutSuccessful}
-							/>
-						) : (
-							<NavBarLoggedOutView
-								onLoginClicked={onLoginClicked}
-								onSignUpClicked={onSignUpClicked}
-							/>
-						)}
-					</Nav>
-				</Navbar.Collapse>
+				<Nav className="ms-auto">
+					{loggedInUser ? (
+						<NavBarLoggedInView
+							user={loggedInUser}
+							onLogoutSuccessful={onLogoutSuccessful}
+						/>
+					) : (
+						<NavBarLoggedOutView
+							onLoginClicked={onLoginClicked}
+							onSignUpClicked={onSignUpClicked}
+						/>
+					)}
+				</Nav>
 			</Container>
 		</Navbar>
 	);
