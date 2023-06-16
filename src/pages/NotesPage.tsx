@@ -106,6 +106,8 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 			style={{
 				display: "flex",
 				textAlign: "center",
+				flexDirection: "column",
+				justifyContent: "center",
 				gap: "2rem",
 				width: "100%",
 				height: "100%",
