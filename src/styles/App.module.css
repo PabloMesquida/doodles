@@ -11,4 +11,7 @@
 	padding: 2rem;
 	font-size: small;
 	color: darkslategrey;
+	margin-top: 4rem;
+	position: sticky;
+	bottom: 0;
 }
