@@ -98,7 +98,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	);
 
 	return (
-		<div>
+		<div style={{ alignItems: "center" }}>
 			{loggedInUser ? (
 				<Button
 					className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
@@ -108,7 +108,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					Add new note
 				</Button>
 			) : (
-				"Log in "
+				<div>"Log in "</div>
 			)}
 
 			{showNotesLoadingError && (
