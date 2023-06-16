@@ -37,14 +37,13 @@ const LoginModal = ({ onDismiss, OnLoginSuccessful }: LoginModalProps) => {
 	}
 
 	return (
-		<Modal
-			show
-			onHide={onDismiss}
-			style={{
-				backgroundColor: "#f2eecb",
-			}}
-		>
-			<Modal.Header closeButton>
+		<Modal show onHide={onDismiss}>
+			<Modal.Header
+				closeButton
+				style={{
+					backgroundColor: "#f2eecb",
+				}}
+			>
 				<Modal.Title>Log In</Modal.Title>
 			</Modal.Header>
 			<Modal.Body>
