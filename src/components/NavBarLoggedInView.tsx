@@ -23,7 +23,11 @@ const NavBarLoggedInView = ({
 
 	return (
 		<>
-			<Navbar.Text className="m-2">{user.username}</Navbar.Text>
+			<Navbar.Text
+				style={{ marginRight: "2rem", color: "#4e598c", fontSize: "large" }}
+			>
+				{user.username}
+			</Navbar.Text>
 			<Button
 				onClick={logout}
 				style={{ backgroundColor: "#4e598c", borderColor: "#4e598c" }}
