@@ -85,7 +85,7 @@ const Note = ({
 							<small className={styles.userText}>{userNote?.username}</small>
 						</Link>
 					</div>
-					<div>
+					<div style={{ display: "flex", alignItems: "center" }}>
 						<BiCalendar style={{ color: "darkslategrey" }} />
 						<span className={styles.dateText}>{createdUpdatedText}</span>
 					</div>
