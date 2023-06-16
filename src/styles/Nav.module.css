@@ -4,3 +4,18 @@
 	backdrop-filter: blur(8px);
 	background-color: #fcfbf190;
 }
+
+.navBtn {
+	display: flex;
+	align-items: center;
+	color: #fff;
+	background-color: #4e598c;
+	/* max-width: 400px;
+	width: 400px; */
+	/* padding: 0.5rem;
+	margin-top: 1rem;
+	margin-bottom: 1rem; */
+	border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+}
