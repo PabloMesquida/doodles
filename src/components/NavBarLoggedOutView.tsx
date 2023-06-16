@@ -10,11 +10,21 @@ const NavBarLoggedOutView = ({
 	onLoginClicked,
 }: NavBarLoggedOutViewProps) => {
 	return (
-		<div style={{ gap: "2rem" }}>
-			<Button onClick={onSignUpClicked} style={{ backgroundColor: "#4e598c" }}>
+		<div>
+			<Button
+				onClick={onSignUpClicked}
+				style={{
+					backgroundColor: "#4e598c",
+					borderColor: "#4e598c",
+					marginRight: "1rem",
+				}}
+			>
 				Sign Up
 			</Button>
-			<Button onClick={onLoginClicked} style={{ backgroundColor: "#4e598c" }}>
+			<Button
+				onClick={onLoginClicked}
+				style={{ backgroundColor: "#4e598c", borderColor: "#4e598c" }}
+			>
 				Log In
 			</Button>
 		</div>
