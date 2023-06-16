@@ -72,7 +72,11 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 				next={() => setPage(page + 1)}
 				hasMore={hasMore}
 				loader={<Spinner animation="border" variant="primary" />}
-				endMessage={<p>You have reached the end of the notes.</p>}
+				endMessage={
+					<div style={{ fontSize: "small", color: "darkslategrey" }}>
+						You have reached the end of the doodles.
+					</div>
+				}
 				style={{
 					display: "flex",
 					flexDirection: "column",
