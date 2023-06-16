@@ -102,7 +102,15 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	);
 
 	return (
-		<div>
+		<div
+			style={{
+				textAlign: "center",
+				gap: "2rem",
+				width: "100%",
+				height: "100%",
+				overflow: "auto",
+			}}
+		>
 			{loggedInUser ? (
 				<Button
 					className={`${styleUtils.blockCenter} ${styleUtils.flexCenter} mb-4`}
