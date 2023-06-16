@@ -10,6 +10,7 @@ import AddEditNoteDialog from "../components/AddEditNoteDialog";
 import Note from "../components/Note";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { LogMessage } from "../components/LogMessage";
+import { UserBanner } from "../components/UserBanner";
 
 interface NotesPageProps {
 	loggedInUser: User | null;
@@ -111,7 +112,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 			}}
 		>
 			{userName ? (
-				`${userName} doodles`
+				<UserBanner userName={userName} />
 			) : loggedInUser ? (
 				<Button
 					className={styles.logMessage}
