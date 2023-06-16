@@ -76,7 +76,7 @@ const Note = ({
 						justifyContent: "center",
 					}}
 				>
-					<div>
+					<div style={{ display: "flex", alignItems: "center" }}>
 						<BiFace style={{ color: "darkslategrey" }} />
 						<Link
 							to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}

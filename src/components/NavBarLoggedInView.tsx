@@ -30,6 +30,8 @@ const NavBarLoggedInView = ({
 					marginLeft: "0.5rem",
 					color: "#4e598c",
 					fontSize: "large",
+					display: "flex",
+					alignItems: "center",
 				}}
 			>
 				<BiFace style={{ color: "#4e598c" }} /> {user.username}
