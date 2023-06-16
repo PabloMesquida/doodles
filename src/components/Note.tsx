@@ -68,14 +68,7 @@ const Note = ({
 						</div>
 					)}
 				</Card.Title>
-				<Card.Text
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "start",
-						justifyContent: "center",
-					}}
-				>
+				<Card.Text className={styles.cardBody}>
 					<div style={{ display: "flex", alignItems: "center" }}>
 						<BiFace style={{ color: "darkslategrey" }} />
 						<Link
