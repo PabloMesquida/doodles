@@ -10,6 +10,7 @@ import styleUtils from "../styles/utils.module.css";
 import AddEditNoteDialog from "../components/AddEditNoteDialog";
 import Note from "../components/Note";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { LogMessage } from "../components/LogMessage";
 
 interface NotesPageProps {
 	loggedInUser: User | null;
@@ -115,7 +116,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					Add new note
 				</Button>
 			) : (
-				<div className={styles.logMessage}>Log in</div>
+				<LogMessage />
 			)}
 
 			{showNotesLoadingError && (
