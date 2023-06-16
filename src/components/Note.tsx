@@ -68,16 +68,26 @@ const Note = ({
 						</div>
 					)}
 				</Card.Title>
-				<Card.Text style={{ display: "flex", alignItems: "center" }}>
-					<BiFace style={{ color: "darkslategrey" }} />
-					<Link
-						to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
-						style={{ textDecoration: "none", marginLeft: "0.5rem" }}
-					>
-						<small className={styles.userText}>{userNote?.username}</small>
-					</Link>
-					<BiCalendar style={{ color: "darkslategrey" }} />
-					<span className={styles.dateText}>{createdUpdatedText}</span>
+				<Card.Text
+					style={{
+						display: "flex",
+						flexDirection: "column",
+						alignItems: "center",
+					}}
+				>
+					<div>
+						<BiFace style={{ color: "darkslategrey" }} />
+						<Link
+							to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
+							style={{ textDecoration: "none", marginLeft: "0.5rem" }}
+						>
+							<small className={styles.userText}>{userNote?.username}</small>
+						</Link>
+					</div>
+					<div>
+						<BiCalendar style={{ color: "darkslategrey" }} />
+						<span className={styles.dateText}>{createdUpdatedText}</span>
+					</div>
 				</Card.Text>
 			</Card.Body>
 		</Card>
