@@ -5,7 +5,7 @@ const Doodle = memo(() => {
 	const sketch = (p5: P5CanvasInstance) => {
 		p5.setup = () => {
 			p5.createCanvas(380, 380).id("p5canvas");
-			p5.background(252, 251, 241);
+			p5.background(247, 245, 225);
 		};
 
 		p5.draw = () => {
