@@ -74,7 +74,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 				display: "flex",
 				flexDirection: "column",
 				justifyContent: "center",
-				gap: "2rem",
+
 				width: "100%",
 				height: "100%",
 				overflow: "auto",
@@ -86,6 +86,12 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 				hasMore={hasMore}
 				loader={<Spinner animation="border" variant="primary" />}
 				endMessage={<p>You have reached the end of the notes.</p>}
+				style={{
+					display: "flex",
+					flexDirection: "column",
+					justifyContent: "center",
+					gap: "2rem",
+				}}
 			>
 				{notes.map((note) => (
 					<Note
