@@ -11,7 +11,7 @@ const NavBarLoggedOutView = ({
 	onLoginClicked,
 }: NavBarLoggedOutViewProps) => {
 	return (
-		<div>
+		<div style={{ display: "flex" }}>
 			<Button
 				onClick={onSignUpClicked}
 				style={{
