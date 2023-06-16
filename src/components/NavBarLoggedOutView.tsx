@@ -1,4 +1,5 @@
 import { Button } from "react-bootstrap";
+import styles from "../styles/Nav.module.css";
 
 interface NavBarLoggedOutViewProps {
 	onSignUpClicked: () => void;
@@ -14,17 +15,13 @@ const NavBarLoggedOutView = ({
 			<Button
 				onClick={onSignUpClicked}
 				style={{
-					backgroundColor: "#4e598c",
-					borderColor: "#4e598c",
 					marginRight: "1rem",
 				}}
+				className={styles.navBtn}
 			>
 				Sign Up
 			</Button>
-			<Button
-				onClick={onLoginClicked}
-				style={{ backgroundColor: "#4e598c", borderColor: "#4e598c" }}
-			>
+			<Button onClick={onLoginClicked} className={styles.navBtn}>
 				Log In
 			</Button>
 		</div>
