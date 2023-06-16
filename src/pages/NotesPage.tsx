@@ -80,7 +80,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					display: "flex",
 					flexDirection: "column",
 					justifyContent: "center",
-					alignContent: "center",
+					alignItems: "center",
 					gap: "2rem",
 					width: "100%",
 					height: "100%",
@@ -88,25 +88,16 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 					backgroundColor: "red",
 				}}
 			>
-				<div
-					style={{
-						display: "flex",
-						flexDirection: "column",
-						alignItems: "center",
-						width: "100%",
-					}}
-				>
-					{notes.map((note) => (
-						<Note
-							key={note._id}
-							note={note}
-							user={loggedInUser}
-							className={styles.note}
-							onNoteClicked={setNoteToEdit}
-							onDeleteNoteClicked={deleteNote}
-						/>
-					))}
-				</div>
+				{notes.map((note) => (
+					<Note
+						key={note._id}
+						note={note}
+						user={loggedInUser}
+						className={styles.note}
+						onNoteClicked={setNoteToEdit}
+						onDeleteNoteClicked={deleteNote}
+					/>
+				))}
 			</InfiniteScroll>
 		</div>
 	);
