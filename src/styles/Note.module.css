@@ -9,10 +9,11 @@
 .userText {
   color: darkslategrey;
   transition: background-color 0.3s ease;
+  padding: 0.5rem;
 }
 
 .userText:hover {
-  background-color: #4e598c;
+  background-color: #fcfbf1;
   border-radius: 2px 2px 2px 2px;
   -webkit-border-radius: 2px 2px 2px 2px;
   -moz-border-radius: 2px 2px 2px 2px;
