@@ -83,7 +83,7 @@ const Note = ({ note, user, onDeleteNoteClicked, className }: NoteProps) => {
               to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
               style={{ textDecoration: "none" }}
             >
-              <small className={styles.userText} style={{ marginBottom: "0.5rem" }}>
+              <small className={styles.userText} style={{ paddingBottom: "0.5rem" }}>
                 {userNote?.username}
               </small>
             </Link>
