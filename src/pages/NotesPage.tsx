@@ -47,6 +47,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
       console.log("lenght", notes.length);
       console.log("hasmore", hasMore);
       if (notes.length < limit) {
+        console.log("sett-false");
         setHasMore(false);
       }
     } catch (error) {
