@@ -35,15 +35,15 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 		console.log("loadnotes");
 		try {
 			setShowNotesLoadingError(false);
-			let notes: NoteModel[];
+			let doodles: NoteModel[];
 			if (userName) {
-				notes = await NotesApi.fetchUserNotes({ userName, page, limit });
+				doodles = await NotesApi.fetchUserNotes({ userName, page, limit });
 			} else {
 				console.log(page, limit);
-				notes = await NotesApi.fetchNotes({ page, limit });
+				doodles = await NotesApi.fetchNotes({ page, limit });
 			}
 
-			setNotes((prevNotes) => [...prevNotes, ...notes]);
+			setNotes((prevNotes) => [...prevNotes, ...doodles]);
 			console.log("lenght", notes.length);
 			if (notes.length < limit) {
 				setHasMore(false);
