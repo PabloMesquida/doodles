@@ -16,9 +16,11 @@
 }
 
 .userLink {
+  color: #4e598c;
   text-decoration: none;
 }
 
 .userLink:hover {
+  color: #4e598c;
   text-decoration: underline;
 }
