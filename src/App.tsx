@@ -6,6 +6,7 @@ import SignUpModal from "./components/SignUpModal";
 import LoginModal from "./components/LoginModal";
 import NavBar from "./components/NavBar";
 import NotesPage from "./pages/NotesPage";
+import NotePage from "./pages/NotePage";
 import PrivacyPage from "./pages/PrivacyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import styles from "./styles/App.module.css";
@@ -45,6 +46,10 @@ function App() {
 						<Route
 							path="/u/:userName"
 							element={<NotesPage loggedInUser={loggedInUser} />}
+						/>
+						<Route
+							path="/d/:noteId"
+							element={<NotePage loggedInUser={loggedInUser} />}
 						/>
 						<Route path="*" element={<NotFoundPage />} />
 					</Routes>

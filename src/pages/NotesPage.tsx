@@ -5,12 +5,12 @@ import { FaPlus } from "react-icons/fa";
 import { Note as NoteModel } from "../models/note";
 import { useParams } from "react-router-dom";
 import { User } from "../models/user";
+import { LogMessage } from "../components/LogMessage";
+import { UserBanner } from "../components/UserBanner";
 import styles from "../styles/NotesPage.module.css";
 import AddEditNoteDialog from "../components/AddEditNoteDialog";
 import Note from "../components/Note";
 import InfiniteScroll from "react-infinite-scroll-component";
-import { LogMessage } from "../components/LogMessage";
-import { UserBanner } from "../components/UserBanner";
 
 interface NotesPageProps {
 	loggedInUser: User | null;

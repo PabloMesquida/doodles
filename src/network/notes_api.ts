@@ -97,6 +97,16 @@ export async function fetchNotes({
 	return response.json();
 }
 
+export async function fetchNote(noteId: string): Promise<Note> {
+	const response = await fetchData(
+		`${import.meta.env.VITE_SERVER_URL}/api/notes/${noteId}`,
+		{
+			method: "GET",
+		}
+	);
+	return response.json();
+}
+
 export async function fetchNoteUser(userId: string): Promise<User> {
 	const response = await fetchData(
 		`${import.meta.env.VITE_SERVER_URL}/api/users/${userId}`,

@@ -8,6 +8,7 @@ import { BiFace, BiCalendar } from "react-icons/bi";
 import { useEffect, useState } from "react";
 import { User } from "../models/user";
 import { Link } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 interface NoteProps {
 	note: NoteModel;
@@ -28,6 +29,12 @@ const Note = ({
 	const { userId, title, img, createdAt, updatedAt } = note;
 
 	let createdUpdatedText: string;
+
+	type RouteParams = {
+		noteId: string;
+	};
+
+	const { noteId } = useParams<RouteParams>();
 
 	if (updatedAt > createdAt) {
 		createdUpdatedText = "Updated: " + formDate(updatedAt);
@@ -50,7 +57,7 @@ const Note = ({
 	return (
 		<Card className={`${styles.noteCard} ${className}`}>
 			<Card.Img
-				onClick={() => onNoteClicked(note)}
+				onClick={noteId !== undefined ? () => onNoteClicked(note) : undefined}
 				variant="top"
 				src={img}
 				style={{ cursor: "pointer" }}
