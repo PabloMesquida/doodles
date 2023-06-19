@@ -36,9 +36,8 @@ const NavBarLoggedInView = ({ user, onLogoutSuccessful }: NavBarLoggedInViewProp
         <Link
           to={`https://doodles-notes.vercel.app/u/${user.username}`}
           style={{ textDecoration: "none" }}
-          className={styles.userLink}
         >
-          {user.username}
+          <span className={styles.userLink}> {user.username}</span>
         </Link>
       </Navbar.Text>
       <Button className={styles.navBtn} onClick={logout}>
