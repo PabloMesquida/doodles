@@ -77,12 +77,12 @@ const Note = ({ note, user, onDeleteNoteClicked, className }: NoteProps) => {
           )}
         </Card.Title>
         <Card.Text className={styles.cardBody}>
-          <div style={{ display: "flex", alignItems: "center" }} className={styles.userText}>
+          <div style={{ display: "flex", alignItems: "center" }}>
+            <BiFace style={{ color: "darkslategrey" }} />
             <Link
               to={`https://doodles-notes.vercel.app/u/${userNote?.username}`}
-              style={{ textDecoration: "none" }}
+              style={{ textDecoration: "none", marginLeft: "0.5rem" }}
             >
-              <BiFace style={{ color: "darkslategrey", marginRight: "0.5rem" }} />
               <small className={styles.userText}>{userNote?.username}</small>
             </Link>
           </div>

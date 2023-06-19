@@ -10,13 +10,10 @@
   color: darkslategrey;
   transition: background-color 0.3s ease;
   padding: 0.5rem;
-  border-radius: 20px;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
 }
 
 .userText:hover {
-  background-color: #fcfbf1;
+  text-decoration: underline;
 }
 
 .dateText {
