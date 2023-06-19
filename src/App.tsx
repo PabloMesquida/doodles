@@ -36,7 +36,7 @@ function App() {
           onLogoutSuccessful={() => setLoggedInUser(null)}
         />
 
-        <div style={{ marginBottom: "4rem", position: "relative" }}>
+        <div style={{ paddingBottom: "4rem" }}>
           <Routes>
             <Route path="/" element={<NotesPage loggedInUser={loggedInUser} />} />
             <Route path="/u/:userName" element={<NotesPage loggedInUser={loggedInUser} />} />
