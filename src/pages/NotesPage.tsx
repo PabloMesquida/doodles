@@ -100,7 +100,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
         }
         style={{
           display: "flex",
-          flexDirection: "column-reverse",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           gap: "2rem",
