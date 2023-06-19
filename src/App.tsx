@@ -29,7 +29,7 @@ function App() {
 			}
 		}
 		fetchLoggedInUser();
-	}, []);
+	}, [hasPath]);
 	return (
 		<BrowserRouter>
 			<div className={styles.pageContainer}>
