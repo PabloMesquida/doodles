@@ -8,8 +8,6 @@
 
 .userText {
   color: darkslategrey;
-  transition: background-color 0.3s ease;
-  padding: 0.5rem;
   margin-left: 0.5rem;
 }
 
