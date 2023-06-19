@@ -56,6 +56,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	useEffect(() => {
 		setPage(1);
 		setHasMore(true);
+		console.log("effect");
 	}, [userName]);
 
 	useEffect(() => {
