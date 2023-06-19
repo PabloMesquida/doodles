@@ -48,11 +48,8 @@ const Note = ({
 	}, [userId]);
 
 	return (
-		<Card
-			className={`${styles.noteCard} ${className}`}
-			onClick={() => onNoteClicked(note)}
-		>
-			<Card.Img variant="top" src={img} />
+		<Card className={`${styles.noteCard} ${className}`}>
+			<Card.Img onClick={() => onNoteClicked(note)} variant="top" src={img} />
 			<Card.Body>
 				<Card.Title style={{ display: "flex", alignItems: "center" }}>
 					<div style={{ flex: "1" }}>{title}</div>
