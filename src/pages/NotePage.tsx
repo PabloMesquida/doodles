@@ -57,6 +57,7 @@ const NotePage = ({ loggedInUser }: NotePageProps) => {
 				width: "100%",
 				height: "100%",
 				overflow: "visible",
+				marginTop: "2rem",
 			}}
 		>
 			{showNotesLoadingError && (
