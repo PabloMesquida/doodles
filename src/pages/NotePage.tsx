@@ -48,7 +48,17 @@ const NotePage = ({ loggedInUser }: NotePageProps) => {
 	}
 
 	return (
-		<div>
+		<div
+			style={{
+				display: "flex",
+				flexDirection: "column",
+				justifyContent: "center",
+				alignItems: "center",
+				width: "100%",
+				height: "100%",
+				overflow: "visible",
+			}}
+		>
 			{showNotesLoadingError && (
 				<p>Something went wrong. Please refresh the page.</p>
 			)}
