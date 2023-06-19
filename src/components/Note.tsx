@@ -20,7 +20,7 @@ interface NoteProps {
 
 const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: NoteProps) => {
   const [userNote, setUserNote] = useState<User>();
-  const { userId, title, img, createdAt, updatedAt } = note;
+  const { _id, userId, title, img, createdAt, updatedAt } = note;
 
   let createdUpdatedText: string;
 
@@ -50,12 +50,18 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
 
   return (
     <Card className={`${styles.noteCard} ${className}`}>
-      <Card.Img
-        onClick={noteId === undefined ? () => onNoteClicked(note) : undefined}
-        variant="top"
-        src={img}
-        style={{ cursor: noteId === undefined ? "pointer" : "" }}
-      />
+      {noteId === undefined ? (
+        <Link to={`/d/${_id}`}>
+          <Card.Img
+            variant="top"
+            src={img}
+            style={{ cursor: noteId === undefined ? "pointer" : "" }}
+          />
+        </Link>
+      ) : (
+        <Card.Img variant="top" src={img} />
+      )}
+
       <Card.Body>
         <Card.Title style={{ display: "flex", alignItems: "center" }}>
           <div style={{ flex: "1" }}>{title}</div>
