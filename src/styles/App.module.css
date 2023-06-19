@@ -8,13 +8,13 @@
 
 .footer {
   background-color: #f7f5e1;
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
   font-size: small;
   color: darkslategrey;
-  margin-top: 4rem;
+  margin-top: 4rem; */
   bottom: 0;
   width: 100%;
   position: abosolute;
