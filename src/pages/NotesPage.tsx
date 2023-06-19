@@ -42,8 +42,10 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
       }
 
       if (page === 1) {
+        console.log("note 1", notes);
         setNotes(notes);
       } else {
+        console.log("note", notes);
         setNotes((prevNotes) => [...prevNotes, ...notes]);
       }
 
