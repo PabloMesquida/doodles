@@ -63,7 +63,11 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   }
 
   useEffect(() => {
-    setPage(1);
+    if (page === 1) {
+      loadNotes();
+    } else {
+      setPage(1);
+    }
     setHasMore(true);
     console.log("userNameChange");
   }, [userName]);
