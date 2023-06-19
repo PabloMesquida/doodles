@@ -60,7 +60,7 @@ const Note = ({
 				onClick={noteId !== undefined ? () => onNoteClicked(note) : undefined}
 				variant="top"
 				src={img}
-				style={{ cursor: "pointer" }}
+				style={{ cursor: noteId !== undefined ? "pointer" : "" }}
 			/>
 			<Card.Body>
 				<Card.Title style={{ display: "flex", alignItems: "center" }}>
