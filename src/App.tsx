@@ -41,7 +41,7 @@ function App() {
         >
           Developed by PM
         </div>
-        <div>
+        <div style={{ marginBottom: "4rem" }}>
           <Routes>
             <Route path="/" element={<NotesPage loggedInUser={loggedInUser} />} />
             <Route path="/u/:userName" element={<NotesPage loggedInUser={loggedInUser} />} />
