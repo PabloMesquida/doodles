@@ -9,6 +9,7 @@
 .userText {
   color: darkslategrey;
   margin-left: 0.5rem;
+  padding-bottom: 0.1rem;
 }
 
 .userText:hover {
