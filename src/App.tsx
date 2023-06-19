@@ -28,14 +28,16 @@ function App() {
   }, []);
   return (
     <BrowserRouter>
-      <div className={styles.pageContainer}>
+      <div className={styles.pageContainer} style={{ position: "relative" }}>
         <NavBar
           loggedInUser={loggedInUser}
           onLoginClicked={() => setShowLoginModal(true)}
           onSignUpClicked={() => setShowSignUpModal(true)}
           onLogoutSuccessful={() => setLoggedInUser(null)}
         />
-        <div className={styles.footer}>Developed by PM</div>
+        <div className={styles.footer} style={{ position: "absolute", bottom: "0px" }}>
+          Developed by PM
+        </div>
         <div>
           <Routes>
             <Route path="/" element={<NotesPage loggedInUser={loggedInUser} />} />
