@@ -1,7 +1,7 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { User } from "../models/user";
 import { Link } from "react-router-dom";
-
+import { useEffect } from "react";
 import NavBarLoggedInView from "./NavBarLoggedInView";
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
 import styles from "../styles/Nav.module.css";
@@ -21,7 +21,10 @@ const NavBar = ({
 	onLogoutSuccessful,
 	hasPath,
 }: NavBarProps) => {
-	console.log("nav", hasPath);
+	useEffect(() => {
+		console.log("nav", hasPath);
+	}, [hasPath]);
+
 	return (
 		<Navbar className={styles.navContainer} expand="sm" sticky="top">
 			<Container>
