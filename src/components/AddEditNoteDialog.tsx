@@ -68,7 +68,7 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
       <Modal.Header closeButton>
         <Modal.Title>{noteToEdit ? "Edit Doodle" : "Add Doodle"}</Modal.Title>
       </Modal.Header>
-      <Modal.Body style={{ textAlign: "center" }}>
+      <Modal.Body>
         <Form id="addEditNoteForm" onSubmit={handleSubmit(onSubmit)}>
           <TextInputField
             name="title"
@@ -80,7 +80,9 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
             error={errors.title}
           />
         </Form>
-        <Doodle />
+        <div style={{ textAlign: "center", width: "100%", touchAction: "none" }}>
+          <Doodle />
+        </div>
       </Modal.Body>
       <Modal.Footer>
         <Button type="submit" form="addEditNoteForm" disabled={isSubmitting}>
