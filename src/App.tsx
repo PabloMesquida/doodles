@@ -35,7 +35,8 @@ function App() {
           onSignUpClicked={() => setShowSignUpModal(true)}
           onLogoutSuccessful={() => setLoggedInUser(null)}
         />
-        <div className={styles.notesPage}>
+        <div className={styles.footer}>Developed by PM</div>
+        <div>
           <Routes>
             <Route path="/" element={<NotesPage loggedInUser={loggedInUser} />} />
             <Route path="/u/:userName" element={<NotesPage loggedInUser={loggedInUser} />} />
@@ -43,7 +44,7 @@ function App() {
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
         </div>
-        <div className={styles.footer}>Developed by PM</div>
+
         {showSignUpModal && (
           <SignUpModal
             onDismiss={() => setShowSignUpModal(false)}
