@@ -30,31 +30,37 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 
 	const { userName } = useParams<RouteParams>();
 
+	async function loadNotes() {
+		const limit = 3;
+		try {
+			setShowNotesLoadingError(false);
+			let notes: NoteModel[];
+			if (userName) {
+				notes = await NotesApi.fetchUserNotes({ userName, page, limit });
+			} else {
+				notes = await NotesApi.fetchNotes({ page, limit });
+			}
+
+			setNotes((prevNotes) => [...prevNotes, ...notes]);
+
+			if (notes.length < limit) {
+				setHasMore(false);
+			}
+		} catch (error) {
+			console.error(error);
+			setShowNotesLoadingError(true);
+		}
+	}
+
+	useEffect(() => {
+		loadNotes();
+	}, [page]);
+
 	useEffect(() => {
 		console.log("username:", userName);
-		async function loadNotes() {
-			const limit = 3;
-			try {
-				setShowNotesLoadingError(false);
-				let notes: NoteModel[];
-				if (userName) {
-					notes = await NotesApi.fetchUserNotes({ userName, page, limit });
-				} else {
-					notes = await NotesApi.fetchNotes({ page, limit });
-				}
-
-				setNotes((prevNotes) => [...prevNotes, ...notes]);
-
-				if (notes.length < limit) {
-					setHasMore(false);
-				}
-			} catch (error) {
-				console.error(error);
-				setShowNotesLoadingError(true);
-			}
-		}
+		setNotes([]);
 		loadNotes();
-	}, [page, userName]);
+	}, [userName]);
 
 	async function deleteNote(note: NoteModel) {
 		try {
