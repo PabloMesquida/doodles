@@ -38,6 +38,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 			if (userName) {
 				notes = await NotesApi.fetchUserNotes({ userName, page, limit });
 			} else {
+				console.log(page, limit);
 				notes = await NotesApi.fetchNotes({ page, limit });
 			}
 
@@ -54,6 +55,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 
 	useEffect(() => {
 		setPage(1);
+		setHasMore(true);
 	}, [userName]);
 
 	useEffect(() => {
