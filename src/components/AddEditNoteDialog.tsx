@@ -66,9 +66,9 @@ const AddEditNoteDialog = ({ noteToEdit, onDismiss, onNoteSaved }: AddEditNoteDi
   return (
     <Modal show onHide={onDismiss}>
       <Modal.Header closeButton>
-        <Modal.Title>{noteToEdit ? "Edit Note" : "Add Note"}</Modal.Title>
+        <Modal.Title>{noteToEdit ? "Edit Doodle" : "Add Doodle"}</Modal.Title>
       </Modal.Header>
-      <Modal.Body>
+      <Modal.Body style={{ textAlign: "center" }}>
         <Form id="addEditNoteForm" onSubmit={handleSubmit(onSubmit)}>
           <TextInputField
             name="title"
