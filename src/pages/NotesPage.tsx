@@ -30,6 +30,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   const { userName } = useParams<RouteParams>();
 
   async function loadNotes() {
+    console.log("loadnote");
     const limit = 3;
     try {
       setShowNotesLoadingError(false);
@@ -39,6 +40,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
         console.log("user");
         notes = await NotesApi.fetchUserNotes({ userName, page, limit });
       } else {
+        console.log("no-user");
         notes = await NotesApi.fetchNotes({ page, limit });
       }
 
