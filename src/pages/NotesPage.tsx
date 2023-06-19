@@ -36,6 +36,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
       let notes: NoteModel[];
 
       if (userName) {
+        console.log("user");
         notes = await NotesApi.fetchUserNotes({ userName, page, limit });
       } else {
         notes = await NotesApi.fetchNotes({ page, limit });
