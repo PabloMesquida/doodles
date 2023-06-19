@@ -53,6 +53,10 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	}
 
 	useEffect(() => {
+		setPage(1);
+	}, [userName]);
+
+	useEffect(() => {
 		console.log("username:", userName);
 		if (page === 1) setNotes([]);
 		loadNotes();
