@@ -23,6 +23,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	const [noteToEdit, setNoteToEdit] = useState<NoteModel | null>(null);
 	const [hasMore, setHasMore] = useState(true);
 	const [page, setPage] = useState(1);
+	const [resetNotes, setResetNotes] = useState(false);
 
 	type RouteParams = {
 		userName: string;
@@ -53,13 +54,18 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	}
 
 	useEffect(() => {
-		loadNotes();
-	}, [page]);
+		if (resetNotes) {
+			setNotes([]);
+			setResetNotes(false);
+		} else {
+			loadNotes();
+		}
+	}, [userName, page, resetNotes]);
 
 	useEffect(() => {
 		console.log("username:", userName);
-		setNotes([]);
-		loadNotes();
+
+		setResetNotes(true);
 	}, [userName]);
 
 	async function deleteNote(note: NoteModel) {
