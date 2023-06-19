@@ -35,7 +35,10 @@ function App() {
           onSignUpClicked={() => setShowSignUpModal(true)}
           onLogoutSuccessful={() => setLoggedInUser(null)}
         />
-        <div className={styles.footer} style={{ position: "absolute", bottom: "0px" }}>
+        <div
+          className={styles.footer}
+          style={{ position: "absolute", bottom: "0px", marginTop: "4rem" }}
+        >
           Developed by PM
         </div>
         <div>
