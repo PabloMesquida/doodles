@@ -32,6 +32,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 
 	async function loadNotes() {
 		const limit = 3;
+		console.log("loadnotes");
 		try {
 			setShowNotesLoadingError(false);
 			let notes: NoteModel[];
