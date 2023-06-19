@@ -31,6 +31,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
 	const { userName } = useParams<RouteParams>();
 
 	useEffect(() => {
+		console.log("username:", userName);
 		async function loadNotes() {
 			const limit = 3;
 			try {
