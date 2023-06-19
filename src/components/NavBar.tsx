@@ -20,6 +20,7 @@ const NavBar = ({
 	onLogoutSuccessful,
 }: NavBarProps) => {
 	const currentUrl: string = window.location.href;
+	console.log("nav", hasPathAfterDomain(currentUrl));
 	return (
 		<Navbar className={styles.navContainer} expand="sm" sticky="top">
 			<Container>
