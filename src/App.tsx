@@ -10,11 +10,14 @@ import NotePage from "./pages/NotePage";
 import PrivacyPage from "./pages/PrivacyPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import styles from "./styles/App.module.css";
+import { hasPathAfterDomain } from "./utils/hasPathAfterDomain";
 
 function App() {
 	const [loggedInUser, setLoggedInUser] = useState<User | null>(null);
 	const [showSignUpModal, setShowSignUpModal] = useState(false);
 	const [showLoginModal, setShowLoginModal] = useState(false);
+	const currentUrl: string = window.location.href;
+	const hasPath = hasPathAfterDomain(currentUrl);
 
 	useEffect(() => {
 		async function fetchLoggedInUser() {
@@ -35,6 +38,7 @@ function App() {
 					onLoginClicked={() => setShowLoginModal(true)}
 					onSignUpClicked={() => setShowSignUpModal(true)}
 					onLogoutSuccessful={() => setLoggedInUser(null)}
+					hasPath={hasPath}
 				/>
 				<div className={styles.notesPage}>
 					<Routes>

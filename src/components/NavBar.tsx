@@ -1,16 +1,17 @@
 import { Container, Nav, Navbar } from "react-bootstrap";
 import { User } from "../models/user";
 import { Link } from "react-router-dom";
+
 import NavBarLoggedInView from "./NavBarLoggedInView";
 import NavBarLoggedOutView from "./NavBarLoggedOutView";
 import styles from "../styles/Nav.module.css";
-import { hasPathAfterDomain } from "../utils/hasPathAfterDomain";
 
 interface NavBarProps {
 	loggedInUser: User | null;
 	onSignUpClicked: () => void;
 	onLoginClicked: () => void;
 	onLogoutSuccessful: () => void;
+	hasPath: boolean;
 }
 
 const NavBar = ({
@@ -18,16 +19,16 @@ const NavBar = ({
 	onSignUpClicked,
 	onLoginClicked,
 	onLogoutSuccessful,
+	hasPath,
 }: NavBarProps) => {
-	const currentUrl: string = window.location.href;
-	console.log("nav", hasPathAfterDomain(currentUrl));
+	console.log("nav", hasPath);
 	return (
 		<Navbar className={styles.navContainer} expand="sm" sticky="top">
 			<Container>
 				<Navbar.Brand as={Link} to="/" style={{ color: "#4e598c" }}>
 					doodles
 				</Navbar.Brand>
-				{hasPathAfterDomain(currentUrl) && (
+				{hasPath && (
 					<Nav>
 						<Nav.Link as={Link} to="/">
 							Feed
