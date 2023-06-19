@@ -13,12 +13,11 @@ import { useParams } from "react-router-dom";
 interface NoteProps {
   note: NoteModel;
   user: User | null;
-  onNoteClicked: (note: NoteModel) => void;
   onDeleteNoteClicked: (note: NoteModel) => void;
   className?: string;
 }
 
-const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: NoteProps) => {
+const Note = ({ note, user, onDeleteNoteClicked, className }: NoteProps) => {
   const [userNote, setUserNote] = useState<User>();
   const { _id, userId, title, img, createdAt, updatedAt } = note;
 
@@ -51,7 +50,7 @@ const Note = ({ note, user, onNoteClicked, onDeleteNoteClicked, className }: Not
   return (
     <Card className={`${styles.noteCard} ${className}`}>
       {noteId === undefined ? (
-        <Link to={`/d/${_id}`}>
+        <Link to={`https://doodles-notes.vercel.app/d/${_id}`}>
           <Card.Img
             variant="top"
             src={img}

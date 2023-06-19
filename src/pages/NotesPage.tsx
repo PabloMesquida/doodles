@@ -20,7 +20,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   const [notes, setNotes] = useState<NoteModel[]>([]);
   const [showNotesLoadingError, setShowNotesLoadingError] = useState(false);
   const [showNoteDialog, setShowNoteDialog] = useState(false);
-  const [noteToEdit, setNoteToEdit] = useState<NoteModel | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [page, setPage] = useState(1);
 
@@ -101,7 +100,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
             note={note}
             user={loggedInUser}
             className={styles.note}
-            onNoteClicked={setNoteToEdit}
             onDeleteNoteClicked={deleteNote}
           />
         ))}
@@ -142,20 +140,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
             }}
           />
         </>
-      )}
-      {noteToEdit && (
-        <AddEditNoteDialog
-          noteToEdit={noteToEdit}
-          onDismiss={() => setNoteToEdit(null)}
-          onNoteSaved={(updatedNote) => {
-            setNotes(
-              notes.map((existingNote) =>
-                existingNote._id === updatedNote._id ? updatedNote : existingNote
-              )
-            );
-            setNoteToEdit(null);
-          }}
-        />
       )}
     </div>
   );
