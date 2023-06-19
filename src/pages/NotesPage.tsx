@@ -44,6 +44,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
         notes = await NotesApi.fetchNotes({ page, limit });
       }
 
+      console.log("page", page);
       if (page === 1) {
         console.log("note 1", notes);
         setNotes(notes);
