@@ -1,35 +1,36 @@
 .notesPage {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	background-color: #fcfbf1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #fcfbf1;
 }
 
 .notesGrid {
-	width: 100%;
-	height: 100%;
-	align-items: center;
-	display: flex;
-	justify-content: center;
-	flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .note {
-	max-width: 400px;
+  max-width: 400px;
+  width: 100%;
 }
 
 .logMessage {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	color: #fff;
-	background-color: #4e598c;
-	max-width: 400px;
-	width: 400px;
-	padding: 1.5rem;
-	margin-top: 1rem;
-	margin-bottom: 1rem;
-	border-radius: 5px 5px 5px 5px;
-	-webkit-border-radius: 5px 5px 5px 5px;
-	-moz-border-radius: 5px 5px 5px 5px;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #fff;
+  background-color: #4e598c;
+  max-width: 400px;
+  width: 100%;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 5px 5px 5px 5px;
+  -webkit-border-radius: 5px 5px 5px 5px;
+  -moz-border-radius: 5px 5px 5px 5px;
 }
