@@ -34,14 +34,18 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
     try {
       setShowNotesLoadingError(false);
       let notes: NoteModel[];
-      if (page === 1) notes = [];
+
       if (userName) {
         notes = await NotesApi.fetchUserNotes({ userName, page, limit });
       } else {
         notes = await NotesApi.fetchNotes({ page, limit });
       }
 
-      setNotes((prevNotes) => [...prevNotes, ...notes]);
+      if (page === 1) {
+        setNotes(notes);
+      } else {
+        setNotes((prevNotes) => [...prevNotes, ...notes]);
+      }
 
       if (notes.length < limit) {
         setHasMore(false);
@@ -58,7 +62,6 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
   }, [userName]);
 
   useEffect(() => {
-    if (page === 1) setNotes([]);
     loadNotes();
   }, [page]);
 
