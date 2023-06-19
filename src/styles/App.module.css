@@ -1,21 +1,17 @@
 .pageContainer {
-  /* background-color: #fcfbf1; */
-  background-color: blueviolet;
+  background-color: #fcfbf1;
   width: 100%;
   min-height: 100vh;
 }
 
 .footer {
   background-color: #f7f5e1;
-  /* display: flex;
+  display: flex;
   justify-content: center;
   align-items: center;
   padding: 2rem;
   font-size: small;
   color: darkslategrey;
-  margin-top: 4rem; */
-  /* bottom: 0; */
+  margin-top: 4rem;
   width: 100%;
-
-  /* position: abosolute; */
 }
