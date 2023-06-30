@@ -45,7 +45,7 @@ function App() {
           </Routes>
         </div>
         <div className={styles.footer} style={{ position: "absolute", bottom: "0px" }}>
-          Developed by PM
+          Developed by <a href="https://pablopx.vercel.app/" target="_blank"></a>PM
         </div>
         {showSignUpModal && (
           <SignUpModal
