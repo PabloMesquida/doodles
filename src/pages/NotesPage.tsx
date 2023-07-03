@@ -50,8 +50,7 @@ const NotesPage = ({ loggedInUser }: NotesPageProps) => {
         setNotes(notes);
       } else {
         console.log("note", notes);
-        //  setNotes((prevNotes) => [...prevNotes, ...notes]);
-        setNotes((prevNotes) => [...notes, ...prevNotes]);
+        setNotes((prevNotes) => [...prevNotes, ...notes]);
       }
 
       if (notes.length < limit) {
